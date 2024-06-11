@@ -1,0 +1,1012 @@
+{%- capture section_settings -%}
+{
+  "showShippingEstimator": {% if template == 'product.quick-view' or product.available == false %}false{% else %}{{ section.settings.show_shipping_estimator | json }}{% endif %},
+  "showQuantitySelector": {{ section.settings.show_quantity_selector | json }},
+  "showPaymentButton": {{ section.settings.show_payment_button | json }},
+  "showInventoryQuantity": {% if product.template_suffix != 'pre-order' %}{{ section.settings.show_inventory_quantity | json }}{% else %}false{% endif %},
+  "lowInventoryThreshold": {{ section.settings.low_inventory_threshold | json }},
+  "galleryTransitionEffect": {{ section.settings.carousel_effect | json }},
+  "enableImageZoom": {% if template == 'product.quick-view' %}false{% else %}{{ section.settings.enable_image_zoom | json }}{% endif %},
+  "zoomEffect": {{ section.settings.zoom_effect | json }},
+  "enableVideoLooping": {{ section.settings.enable_video_looping | json }},
+  "productOptions": {{ product.options | json | escape }},
+  "enableHistoryState": {% if template == 'product.quick-view' %}false{% else %}true{% endif %},
+  "infoOverflowScroll": {% if template == 'product.quick-view' %}false{% else %}true{% endif %},
+  "isQuickView": {% if template == 'product.quick-view' %}true{% else %}false{% endif %}
+}
+{%- endcapture -%}
+
+<section data-section-id="{{ section.id }}" data-section-type="product" data-section-settings='{{ section_settings }}'>
+  {%- if template != 'product.quick-view' -%}
+    <div class="container container--flush">
+      <div class="page__sub-header">
+<!--         <nav aria-label="{{ 'general.breadcrumb.title' | t }}" class="breadcrumb">
+          <ol class="breadcrumb__list">
+            <li class="breadcrumb__item">
+              <a class="breadcrumb__link link" href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a> {%- render 'icon', icon: 'arrow-right' -%}
+            </li>
+
+            <li class="breadcrumb__item">
+              {%- if collection -%}
+                <a class="breadcrumb__link link" href="{{ collection.url }}">{{ collection.title }}</a> {%- render 'icon', icon: 'arrow-right' -%}
+              {%- else -%}
+                <a class="breadcrumb__link link" href="{{ routes.all_products_collection_url }}">{{- 'collection.general.all_products' | t -}}</a> {%- render 'icon', icon: 'arrow-right' -%}
+              {%- endif -%}
+            </li>
+
+            
+
+            <li class="breadcrumb__item">
+              <span class="breadcrumb__link" aria-current="page">{{ product.title | truncate: 40 }}</span>
+            </li>
+          </ol> 
+    
+        </nav> -->
+
+        {%- unless template == 'index' or template == 'cart' -%}
+        <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs" style="margin-bottom:50px;">
+          <a href="/" title="{{ 'general.breadcrumbs.home_link_title' | t }}">Home</a>
+         
+              {%comment%} DETERMINE OBJECT TYPE - product, collection or page   {%endcomment%}
+           
+        {%- if template contains 'product' -%}
+          {%- capture product_url_string -%}{%- for collection in product.collections -%}{{collection.url }}|{%- endfor -%}{%- endcapture -%}
+          {%- assign object_url_string = product_url_string | append: product.url -%}
+        {%- elsif template contains 'collection' and collection.handle -%}
+          {%- capture object_url_string -%}/collections/{{ collection.handle }}{%- endcapture -%}
+        {%- elsif template contains 'page' -%}
+          {%- capture object_url_string -%}/pages/{{ page.url }}{%- endcapture -%}
+        {% endif %}
+         
+        {%- assign object_urls = object_url_string | split: '|' -%}
+         
+          {%comment%} 
+          GET TITLES OF ALL LINKLISTS
+          Linklist is the Shopify term for a menu or submenu. We grab all the titles so we can match against them and
+          find out if they are linked from a parent menu.
+          {%endcomment%}    
+        {%- capture linklist_titles_str -%}{%- for linklist in linklists -%}{{ linklist.title | handleize }}|{%- endfor -%}{%- endcapture -%}
+        {%- assign str_size = linklist_titles_str | size | minus: 1 -%}
+        {%- assign linklist_titles_str = linklist_titles_str | slice: 0, str_size -%}
+        {%- assign linklist_titles = linklist_titles_str | split: '|' -%}
+         
+          {%comment%} 
+          GET TOP LEVEL MENU THEN DRILL DOWN
+          First we grab all the top-level menu items and we create a set of strings for each property, which 
+          we will eventually split into arrays. We cannot create multi-dimensional arrays in Liquid, but we 
+          can create parallel arrays so that if we know the index in the handle array, we can find it's title
+          by iterating through the title array until we hit the same index.
+           
+          If the link handle matches a string in the linklist_titles, the list with that title is the child.
+          You might think we would match handles to handles, but we don't. Shopify creates nested menus based
+          on the parent item having the exact same label as the child item and converts that to a handle.
+          {%endcomment%}
+         
+        {%- assign level = 1 -%}
+        {%- for link in linklists.main-menu.links -%}
+          {%- assign link_handle = link.title | handle -%}
+          {%- assign link_titles = link_titles | append: link.title | append: '|' -%}
+          {%- assign link_urls = link_urls | append: link.url | append: '|' -%}
+          {%- assign link_levels = link_levels | append: level | append: '|'  -%}
+          {%- assign link_parents = link_parents | append: 'main-menu' | append: '|'  -%}
+          {%- assign link_handles = link_handles | append: link_handle | append: '|' -%}
+         
+          {%- if linklist_titles contains link_handle -%}
+         
+              {%comment%} GET CHILDREN    {%endcomment%}
+         
+            {%- for clink in linklists[link_handle].links -%}
+              {%- if forloop.first == true -%}
+                {%- assign level = level | plus: 1 -%}
+              {%- endif -%}
+              {% assign clink_handle = clink.title | handle %}
+              {%- assign link_titles = link_titles | append: clink.title | append: '|' -%}
+              {%- assign link_urls = link_urls | append: clink.url | append: '|' -%}
+              {%- assign link_levels = link_levels | append: level | append: '|'  -%}
+              {%- assign link_parents = link_parents | append: link_handle | append: '|'  -%}
+              {%- assign handle = link.title | handleize -%} 
+              {%- assign link_handles = link_handles | append: clink_handle | append: '|' -%}
+         
+              {%- if linklist_titles contains clink_handle -%}
+         
+                      {%comment%} GET GRANDCHILDREN  {%endcomment%}
+         
+                    {%- for gclink in linklists[clink_handle].links -%}
+                      {%- if forloop.first == true -%}
+                        {%- assign level = level | plus: 1 -%}
+                      {%- endif -%}
+                      {% assign gclink_handle = gclink.title | handle %}
+                      {%- assign link_titles = link_titles | append: gclink.title | append: '|' -%}
+                      {%- assign link_urls = link_urls | append: gclink.url | append: '|' -%}
+                      {%- assign link_levels = link_levels | append: level | append: '|'  -%}
+                      {%- assign link_parents = link_parents | append: clink_handle | append: '|'  -%}
+                      {%- assign link_handles = link_handles | append: gclink_handle | append: '|' -%}
+         
+                      {%- if linklist_titles contains gclink_handle -%}
+                          {% comment %} ************GET ME THE GGC {% endcomment %}
+                      {%- endif -%}
+                      {%- if forloop.last == true -%}
+                        {%- assign level = level | minus: 1 -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                        {%comment%} END GRANDCHILDREN  {%endcomment%}
+         
+              {%- endif -%}
+              {%- if forloop.last == true -%}
+                {%- assign level = level | minus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+                      {%comment%} END CHILDREN  {%endcomment%}
+          {%- endif -%}
+        {%- endfor -%}
+         
+        {%- comment -%} CONVERT TO ARRAYS {%- endcomment -%}
+        {%- assign str_size = link_levels | size | minus: 1 -%}
+        {%- assign llevels = link_levels | slice: 0, str_size | split: '|' -%}
+         
+        {%- assign str_size = link_titles | size | minus: 1 -%}
+        {%- assign ltitles = link_titles | slice: 0, str_size | split: '|' -%}
+         
+        {%- assign str_size = link_handles | size | minus: 1 -%}
+        {%- assign lhandles = link_handles | slice: 0, str_size | split: '|' -%}
+         
+        {%- assign str_size = link_parents | size | minus: 1 -%}
+        {%- assign lparents = link_parents | slice: 0, str_size | split: '|' -%}
+         
+        {%- assign str_size = link_urls | size | minus: 1 -%}
+        {%- assign lurls = link_urls | slice: 0, str_size | split: '|' -%}
+         
+        {%- comment -%} GET THE DEEPEST LEVEL WE FOUND {%- endcomment -%}
+        {%- assign depth = '3' -%}
+        {%- assign bc3_parent_list_handle = '' %}
+         
+        {%- comment -%} LEVEL 3: THREE DOWN FROM THE TOP {%- endcomment -%}
+        {%- comment -%} Do we have a link to this product or its collection on the deepest level? {%- endcomment -%}
+        {%- for url in lurls -%}
+          {%- if object_urls contains url and llevels[forloop.index0] == depth -%}
+            {%- unless url == product.url or url == collection.url -%}
+              {%- capture bc3 -%}{{ ltitles[forloop.index0] | link_to: url, ltitles[forloop.index0] }}{%- endcapture -%}
+            {%- endunless -%}
+            {%- assign bc3_parent_list_handle = lparents[forloop.index0] -%}
+            {%- assign bc3_list_handle = lhandles[forloop.index0] -%}
+            {% break %}
+          {%- endif -%}
+        {%- endfor -%}
+         
+        {%- comment -%} LEVEL 2: TWO DOWN FROM THE TOP
+          Next level. If we found something, we can save a lot of processing. Otherwise, 
+          we need to scan everything on this level 
+        {%- endcomment -%}
+        {%- assign depth = '2' -%}
+        {%- assign bc2_parent_list_handle = '' %}
+         
+        {%- comment -%} IF we didn't find anything on the deepest level, we start from scratch one level up {%- endcomment -%}
+        {%- if bc3_parent_list_handle == '' -%} 
+          {%- for url in lurls -%}
+            {%- if llevels[forloop.index0] == depth -%}
+              {%- if object_urls contains url -%} 
+                {%- unless url == product.url or url == collection.url -%}
+                  {%- capture bc2 -%}{{ ltitles[forloop.index0] | link_to: url, ltitles[forloop.index0] }}{%- endcapture -%}
+                {% endunless %}
+                {%- assign bc2_parent_list_handle = lparents[forloop.index0] -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+           
+        {%- comment -%} ELSE we have a parent handle. We need its array index to find its other data {%- endcomment -%}  
+        {%- else -%}
+          {%- for list_handle in lhandles -%}
+            {%- if list_handle == bc3_parent_list_handle -%}
+              {% assign bc2_list_handle = list_handle %}
+              {%- assign bc2_parent_list_handle = lparents[forloop.index0] -%}
+              {%- assign bc2_list_title = ltitles[forloop.index0] -%}
+              {%- comment -%} we have the handle of bc2's parent, so now we get the parent links, find where title matches parent title, then we have the collection URL {%- endcomment -%}
+              {%- for bc2_sibling_link in linklists[bc2_parent_list_handle].links -%}
+                {%- assign bc2_sibling_title_handleized = bc2_sibling_link.title | handle -%}
+                {% if bc2_sibling_title_handleized == bc2_list_handle %}
+                  {%- capture bc2 -%}{{ bc2_sibling_link.title | link_to: bc2_sibling_link.url, bc2_sibling_link.title }}{%- endcapture -%}
+                  {% break %}
+                {%- endif -%}
+              {%- endfor -%}
+              {% break %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+         
+        {%- comment -%} LEVEL 1: MAIN ITEMS BELOW MAIN MENU (I.E. TOP NAV BAR) {%- endcomment -%}
+         
+        {%- assign depth = depth | minus: 1 | append: '' -%}
+        {%- assign bc1_parent_list_handle = '' %}
+         
+        {%- if bc2_parent_list_handle == '' -%} 
+            {%- comment -%} IF found nothing on deepest level or middle level, we start from scratch on top level {%- endcomment -%}
+          {% for url in lurls %}
+            {%- if object_urls contains url and llevels[forloop.index0] == depth -%}
+              {%- unless url == product.url or url == collection.url -%}
+                {%- capture bc1 -%}{{ ltitles[forloop.index0] | link_to: url, ltitles[forloop.index0] }}{%- endcapture -%}
+              {% endunless %}
+              {%- assign bc1_parent_list_handle = lparents[forloop.index0] -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endfor -%}
+         
+            {%- comment -%}
+                ELSE we have a parent handle. We need its array index to find its other data 
+            {%- endcomment -%}
+        {%- else -%}
+          {%- for list_handle in lhandles -%}
+            {%- if bc2_parent_list_handle == list_handle -%}
+              {% assign bc1_list_handle = list_handle %}
+              {%- assign bc1_parent_list_handle = lparents[forloop.index0] -%}
+              {%- assign bc1_title = ltitles[forloop.index0] -%}
+                    {%- comment -%} 
+                      We HAVE PARENT, so now we GET THE SIBLING links, find where title 
+                      matches parent title, then we have the collection URL
+                    {%- endcomment -%}
+              {%- for bc1_sibling_link in linklists[bc1_parent_list_handle].links -%}
+                {%- assign bc1_sibling_title_handleized = bc1_sibling_link.title | handle -%}
+                {% if bc1_sibling_title_handleized == bc1_list_handle %}
+                  {%- capture bc1 -%}{{ bc1_sibling_link.title | link_to: bc1_sibling_link.url, bc1_sibling_link.title }}{%- endcapture -%} 
+                  {% break %}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+         
+          {%- if bc1 -%}
+            <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+            {{ bc1 }}
+          {%- endif -%}
+          {%- if bc2 -%}
+            <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+            {{ bc2 }}
+          {%- endif -%}
+          {%- if bc3 -%}
+            <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+            {{ bc3 }}
+          {%- endif -%}
+        {%- if template contains 'product' -%}
+          <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+          <span>{{ product.title | truncate: 40 }}</span>
+         
+        {%- elsif template contains 'collection' and collection.handle -%}
+            <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+            <span>{{ collection.title }}</span>
+         
+        {%- elsif template == 'blog' -%}
+         
+          <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+          {%- if current_tags -%}
+            {{ blog.title | link_to: blog.url }}
+            <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+            <span>{{ current_tags | join: " + " }}</span>
+          {%- else -%}
+          <span>{{ blog.title }}</span>
+          {%- endif -%}
+         
+        {%- elsif template == 'article' -%}
+         
+          <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+          {{ blog.title | link_to: blog.url }}
+          <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+          <span>{{ article.title }}</span>
+         
+        {%- elsif template contains 'page' -%}
+         
+         <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+         <span>{{ page.title }}</span>
+         
+        {%- else -%}
+         
+         <span aria-hidden="true"> {%- render 'icon', icon: 'arrow-right' -%} </span>
+         <span>{{ page_title }}</span>
+         
+        {% endif %}
+        </nav>
+        {%- endunless -%}
+
+
+    
+        {%- if collection.previous_product or collection.next_product -%}
+          <div class="page__navigation">
+            {%- if collection.previous_product -%}
+              <span class="page__navigation-item page__navigation-item--prev">
+                <a href="{{ collection.previous_product.url }}" class="link" rel="prev">{%- render 'icon', icon: 'arrow-left' -%} {{- 'product.general.previous_product' | t -}}</a>
+              </span>
+            {%- endif -%}
+
+            {%- if collection.next_product -%}
+              <span class="page__navigation-item page__navigation-item--next">
+                <a href="{{ collection.next_product.url }}" class="link" rel="next">{{- 'product.general.next_product' | t -}} {%- render 'icon', icon: 'arrow-right' -%}</a>
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-block-list product-block-list--{{ section.settings.image_size }}">
+        <div class="product-block-list__wrapper">
+          <div class="card__header mobile-show">
+            {% comment %}
+            <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" data-product-type="{{product.type}}" data-product-title="{{product.title}}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+            {% endcomment %}
+            
+            {%- if template.name == 'product' and template != 'product.quick-view' -%}
+            <div class="product-meta__title heading h1">{{ product.title }}</div>
+            {%- else -%}
+            <h3 class="product-meta__title heading h2">
+              <a href="{{ product.url }}">{{ product.title }}</a>
+            </h3>
+            {%- endif -%}
+          </div>
+          {%- if product.media.size > 0 -%}
+            <div class="product-block-list__item product-block-list__item--gallery">
+              {% render 'product-gallery' %}
+            </div>
+            
+          {%- endif -%}
+
+          {%- if product.description != blank -%}
+            <div class="product-block-list__item product-block-list__item--description">
+              <div class="card--collapsed card--sticky">
+                
+                {%- if section.settings.content_display_mode == 'collapse_all' -%}
+                  <button class="card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="product-description">
+                    <span class="card__title heading h3">{{ 'product.general.description' | t }}</span>
+                    <span class="plus-button plus-button--large"></span>
+                  </button>
+
+                  <div id="product-description" class="card__collapsible">
+                    <div class="card__collapsible-content">
+                      <div class="rte text--pull product-description test">
+                        {{ product.description | remove: 'data-section-type="product"' }}
+                        {% comment %}{{ product.metafields.Genemco.description }}{% endcomment %}
+                      </div>
+                      
+                      <div class="rte text--pull product-attribute">
+                        {% render 'product-attribute' | product: product %}
+                      </div>
+                      
+                      
+                    </div>
+                  </div>
+                {%- else -%}
+                  <div class="card__header desktop-show">
+                    {%- if template.name == 'product' and template != 'product.quick-view' -%}
+                      <h1 class="product-meta__title heading h1">{{ product.title }}</h1>
+                    {%- else -%}
+                      <h3 class="product-meta__title heading h2">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                      </h3>
+                    {%- endif -%}
+                    
+                    {% comment %}
+                    <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" data-product-type="{{product.type}}" data-product-title="{{product.title}}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
+                    {% endcomment %}
+                    
+                    {% comment %}
+                    <h2 class="card__title heading h3">{{ 'product.general.description' | t }}</h2>
+                    {% endcomment %}
+                  </div>
+
+                  {%- if section.settings.content_display_mode == 'show_all_and_expand_description' -%}
+                    <div class="card__section">
+                      
+                      <div class="rte text--pull product-description">
+                        {{ product.description | remove: 'data-section-type="product"' }}
+                        {% comment %}{{ product.metafields.Genemco.description }}{% endcomment %}
+                      </div>
+                      
+                      <div class="rte text--pull product-attribute">
+                        {% render 'product-attribute' | product: product %}
+                      </div>
+                    </div>
+                  {%- else -%}
+                    <div class="card__section expandable-content" aria-expanded="false">
+                      
+                      <div class="rte text--pull product-description">
+                        {{ product.description | remove: 'data-section-type="product"' }}
+                        {% comment %}{{ product.metafields.Genemco.description }}{% endcomment %}
+                      </div>
+                      
+                      <div class="rte text--pull product-attribute">
+                        {% render 'product-attribute' | product: product %}
+                      </div>
+
+                      <button class="expandable-content__toggle">
+                        <span class="expandable-content__toggle-icon"></span>
+                        <span class="expandable-content__toggle-text" data-view-more="{{ 'product.general.view_more' | t | escape }}" data-view-less="{{ 'product.general.view_less' | t | escape }}">{{- 'product.general.view_more' | t -}}</span>
+                      </button>
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+          
+          <div class="product-block-list__item product-block-list__item--info">
+            {% render 'product-info' %}
+
+            
+<!--             <div class="card {% if product.media.size > 0 %}card--collapsed{% endif %} {% if template.name == 'product' %}card--sticky{% endif %}">
+              <div class="card__section">
+                <div class="how-to-get"><h2>Questions about the item?</h2></div>
+                <p>Our friendly and knowledgeable sales team is here to help. Reach out below with your questions and we will get back to you ASAP.</p>
+              </div>
+            </div> -->
+          </div>
+
+
+          {%- comment -%}
+          --------------------------------------------------------------------------------------
+          TABS
+          --------------------------------------------------------------------------------------
+          {%- endcomment -%}
+
+          {%- for i in (1..5) -%}
+            {%- assign unique_tab_title = '' -%}
+            {%- assign unique_tab_content = '' -%}
+
+            {%- comment -%}First check for metafields{%- endcomment -%}
+
+            {%- assign metafield_tab_title_option = 'tab_' | append: i | append: '_title' -%}
+            {%- assign metafield_tab_content_option = 'tab_' | append: i | append: '_content' -%}
+
+            {%- if product.metafields.sf_product_tabs[metafield_tab_title_option] != blank and product.metafields.sf_product_tabs[metafield_tab_content_option] != blank -%}
+              {%- assign unique_tab_title = product.metafields.sf_product_tabs[metafield_tab_title_option] -%}
+              {%- assign unique_tab_content = product.metafields.sf_product_tabs[metafield_tab_content_option] -%}
+            {%- else -%}
+              {%- assign tab_to_look = '__tab' | append: i | append: ':' -%}
+
+              {%- for tag in product.tags -%}
+                {%- if tag contains tab_to_look -%}
+                  {%- assign unique_tab_handle = tag | split: tab_to_look | last -%}
+                  {%- assign unique_tab_page = pages[unique_tab_handle] -%}
+
+                  {%- unless unique_tab_page.empty? -%}
+                    {%- assign unique_tab_title = unique_tab_page.title -%}
+                    {%- assign unique_tab_content = unique_tab_page.content -%}
+                    {%- break -%}
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- if unique_tab_title != blank and unique_tab_content != blank -%}
+              <div class="product-block-list__item product-block-list__item--content">
+                <div class="card">
+                  {%- if section.settings.content_display_mode == 'collapse_all_except_description' or section.settings.content_display_mode == 'collapse_all' -%}
+                    <button class="card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="unique-tab-{{ i }}">
+                      <span class="card__title heading h3">{{ unique_tab_title }}</span>
+                      <span class="plus-button plus-button--large"></span>
+                    </button>
+
+                    <div id="unique-tab-{{ i }}" class="card__collapsible">
+                      <div class="card__collapsible-content">
+                        <div class="rte text--pull">
+                          {{ unique_tab_content }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- else -%}
+                    <div class="card__header">
+                      <h2 class="card__title heading h3">{{ unique_tab_title }}</h2>
+                    </div>
+
+                    <div class="card__section expandable-content" aria-expanded="false">
+                      <div class="rte text--pull">
+                        {{ unique_tab_content }}
+                      </div>
+
+                      <button class="expandable-content__toggle">
+                        <span class="expandable-content__toggle-icon"></span>
+                        <span class="expandable-content__toggle-text" data-view-more="{{ 'product.general.view_more' | t | escape }}" data-view-less="{{ 'product.general.view_less' | t | escape }}">{{- 'product.general.view_more' | t -}}</span>
+                      </button>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- for i in (1..3) -%}
+            {%- assign global_tab_option = 'tab_page_' | append: i | append: '_handle' -%}
+            {%- assign global_tab_page = pages[section.settings[global_tab_option]] -%}
+
+            {%- unless global_tab_page.empty? -%}
+              <div class="product-block-list__item product-block-list__item--content">
+                <div class="card">
+                  {%- if section.settings.content_display_mode == 'collapse_all_except_description' or section.settings.content_display_mode == 'collapse_all' -%}
+                    <button class="card__collapsible-button" data-action="toggle-collapsible" aria-expanded="false" aria-controls="global-tab-{{ i }}">
+                      <span class="card__title heading h3">{{ global_tab_page.title }}</span>
+                      <span class="plus-button plus-button--large"></span>
+                    </button>
+
+                    <div id="global-tab-{{ i }}" class="card__collapsible">
+                      <div class="card__collapsible-content">
+                        <div class="rte text--pull">
+                          {{ global_tab_page.content }}
+                        </div>
+                      </div>
+                    </div>
+                  {%- else -%}
+                    <div class="card__header">
+                      <h2 class="card__title heading h3">{{ global_tab_page.title }}</h2>
+                    </div>
+
+                    <div class="card__section expandable-content" aria-expanded="false">
+                      <div class="rte text--pull">
+                        {{ global_tab_page.content }}
+                      </div>
+
+                      <button class="expandable-content__toggle">
+                        <span class="expandable-content__toggle-icon"></span>
+                        <span class="expandable-content__toggle-text" data-view-more="{{ 'product.general.view_more' | t | escape }}" data-view-less="{{ 'product.general.view_less' | t | escape }}">{{- 'product.general.view_more' | t -}}</span>
+                      </button>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+
+          {%- comment -%}
+          --------------------------------------------------------------------------------------
+          REVIEWS
+          --------------------------------------------------------------------------------------
+          {%- endcomment -%}
+
+          {%- if section.settings.enable_reviews -%}
+            <div class="product-block-list__item product-block-list__item--reviews">
+              <span id="product-reviews" class="anchor"></span>
+
+              <div class="card">
+                <div class="card__section">
+                  {%- assign reviews_count = product.metafields.spr.reviews | split: '<meta itemprop="reviewCount" content="' | last | split: '">' | first | times: 1 -%}
+                  <div id="shopify-product-reviews" class="spr-reviews {% if reviews_count > 0 %}spr-reviews--has-reviews{% endif %}" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%}
+          --------------------------------------------------------------------------------------
+          SECURITY BADGES
+          --------------------------------------------------------------------------------------
+          {%- endcomment -%}
+
+          {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+            {%- assign show_payment_icons = true -%}
+          {%- else -%}
+            {%- assign show_payment_icons = false -%}
+          {%- endif -%}
+
+          {%- if section.settings.custom_security_badge or show_payment_icons -%}
+            <div class="product-block-list__item product-block-list__item--trust">
+              <div class="card">
+                <div class="card__header card__header--flex">
+                  <h2 class="card__title heading h3">{{ section.settings.trust_title | escape }}</h2>
+
+                  {%- render 'icon', icon: 'lock', width: 22, height: 24 -%}
+                </div>
+
+                <div class="card__section">
+                  {%- if show_payment_icons -%}
+                    {%- if section.settings.custom_security_badge -%}
+                      <p class="card__subtitle heading h6">{{ 'product.general.payment' | t }}</p>
+                    {%- endif -%}
+
+                    <div class="payment-list">
+                      {% for type in shop.enabled_payment_types %}
+                        {{ type | payment_type_svg_tag: class: 'payment-list__item' }}
+                      {% endfor %}
+                    </div>
+
+                    <p class="payment-list__notice">{{ 'product.general.payment_notice' | t }}</p>
+                  {%- endif -%}
+
+                  {%- if show_payment_icons and section.settings.custom_security_badge -%}
+                    <hr class="card__separator">
+                  {%- endif -%}
+
+                  {%- if section.settings.custom_security_badge -%}
+                    {%- if show_payment_icons -%}
+                      <p class="card__subtitle heading h6">{{ 'product.general.security' | t }}</p>
+                    {%- endif -%}
+
+                    {%- assign badge_width = section.settings.custom_security_badge.width | at_most: 450 | append: 'x' -%}
+                    <img class="product__trust-badge" src="{{ section.settings.custom_security_badge | img_url: badge_width }}" srcset="{{ section.settings.custom_security_badge | img_url: badge_width }} 1x, {{ section.settings.custom_security_badge | img_url: badge_width, scale: 2 }} 2x" alt="{{ section.settings.custom_security_badge.alt | escape }}">
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%}
+          --------------------------------------------------------------------------------------
+          ESTIMATE SHIPPING
+          --------------------------------------------------------------------------------------
+          {%- endcomment -%}
+
+          {%- if section.settings.show_shipping_estimator and product.available -%}
+            <div class="product-block-list__item product-block-list__item--shipping">
+              <div class="card">
+                <div class="card__header">
+                  <h2 class="card__title heading h3">{{ 'product.general.estimate_shipping' | t }}</h2>
+                </div>
+
+                <div class="card__section">
+                  <div class="shipping-estimator form">
+                    <div class="form__input-row">
+                      <div class="form__input-wrapper">
+                        <label for="shipping-estimator-country" class="form__label">{{ 'cart.shipping_estimator.country' | t }}</label>
+
+                        <div class="select-wrapper select-wrapper--primary">
+                          {%- render 'icon', icon: 'arrow-bottom' -%}
+
+                          <select name="country" id="shipping-estimator-country" data-default="{{ customer.default_address.country | default: section.settings.shipping_estimator_default_country }}" required>
+                            {{- country_option_tags -}}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="form__input-wrapper" style="display: none">
+                        <label for="shipping-estimator-province" class="form__label">{{ 'cart.shipping_estimator.province' | t }}</label>
+
+                        <div class="select-wrapper select-wrapper--primary">
+                          {%- render 'icon', icon: 'arrow-bottom' -%}
+
+                          <select name="province" id="shipping-estimator-province" data-default="{{ customer.default_address.province }}"></select>
+                        </div>
+                      </div>
+
+                      <div class="form__input-wrapper" style="max-width: 155px">
+                        <label for="shipping-estimator-zip" class="form__label">{{ 'cart.shipping_estimator.zip_code' | t }}</label>
+                        <input type="text" name="zip" id="shipping-estimator-zip" class="form__field form__field--text" value="{{ customer.default.address.zip }}" required>
+                      </div>
+                    </div>
+
+                    <button type="button" class="form__submit button button--primary" data-action="estimate-shipping">{{ 'cart.shipping_estimator.estimate' | t }}</button>
+
+                    <div class="shipping-estimator__results rte" style="display: none;"></div>
+                  </div>
+                </div>
+
+                {%- if section.settings.show_refunds_policy and shop.refund_policy != blank -%}
+                  <div class="card__section card__section--tight">
+                    <button class="product__refund-policy-link link link--accented" data-action="open-modal" aria-controls="modal-refunds-policy">{{ 'product.general.refund_policy' | t }} {%- render 'icon', icon: 'arrow-right' -%}</button>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+      {%- if section.settings.enable_image_zoom -%}
+        <div id="product-zoom-{{ section.id }}" class="product__zoom-wrapper card--collapsed card--sticky"></div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_refunds_policy and shop.refund_policy != blank -%}
+      <div id="modal-refunds-policy" class="modal" aria-hidden="true">
+        <div class="modal__dialog" role="dialog">
+          <header class="modal__header">
+            <h3 class="modal__title heading h2">{{ 'product.general.refund_policy' | t }}</h3>
+            <button class="modal__close link" data-action="close-modal">{%- render 'icon', icon: 'close' -%}</button>
+          </header>
+
+          <div class="modal__content">
+            <div class="rte">
+              {{ shop.refund_policy }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- else -%}
+    {%- comment -%}We display the quick view within the product template so we can re-use the same settings{%- endcomment -%}
+    <div class="featured-product">
+      {%- render 'product-gallery' -%}
+      {%- render 'product-info' -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Show SKU",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_taxes_included",
+      "label": "Show price taxes notice",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "selector_mode",
+      "label": "Selector type",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "block"
+    },
+    {
+      "type": "select",
+      "id": "color_mode",
+      "label": "Color selector type",
+      "info": "Variant image mode requires that all variant has an associated image. [Learn more](https://help.shopify.com/en/manual/products/product-variant-images#add-images-to-existing-variants)",
+      "options": [
+        {
+          "value": "block",
+          "label": "Block"
+        },
+        {
+          "value": "dropdown",
+          "label": "Dropdown"
+        },
+        {
+          "value": "color",
+          "label": "Color swatch"
+        },
+        {
+          "value": "variant_image",
+          "label": "Variant image"
+        }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity_selector",
+      "label": "Show quantity selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_button",
+      "label": "Show dynamic checkout button",
+      "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "paragraph",
+      "content": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media)"
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "Size",
+      "info": "Only applicable on desktop screens",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_zoom",
+      "label": "Enable image zoom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Enable video looping",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "zoom_effect",
+      "label": "Zoom effect",
+      "options": [
+        {
+          "value": "inside",
+          "label": "Inside"
+        },
+        {
+          "value": "outside",
+          "label": "Outside"
+        }
+      ],
+      "default": "outside"
+    },
+    {
+      "type": "select",
+      "id": "carousel_effect",
+      "label": "Transition effect",
+      "options": [
+        {
+          "value": "fade",
+          "label": "Fade"
+        },
+        {
+          "value": "slide",
+          "label": "Slide"
+        }
+      ],
+      "default": "fade"
+    },
+    {
+      "type": "header",
+      "content": "Inventory"
+    },
+    {
+      "type": "paragraph",
+      "content": "You can also add a stock countdown. [Learn more](https://support.maestrooo.com/article/177-product-show-an-stock-countdown-bar)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inventory_quantity",
+      "label": "Show inventory quantity",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "low_inventory_threshold",
+      "label": "Low inventory threshold",
+      "info": "Use low stock color when quantity is below the threshold. Choose 0 to always show in stock.",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "paragraph",
+      "content": "You can also add per-product tabs. [Learn more](http://support.maestrooo.com/article/83-product-adding-different-tabs-per-product)."
+    },
+    {
+      "type": "select",
+      "id": "content_display_mode",
+      "label": "Display mode",
+      "options": [
+        {
+          "value": "show_all",
+          "label": "Show all"
+        },
+        {
+          "value": "show_all_and_expand_description",
+          "label": "Show all and expand description"
+        },
+        {
+          "value": "collapse_all",
+          "label": "Collapse all"
+        },
+        {
+          "value": "collapse_all_except_description",
+          "label": "Collapse all except description"
+        }
+      ],
+      "default": "show_all_and_expand_description"
+    },
+    {
+      "type": "page",
+      "id": "tab_page_1_handle",
+      "label": "First page"
+    },
+    {
+      "type": "page",
+      "id": "tab_page_2_handle",
+      "label": "Second page"
+    },
+    {
+      "type": "page",
+      "id": "tab_page_3_handle",
+      "label": "Third page"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "paragraph",
+      "content": "You need to install [Shopify's free Product Reviews](https://apps.shopify.com/product-reviews) app before enabling those options."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_reviews",
+      "label": "Enable",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews_badge",
+      "label": "Show badge",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Trust"
+    },
+    {
+      "type": "text",
+      "id": "trust_title",
+      "label": "Heading",
+      "default": "Payment & Security"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_security_badge",
+      "label": "Security badge",
+      "info": "800 x 200px .jpg recommended"
+    },
+    {
+      "type": "header",
+      "content": "Shipping estimator"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_estimator",
+      "label": "Show shipping estimator",
+      "info": "Only show if product is available.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_estimator_default_country",
+      "label": "Default country",
+      "info": "If the customer is logged in, the country of their shipping address will be used.",
+      "default": "United States"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_refunds_policy",
+      "label": "Show refunds policy",
+      "info": "Refund policy must be added into your store policies. [Learn more](https://help.shopify.com/manual/sell-online/checkout-settings/refund-privacy-tos).",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

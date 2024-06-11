@@ -1,0 +1,53 @@
+/*********************** Custom CSS for Boost Filter & Search  ************************/
+$breakpointMobile: 767px;
+$breakpointSearchMobile: 767px;
+$searchBoxMobileHeight: 64px;
+
+/**************************** Place your custom css below  ****************************/  
+
+// WAREHOUSE THEME VARIABLES
+$accent-color        : #ff6128;
+$accent-background   : rgba(#ff6128, 0.08);
+// END WAREHOUSE THEME VARIABLES  
+
+.search-bar__inner {
+ 	display:none
+}
+.boost-pfs-search-suggestion-wrapper {
+ 	position:fixed
+}
+.boost-pfs-search-suggestion-item:hover {
+  	color: $accent-color;
+  	background-color: $accent-background;
+}
+#boost-pfs-filter-tree2 {
+  	display: initial;
+}
+#boost-pfs-filter-tree2 .boost-pfs-filter-tree-content {
+    padding: 20px;
+}
+.boost-pfs-filter-breadcrumb.hidden {
+  	display: none;
+}  
+.boost-pfs-filter-message {
+  	margin: 0 auto;
+}
+.search-bar__filter {
+  	display: none !important;
+}
+.boost-pfs-filter-scroll-to-top {
+	z-index: 1;
+}
+.boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item .boost-pfs-filter-clear:after,
+.boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item .boost-pfs-filter-clear:before {
+  right: 9px;
+}
+.boost-pfs-filter-refine-by-items:before,
+.boost-pfs-filter-refine-by-items:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.collection__toolbar {
+  width: 100%;
+}

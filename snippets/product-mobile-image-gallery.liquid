@@ -1,0 +1,51 @@
+<div id="product-mobile-image-gallery">
+  <div class="product-mobile-slider-back">
+    Back
+  </div>
+  <div id="product-mobile-image-gallery-main">
+    <div class="product-mobile-slider-wrapper">
+      {%- for media in product.media -%}
+      {%- case media.media_type -%}
+      {%- when 'image' -%}
+      <div class="product-mobile-image-gallery-item" data-media-id="{{ media.id }}">
+        <div class="product-gallery__size-limiter" style="max-width: {{ media.width }}px">
+          {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+          {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+          <div class="aspect-ratio image-{{ media.id }}" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+            <img class="product-gallery__image lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ media | img_url: '3200x' }}" alt="{{ media_alt | escape }}">
+
+            <noscript>
+              <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+            </noscript>
+          </div>
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+  <div id="product-mobile-image-gallery-thumbnail">
+    <div class="product-mobile-slider-wrapper">
+      {%- for media in product.media -%}
+      {%- case media.media_type -%}
+      {%- when 'image' -%}
+      <div class="product-mobile-image-gallery-thumbnail">
+        <div class="product-gallery__size-limiter" style="max-width: {{ media.width }}px; width: 45px;">
+          {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+          {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+          <div class="aspect-ratio image-{{ media.id }}" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+            <img class="product-gallery__image lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ media | img_url: '3200x' }}" alt="{{ media_alt | escape }}">
+
+            <noscript>
+              <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+            </noscript>
+          </div>
+        </div>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

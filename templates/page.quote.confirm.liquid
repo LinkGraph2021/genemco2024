@@ -1,0 +1,65 @@
+<div>
+  <div class="rte">
+    {% comment %} Check if Cart is empty {% endcomment %}
+    {% if cart.item_count == 0 %}
+
+      <script>
+        window.addEventListener('DOMContentLoaded', function() {
+          let emptyCartHtml = `
+          <div class="empty-state">
+            <div class="empty-state__icon"><svg width="81" height="70" viewBox="0 0 81 70">
+              <g transform="translate(0 2)" stroke-width="4" stroke="#3a2a2f" fill="none" fill-rule="evenodd">
+                <circle stroke-linecap="square" cx="34" cy="60" r="6"></circle>
+                <circle stroke-linecap="square" cx="67" cy="60" r="6"></circle>
+                <path d="M22.9360352 15h54.8070373l-4.3391876 30H30.3387146L19.6676025 0H.99560547"></path>
+              </g>
+              </svg></div>
+    
+            <p class="empty-state__heading heading h1">Your quote cart is empty</p><p class="empty-state__description"><a href="/pages/purchase-and-shipping-process" style="color: black;text-decoration-color: black;">Click here to learn about our easy purcase and shipping process</a></p><div class="empty-state__button-container">
+            <a href="/collections/all" class="empty-state__button button button--primary">Shop our products</a>
+            {% if customer %}
+            <a href="/pages/quotes-history" class="empty-state__button button button--primary">View my quotes</a>
+            {% endif %}
+            </div>
+          </div>
+          `;
+          if (window.location.search == '?register=1') {
+            emptyCartHtml = `
+          <div class="empty-state">
+            <div class="empty-state__icon"><svg width="81" height="70" viewBox="0 0 81 70">
+              <g transform="translate(0 2)" stroke-width="4" stroke="#3a2a2f" fill="none" fill-rule="evenodd">
+                <circle stroke-linecap="square" cx="34" cy="60" r="6"></circle>
+                <circle stroke-linecap="square" cx="67" cy="60" r="6"></circle>
+                <path d="M22.9360352 15h54.8070373l-4.3391876 30H30.3387146L19.6676025 0H.99560547"></path>
+              </g>
+              </svg></div>
+    
+            <p class="empty-state__heading heading h1"> Thank you for logging in, your quote is now saved in your profile.</p><p class="empty-state__description"><a href="/pages/purchase-and-shipping-process" style="color: black;text-decoration-color: black;">Click here to learn about our easy purcase and shipping process</a></p><div class="empty-state__button-container">
+            <a href="/collections/all" class="empty-state__button button button--primary">Shop our products</a>
+            {% if customer %}
+            <a href="/pages/quotes-history" class="empty-state__button button button--primary">View my quotes</a>
+            {% endif %}
+            </div>
+          </div>
+          `;
+          }
+          document.querySelector(".rte").innerHTML = emptyCartHtml;
+        });
+      </script>
+    
+    {% else %}
+    
+      <style>
+        #shopify-section-static-newsletter,
+        #shopify-section-text-with-icons,
+        #shopify-section-footer,
+        #shopify-section-header { 
+          display: none !important; 
+        } 
+      </style>
+        
+    	{% render 'genemco-customer-checkout-step2' %}
+    
+    {% endif %}
+  </div>
+</div>

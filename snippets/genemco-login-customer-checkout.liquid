@@ -1,0 +1,79 @@
+<script>
+  window.customerEmail = "{{ customer.email }}";
+</script>
+<div class="genemco-checkout__wrapper" id="genemco-login-customer-checkout">
+  <div class="genemco-checkout__top-bar">
+    <div class="genemco-checkout__container">
+      <img src="{{ 'genemco-logo.png' | asset_img_url: '200x' }}" class="genemco-checkout__logo">
+      <h2 class="hide-on-mobile">Checkout (<span>{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</span>)</h2>
+      <img src="{{ 'security-lock.png' | asset_img_url: '50x' }}">
+    </div>
+  </div>
+  <form class="genemco-checkout__container">
+    <div class="genemco-checkout__left">
+      <div class="genemco-checkout__contact genemco-checkout__row">
+        <h2 class="genemco-checkout__heading"><strong>1. Contact Details</strong><span id="genemco-checkout__contact-detail__change">Change</span></h2>
+        <div class="genemco-checkout__content" id="genemco-login-customer-info" style="display: none;">
+          <p class="genemco-checkout__text">%{first_name}% %{last_name}%</p>
+          <p class="genemco-checkout__text">%{company_name}%</p>
+          <p class="genemco-checkout__text">%{email}%</p>
+          <p class="genemco-checkout__text">%{phone}%</p>
+          <p class="genemco-checkout__text">%{city}%, %{state}% %{country}%</p>
+          <p class="genemco-checkout__text">Preferred language: %{preferred_language}%</p>
+        </div>
+      </div>
+      <div class="genemco-checkout__project-details genemco-checkout__row">
+        <h2 class="genemco-checkout__heading"><strong>2. Project details</strong></h2>
+        <div class="genemco-checkout__content">
+          <select id="role-in-this-project" class="genemco-select genemco-field" data-cookie="roleInThisProject" required="required">
+            <option value="">What's your role in this project? *</option>
+            <option value="I'm the end user/buyer">I'm the end user/buyer</option>
+            <option value="I'm helping the buyer">I'm helping the buyer</option>
+            <option value="I'm a reseller">I'm a reseller</option>
+          </select>
+          <p></p>
+          <select id="project-time-line" class="genemco-select genemco-field" data-cookie="projectTimeLine" required="required">
+            <option value="">What is your project timeline? *</option>
+            <option value="Now">Now</option>
+            <option value="Weeks">Weeks</option>
+            <option value="Months">Months</option>
+            <option value="Future">Future</option>
+            <option value="Just Budgeting">Just Budgeting</option>
+            <option value="I Don't Know">I Don't Know</option>
+          </select>
+          <p></p>
+          <textarea id="about-project-and-request" maxlength="1000" placeholder="Tell us about your project and your request? *" class="genemco-textarea genemco-field" data-cookie="aboutProjectandRequest" required="required"></textarea>
+        </div>
+      </div>
+      <div class="genemco-checkout__review-items genemco-checkout__row">
+        <h2 class="genemco-checkout__heading"><strong>3. Review Items</strong><a id="genemco-checkout__review-items__change" href="/cart">Change</a></h2>
+        {% for line_item in cart.items %}
+        <div class="genemco-checkout__cart-item">
+          <div class="cart-item__left">
+            {{ line_item.image | img_url: '200x' | img_tag }}
+          </div>
+          <div class="cart-item__right">
+            <p class="cart-item__sku">{{ line_item.product.metafields.Genemco.stock_no }}</p>
+            <p class="cart-item__title"><strong>{{ line_item.product.title }}</strong></p>
+            <div class="cart-item__desc">{{ line_item.product.metafields.Genemco.description }}</div>
+          </div>
+          <div class="cart-item__categories" style="display: none;" data-productid="{{ line_item.id }}">{% for collection in line_item.product.collections %}{{ collection.title | strip | strip_html | strip_newlines }}{% unless forloop.last %} | {% endunless %}{% endfor %}</div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="genemco-checkout__row">
+        <p class="error-message"></p>
+        <button class="btn genemco-checkout__button">Request Your Quote</button>
+        <p>Once you submit your quote, your account team will call/email you quickly to review your request.</p>
+      </div>
+    </div>
+    <div class="genemco-checkout__right hide-on-mobile">
+      <p class="error-message"></p>
+      <button class="btn genemco-checkout__button">Request Your Quote</button>
+      <p>Once you submit your quote, your account team will call/email you quickly to review your request.</p>
+    </div>
+  </form>
+</div>
+
+
+

@@ -1,0 +1,115 @@
+{% comment %}
+Author: Allan
+Date: 12-16-2022
+Purpose: This script aims to get the data from the referrer
+{% endcomment %}
+
+<script src="{{'visitData.js' | asset_url }}" type="text/javascript"></script>
+
+<script>
+  var raw_data = visitData.rawData();
+  var p_data = raw_data;
+  var referring_domain = p_data.referring_domain,referring_hostname = p_data.referring_hostname,organic_source = '',organic_medium = '',organic_campaign = '',paid_source = '',paid_medium = '',paid_term = '',paid_campaign = '';
+  var page_entry_url = document.URL;
+  
+  if(p_data.paid_url_data!=null){
+    paid_source = p_data.url_params.utm_source;
+    paid_medium = p_data.paid_url_data.medium;
+    paid_campaign = p_data.url_params.utm_campaign;
+    paid_term = p_data.url_params.utm_term;
+  }else{
+    var parser = new URL(document.URL.replaceAll('"', '').replaceAll(',', ''));
+    page_entry_url = (parser.href).replaceAll('%22', '');
+
+    var urlParams = new URLSearchParams(parser.search);
+    console.log(urlParams.get('utm_source'));
+    // console.log(urlParams.get('utm_campaign'));
+    // console.log(urlParams.get('utm_source'));
+    if(urlParams.has('utm_medium')==true){
+      
+      if(urlParams.get('utm_source')=='SurplusRecord'){
+        referring_domain = 'surplusrecord.com';
+        referring_hostname = 'https://surplusrecord.com/';
+
+        paid_source = urlParams.get('utm_source');
+        paid_medium = urlParams.get('utm_medium');
+        paid_campaign = urlParams.get('utm_campaign').replaceAll('"', '').replaceAll(',', '');
+        
+      }else if (urlParams.get('utm_source')=='facebook'){
+        referring_domain = 'facebook.com';
+        referring_hostname = 'https://facebook.com/';
+
+        organic_source = urlParams.get('utm_source');
+        organic_medium = urlParams.get('utm_medium');
+        organic_campaign = urlParams.get('utm_content').replaceAll('"', '').replaceAll(',', '');
+        
+      }else if (urlParams.get('utm_source')=='linkedin'){
+        referring_domain = 'linkedin.com';
+        referring_hostname = 'https://linkedin.com/';
+
+        organic_source = urlParams.get('utm_source');
+        organic_medium = urlParams.get('utm_medium');
+        organic_campaign = urlParams.get('utm_content').replaceAll('"', '').replaceAll(',', '');
+      }else if (urlParams.get('utm_source')=='hs_email'){
+       
+        organic_source = urlParams.get('utm_source');
+        organic_medium = urlParams.get('utm_medium');
+        organic_campaign = urlParams.get('utm_campaign').replaceAll('"', '').replaceAll(',', '');
+      }
+     
+    }else{
+      (p_data.organic_search_data.source=='genemco') ? organic_medium = 'direct' : organic_medium = p_data.organic_search_data.medium;
+      organic_source = p_data.organic_search_data.source;
+    }
+  }
+  
+  var trafficData = [];
+  trafficData = {
+    'referring_domain':referring_domain,
+    'referring_hostname':referring_hostname,
+    'page_entry_url':page_entry_url,
+    'page_entry_title':document.title,
+    'organic_source':organic_source,
+    'organic_medium':organic_medium,
+    'organic_campaign':organic_campaign,
+    'paid_source':paid_source,
+    'paid_medium':paid_medium,
+    'paid_term':paid_term,
+    'paid_campaign':paid_campaign,
+  };
+
+
+  
+  if(document.cookie.indexOf('trafficData')== -1 && document.title != 'Quote Thank You'){
+    createCookieDays('trafficData',JSON.stringify(trafficData),1);
+  }
+  if(document.title == 'Quote Thank You'){
+    document.cookie = "trafficData=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    createCookieMinute('trafficData',Cookies.get('trafficData') ,1);
+  }
+
+
+  function createCookieMinute(name,value,minutes) {
+    if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime()+(minutes*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie = name+"="+value+expires+"; path=/";
+ }
+
+  function createCookieDays(name,value,days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime()+(days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+    } else {
+        var expires = "";
+    }
+    document.cookie = name+"="+value+expires+"; path=/";
+ }
+  
+  
+</script>

@@ -1,0 +1,136 @@
+{% if customer.tags contains 'Super Admin' or customer.tags contains 'Sales Admin' or customer.tags contains 'Sales Team' %}
+<div class="product-attribute">
+ <div style="margin-top:30px;font-size:20px;font-weight:600;">Internal Sales Data</div>
+ <div>Product Purchased From : <span>{{ product.metafields.Genemco["Product_Purchased_From"] }}</span></div>
+ <div>Purchased Date : <span>{{ product.metafields.Genemco["Purchase_Date"] }}</span></div>
+ <div>Stretch Price : <span>${{ product.metafields.Genemco["Stretch_Price"] }}</span></div>
+ <div>Target Price : <span>${{ product.metafields.Genemco["Target_Price"] }}</span></div>
+ <div>Minimum Price : <span>${{ product.metafields.Genemco["Minimum_Price"] }}</span></div>
+ <div>Hit List : <span>{{ product.metafields.Genemco["Hit_List"] }}</span></div>
+ <div>Internal Notes : <span>{{ product.metafields.Genemco["Internal_Notes"] }}</span></div>
+ <div>Needs Repair : <span>{{ product.metafields.Genemco["Needs_Repair"] }}</span></div>
+</div>
+{%- endif -%}
+
+{% if customer.tags contains 'Super Admin' or customer.tags contains 'Sales Admin'%}
+<div class="product-attribute">
+ <div style="margin-top:15px;font-size:20px;font-weight:600;">Admin Quote History</div>
+ <div>Number of Quotes : <span class="num_quotes"></span></div>
+ <div>Latest : <span class="latest_quote"></span></div>
+ <div>Oldest : <span class="oldest_quote"></span></div>
+ <div>High : <span class="max_quote"></span></div>
+ <div>Low : <span class="min_quote"></span></div>
+ <div>Average : <span class="avg_quote"></span></div>
+ <div><a style="color:#2e4ec4;font-size:16px;magin-top:10px;cursor:pointer;" class="viewHistory"  >Full Quote History</a></div>
+</div>
+
+<div class="deals-attribute">
+  <div style="margin-top:15px;font-size:20px;font-weight:600;">Hubspot Deals</div>
+  <div class="hubspot-data"></div>
+</div>
+
+<script>
+  var stock_no = '{{ product.metafields.Genemco["stock_no"] }}';
+  
+    $( document ).ready(function() {
+     $.ajax({
+     type:'POST',
+     crossDomain: true,
+     url:webhook_domain+"/webhooks/search-hubspot-deal",
+     data: {'sku': stock_no},
+     success:function(data){
+          var hubspotData = JSON.parse(data);
+          var result = '';
+          if(hubspotData.response.status==1){
+            dataDeal = hubspotData.response.data;
+            for (var x = 0; x < dataDeal.length; x++) {
+              console.log(dataDeal[x].id);
+              result +='<div style="cursor:pointer;background:#f7f7f7;margin-bottom:10px;padding:5px;border-left: 3px solid #ff6129;"><a target="_blank" style="color: #ff6129;" href="https://app.hubspot.com/contacts/6369229/record/0-3/'+dataDeal[x].id+'">'+dataDeal[x].name+'</a><div>Stage: '+dataDeal[x].stage+'</div><div>Owner: '+dataDeal[x].owner+'</div><div>Closed date: '+dataDeal[x].closedate+'</div></div>';
+            }
+            $('.hubspot-data').html(result);
+          }else{
+            $('.hubspot-data').html('No Active Deal');
+          }
+          
+       }
+    });
+  });
+
+  
+  $( document ).ready(function() {
+     $.ajax({
+     type:'GET',
+     url:webhook_domain+"/shopify/quote-history/"+stock_no,
+     data: '',
+     success:function(data){
+          var history = JSON.parse(data);
+          $('.num_quotes').html(history[0].num_quote); 
+          $('.latest_quote').html(history[0].latest_quote); 
+          $('.oldest_quote').html(history[0].oldest_quote); 
+          $('.max_quote').html('$'+Math.round(history[0].max_quote).formatMoney(2)); 
+          $('.min_quote').html('$'+Math.round(history[0].min_quote).formatMoney(2)); 
+          $('.avg_quote').html('$'+Math.round(history[0].avg_quote).formatMoney(2)); 
+          
+       }
+    });
+});
+  
+  
+  $('.viewHistory').click(function(){
+    $.ajax({
+     type:'GET',
+     url:webhook_domain+"/shopify/quote-history-details/"+stock_no,
+     data: '',
+     success:function(data){
+          var history = JSON.parse(data);
+          var data_val = '<div style="font-size:20px;font-weight:600;text-align:center;">Quote History</div>';
+          data_val += '<div style="font-size:14px;font-weight:600;text-align:center;">{{ product.metafields.Genemco["name"] }}</div>';
+          
+          for (var key in history) {
+            var price = Math.round(history[key].product_price);
+            var strect_price = Math.round(history[key].product_stretch_price);
+            var min_price = Math.round(history[key].product_min_price);
+            data_val += '</tr>';
+            data_val += '<td><a href="https://app.hubspot.com/contacts/6369229/deal/'+history[key].hubspot_deal_id+'" target="_blank"><img src="https://production.genemco.com/img/Hubspot Icon.png" style="width: 25px;max-width:25px;"></a></td>';
+            data_val += '<td>'+history[key].quote_date+'</td>';
+            data_val += '<td>'+price.formatMoney(2)+'</td>';
+            data_val += '<td>'+strect_price.formatMoney(2)+'</td>';
+            data_val += '<td>'+min_price.formatMoney(2)+'</td>';
+            data_val += '<td>'+history[key].customer_name+'</td>';
+            data_val += '<td>'+history[key].admin_comment+'</td>';
+            data_val += '</tr>';
+          }
+          
+          var historyDialog = new Fancybox([{
+            src: '<table class="table table-bordered">'+
+                  '<thead>'+
+                    '<tr>'+
+                      '<th class="bg-primary text-white"></th><th class="bg-primary text-white"><b>Date</b></th>'+
+                      '<th class="bg-primary text-white"><b>Price</b></th>'+
+                      '<th class="bg-primary text-white"><b>Stretch Price</b></th>'+
+                      '<th class="bg-primary text-white"><b>Min Price</b></th>'+
+                      '<th class="bg-primary text-white"><b>Customer Name</b></th>'+
+                      '<th class="bg-primary text-white"><b>Comments</b></th>'+
+                    '</tr>'+
+                  '</thead>'+
+                  '<tbody>'+
+                    data_val
+                  +'</tbody>'+
+                '</table>',
+            type: "html"
+          }]);
+       }
+    });
+    
+  });
+</script>
+<style>
+  @media screen and (min-width: 768px){
+  .fancybox__content {
+    border-radius: 5px;
+    width: 700px;
+  }
+  }
+</style>
+{%- endif -%}
+

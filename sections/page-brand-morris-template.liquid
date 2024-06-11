@@ -1,0 +1,128 @@
+<div class="container container--narrow">
+  <header class="page__header page__header--stack page__header--centered">
+    <h1 class="page__title heading h1">{{ page.title }}</h1>
+
+    {%- if page.content != blank -%}
+      <div class="page__description rte">
+        {{ page.content }}
+      </div>
+    {%- endif -%}
+  </header>
+</div>
+
+<div class="section section--tight">
+  <div class="layout">
+
+      
+    <div class="container container--flush">
+      <div class="brand-page text-with-icons {% if section.settings.stack_mobile %}text-with-icons--stacked{% endif %}">
+        {%- for block in section.blocks -%}
+
+          <!-- <a href="/collections/screw-compressors" class="collection-item is-selected" data-collection-index="0" style="position: absolute; left: 0%;"><div class="collection-item__image-wrapper " style="background-image: url(//genemco.com/cdn/shop/files/Frick_Rotary_Screw_Compressor_Package_-_Category_Image_Genemco_1x1.jpg?v=1613337702)"><div class="aspect-ratio" style="padding-bottom: 100%">
+                <img class="image--fade-in lazyloaded" data-widths="[300,400,500,600]" data-sizes="auto" alt="" src="{{ block.settings.custom_icon | img_url: '60x' }}">
+              </div>
+            </div><span class="collection-item__title text--strong">{{ block.settings.title | escape }}</span></a> -->
+          
+          <div class="text-with-icons__item" style="text-align:center;" data-block-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank or block.settings.content != blank -%}
+              <div class="text-with-icons__content-wrapper">
+                {%- if block.settings.title != blank -%}
+                  <a class="brand-category" href="{{ block.settings.button_link }}">
+                  <img class="lazyload image--fade-in" data-src="{{ block.settings.custom_icon | img_url: '800x' }}" data-widths="[300,400,500,600]" data-sizes="auto">
+                  <noscript>
+                  <img src="{{ block.settings.custom_icon | img_url: '800x' }}">
+                  </noscript>
+                  <div>{{ block.settings.title | escape }}</div>
+                  </a>
+                {%- endif -%}
+
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+ 
+
+
+    {%- if section.settings.show_store_info -%}
+      <div class="layout__section layout__section--large-secondary">
+        <div class="contact__store-info">
+          {%- if section.settings.store_heading != blank -%}
+            <h2 class="contact__store-heading heading h3">{{ section.settings.store_heading | escape }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.store_image -%}
+            <div class="contact__store-image">
+              <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: section.settings.store_image.aspect_ratio }}%;text-align:center;">
+                <img src="{{ section.settings.store_image | img_url: '700x' }}" alt="{{ section.settings.store_image.alt | escape }}">
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.store_info != blank -%}
+            <div class="contact__store-text rte">
+              {{ section.settings.store_info }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+<style>
+  .text-with-icons__content-wrapper .brand-category{
+    font-size:18px;
+    text-align:center;
+  }
+  .text-with-icons__content-wrapper div{
+    margin-top:15px;
+  }
+  .brand-page{
+    margin-top:50px;
+  }
+  .text-with-icons__content-wrapper .brand-category:hover{
+    color:#ff6128;
+    text-decoration:underline;
+  }
+  .text-with-icons__content-wrapper .brand-category>p:hover{
+    color:#ff6128;
+    text-decoration:underline;
+  }
+</style>
+{% schema %}
+{
+  "name": "Brand Categories",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon/Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Name",
+          "default": "Your title"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Category link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

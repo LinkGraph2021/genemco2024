@@ -1,0 +1,13 @@
+<script>
+  var customerStatus = {% if customer %} true {% else %} false {% endif %};
+  {% if customer %}
+    var customerEmail = "{{ customer.email }}";
+  {% endif %}
+</script>
+<div class="container">
+  <div class="page__content rte" id="thankyou-page-html">
+    
+  </div>
+
+
+</div>

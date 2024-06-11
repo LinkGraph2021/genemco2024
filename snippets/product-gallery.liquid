@@ -1,0 +1,273 @@
+{%- if product.media.size > 0 -%}
+  {%- assign show_thumbnails_if_one_media = true -%}
+
+  <div class="">
+    <div class="card__section card__section--tight">
+      <div class="product-gallery {% if show_thumbnails_if_one_media %}product-gallery--with-thumbnails{% endif %}">
+        {%- assign selected_media = product.selected_variant.featured_media | default: product.featured_media -%}
+
+        <div class="product-gallery__carousel-wrapper">
+          <div class="product-gallery__carousel {% if template != 'product.quick-view' and section.settings.enable_image_zoom %}product-gallery__carousel--zoomable{% endif %}" data-media-count="{{ product.media.size }}" data-initial-media-id="{{ selected_media.id }}">
+            {%- for media in product.media -%}
+              {%- assign is_media_group = false -%}
+              {%- assign is_media_filtered = false -%}
+              {%- assign media_alt = media.alt -%}
+
+              {%- if media.alt contains '#' -%}
+                {%- assign is_media_group = true -%}
+                {%- assign alt_parts = media.alt | split: '#' -%}
+
+                {%- comment -%}
+                If the custom ALT tag contains two parts (for instance "My custom alt # color_blue") then the first part is actually used
+                as a custom ALT tag
+                {%- endcomment -%}
+
+                {%- if alt_parts.size == 2 and alt_parts.first != blank -%}
+                  {%- assign media_alt = alt_parts.first | strip -%}
+                {%- else -%}
+                  {%- assign media_alt = product.title -%}
+                {%- endif -%}
+
+                {%- assign media_group_parts = alt_parts.last | split: '_' -%}
+
+                {%- for option in product.options -%}
+                  {%- assign downcase_option = option | downcase -%}
+                  {%- assign downcase_group_option = media_group_parts.first | strip | downcase -%}
+
+                  {%- if downcase_option == downcase_group_option -%}
+                    {%- assign option_setting = 'option' | append: forloop.index -%}
+                    {%- assign option_value = product.selected_or_first_available_variant[option_setting] | downcase -%}
+
+                    {%- assign downcase_group_value = media_group_parts.last | strip | downcase -%}
+                    {%- assign media_variant_ids = media.variants | map: 'id' -%}
+
+                    {%- if option_value != downcase_group_value -%}
+                      {%- unless media_variant_ids contains product.selected_or_first_available_variant.id -%}
+                        {%- assign is_media_filtered = true -%}
+                      {%- endunless -%}
+                    {%- endif -%}
+
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+
+              <div class="product-gallery__carousel-item product-gallery__image-thumbnail {% if media.id == selected_media.id %}is-selected{% endif %} {% if is_media_filtered %}is-filtered{% endif %}" tabindex="-1" data-media-id="{{ media.id }}" data-media-type="{{ media.media_type | escape }}" {% if is_media_group %}data-group-name="{{ media_group_parts.first | strip | downcase | escape }}" data-group-value="{{ media_group_parts.last | strip | downcase | escape }}"{% endif %}>
+                {%- case media.media_type -%}
+                  {%- when 'image' -%}
+                    <div class="product-gallery__size-limiter" style="max-width: {{ media.width }}px">
+                      {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+                      {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                      <div class="aspect-ratio image-{{ media.id }}" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+                        <img class="product-gallery__image lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ media | img_url: '3200x' }}" alt="{{ media_alt | escape }}">
+
+                        <noscript>
+                          <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+                        </noscript>
+                      </div>
+                    </div>
+
+                  {%- when 'model' -%}
+                    <div class="product-gallery__model">
+                      <div class="model-wrapper">
+                        {{- media | model_viewer_tag: image_size: '1024x', reveal: 'interaction', toggleable: true -}}
+                      </div>
+                    </div>
+
+                  {%- when 'external_video' -%}
+                	<div class="product-gallery__size-limiter product-gallery__video-thumbnail" style="max-width: {{ media.width }}px">
+                      {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+                      {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                      <div class="aspect-ratio image-{{ media.id }}" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+                        <img class="product-gallery__image lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ media | img_url: '3200x' }}" alt="{{ media_alt | escape }}">
+
+                        <noscript>
+                          <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+                        </noscript>
+                      </div>
+                    </div>
+                	{%- comment -%}
+                    <div class="product-gallery__external-video">
+                      <div class="video-wrapper">
+                        {{- media | external_video_tag: image_size: '1024x' -}}
+                      </div>
+                    </div>
+                	{%- endcomment -%}
+                
+                  {%- when 'video' -%}
+                    <div class="product-gallery__video">
+                      <div class="video-wrapper video-wrapper--native" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+                        {{- media | video_tag: image_size: '1024x', controls: true -}}
+                      </div>
+                    </div>
+                {%- endcase -%}
+              </div>
+              
+              
+            {%- endfor -%}
+          </div>
+
+          {%- comment -%}Add the "view in your space" button, which allows to show the product in customer's environment (if the device supports it){%- endcomment -%}
+          {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+
+          {%- if first_3d_model -%}
+            <button class="product-gallery__view-in-space button button--full" data-shopify-xr data-shopify-model3d-id="{{ first_3d_model.id }}" data-shopify-model3d-default-id="{{ first_3d_model.id }}" data-shopify-title="{{ product.title | escape }}" data-shopify-xr-hidden>
+              {%- render 'icon', icon: 'media-view-in-space' -%} {{- 'product.general.view_in_space' | t -}}
+            </button>
+          {%- endif -%}
+
+          <div class="boost-pfs-filter-product-item-label">
+            {% if product.selected_or_first_available_variant.available == false %}
+              <span class="tag boost-pfs-filter-label Recently Sold">Sold Out</span>
+            {% endif %}
+  
+            {% for tag in product.tags %}
+                {% if tag contains "pfs:" %}
+                  
+                  {% assign beatles = tag | split: ":label-" %}
+
+                    <span class="tag boost-pfs-filter-label {{ beatles[1]|strip }}">{{ beatles[1]|strip }}</span>
+                    
+                  
+                {% endif %}
+            {% endfor %}
+  
+          </div>
+  
+          {%- if template != 'product.quick-view' and section.settings.enable_image_zoom -%}
+            <span class="product-gallery__zoom-notice">{% render 'icon', icon: 'zoom' %}Roll over image to Zoom <br/>OR <br/>Click for full Gallery (images, video, data sheets)</span>
+          {%- endif -%}
+        </div>
+        
+        {% render 'product-desktop-thumbnail-popup', product: product %}
+        {% comment %}
+        {% render 'product-mobile-image-gallery', product: product %}
+        {% endcomment %}
+
+        {%- if show_thumbnails_if_one_media -%}
+          <div class="scroller">
+            <div class="scroller__inner">
+              <div>
+                
+              </div>
+              <div class="product-gallery__thumbanil-arrows" {% if product.media.size <= 5 %} style="display: none;" {% endif %}>
+                <div class="product-gallery__thumbnail-up">
+                  <div><svg x="0px" y="0px" width="18px" height="15px" viewBox="0 0 284 177" enable-background="new 0 0 284 177" xml:space="preserve">  <image xmlns="http://www.w3.org/2000/svg" id="image0" width="284" height="177" x="0" y="0" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAACxCAQAAAC8CMrvAAAABGdBTUEAALGPC/xhBQAAACBjSFJN AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAJcEhZ cwAACxMAAAsTAQCanBgAAAAHdElNRQfmBwsOFyxULcxRAAAH4klEQVR42u2dT2ocRxTGv54LJM7O myAYkIRMFJRVTCCEgLMKZOuljuC9TqEbaKkDZOVAyE5BCAYUBmYEAyIgYq8sn6CykCX39HT39J+q et+rer8+gN5U//q9r7p7RgWMDc7dP/gTCwDf4gd8g9eFdEUGPacONcepk67LIOb2/qBWGzi4A3d7 L12fQclNozSPx431HaPKaqs2cHArU8co000bU8dYo7s2po7xxPZsY1nH2GDZWxs4uKWpkzf9u411 HaNntrGsYwAYq42pkynDh5QNrIxZeNEGDm5h6uSDP21MnYzwM6RsYGXG+EhsMTlDwmhj6iTOsLvE XQ+7m5wo86DaWExOFL87KVMnE/zvpJoO22ElRDxtTJ2EiDOkbGAlRvhIXHfMTR3dyGhj6ign/pCy gZUAd2eS2sDB3Z1Jr4HRG3ltTB2F3N5LK/N42BeHFcGjjamjCC5tTB0lcGQbU0cZnNqYOuTwDany Ya96kcKtTWrqJPPrdis3lS6hS5WYJrLiE+kC/HB7r0EbYIpUuk4S4tyd7XwhXUNXprCYTAJ/tklx h6V+4urINhtVq886ykeVTm2AKbS/YKrae63afKpedddR3HG07KSa0B2T1Tp/e69nJ9XyKT7ufCld wzCUiqN7SK19EqUDS+WouklGG70xWaE4C7crXYJXdlWqo65NLt2edAkB0DewlHWcVZLaaNxhqfL8 JrEhtY6urqOo46SWbaroislqxJm7fekSgqMpJitpjosMtHngBrsqzomKItPONlV0ZB0Fo2qVlTZa dlj0buczpMrwDyzyjpNDJK5jF+w/fkvt9dy9kC5BkCX2iM8OcWl5DqkyzAOLtrC8dlJN8O6wSDPO 0rQBwPw9LEpx5ok+yhzClDQmE4qTdyTeZA+MP0NJN0FNmzr4dlhk5aT5mpYP2GIyVTG2k2qDSx2i jGPatMP1vg6NOKm/puWDXaKYTNL87C5xVxbYpzhnFEXYkOoDx4MIghLS+VZmLBhisnjGSelbmbFg iMnC4lgkHoZ8TBZteRaJxyAbkwX/NLs2MwBH0kW0wrLDikrc/8zb/7h0AHApXkf7IZ91IrMSX/L2 4+rphFyJ19J+sL6vEwTZ/5XZRxsN6kjH5GjI/WfeIdpoUCeL/zjMrs1l7UlgzzrJq8M+pC4aT8CF eG3tR9IDiz0SX7QuPrs6ycbkpfjSth+XWxeefWBxvtY+Ep3ZRps6yWWdNLQxdUybteOi12KzZ51k YnJa2mhQJ4kHEewb8O5Dqgz7wFK/w7oWX8L242rwArPfTVY9sGbiyxdKGw3qqI3J7N1m2JAqwz6w VKrDrk3/SFwHe0xWN7DSjMR1sHcdVTGZfQM+LttUYc86ah5EpB2JNX5iFVmHfRH9a6PhU9Orwx6J /WWbKuwDi1od9mwTThsN6tBmHXZtwgwpTepQPsNiH1KzKItmWSexBYujjYaVoFKHfbHCD6ky7AOL Rh32IRVXG1OnIxaJNaojHpPZu028bKNtZUQff7JnGzltNKgjNrBMG+3qXEusELs2MtlG2ypF7zrs 1xKHNhrUiZp12HdS8kOqDPtFFu0ZFvs1JDK5VasTZWCx36Hg00aDOsFXjV0briFVJus+zf7hebXR sHrBBpZF4tTVCRKTs5/SWayi967Dnm0onvcmoY7XC5BdGx3dJjt12LXhzzZV2LOOF3XYrw992mhQ Z/ToZ9dG15DStLKjnmElf12Iwn57Y/BFyZ5tdGuTrDrs2ugdUmXYe3rv11PYP1Aa2mhY6V6bD/bg lo42GtTpvNrsH0R/tqnCfqF26jrsP02m7lftklBna9Zh1ya9bpOEOuzapJVtqrBHhEZ12AvX+XAh JXVqzwB70Wl3m0fYB9aGOuy3+9LNNtrUWRtY7N0mH20A/gcRD2ejAABQn5hrHBbSNcRl5o6kS2jh GT4UwAQ4MW3IOCpm0iW08AEn7qHjEIuTozYPcHcdFJNzYm3m2WoDHBXX0iW0cO4mb6VraGSOF9lq AwCHxVy6hEYuUOy4W+kqasl3SK2tgjuULqGWAxScCWeGI9MGAG/WmUgXUIdp8xnOHdYzTHaka9jg 2rRZg1GdfUx+k66hQs47qSb4dlg/Y/JKuoY1ct9JNcG2w/qR6wag7aTaoIrJxQQ4lS7iEzPTphWe rPNkzIH4E9dc3rcZC8N7DC8/n6n3x9LF5PXixBgI3tcpc3dm2mhB9n2du7NKOXLq2JDqi1zX2dAG kFIn/VfQQyCTdWq1ASTUMW2GEl+dRm2A2OrYkBpD3IHVqg0AvHsTqxSLxGOJF5PfvelQThx1TBsf xFGnkzZADHVsSPki/MDqrA0QOutYJPZJ2Ji8NdtUCaeOdRvfhFOntzZAqIFl2SYEYQZWryFVxr86 pk0o/MfkwdoAvtWxIRUSv13n/fHIcvypY5E4NP6yzqhu84ifmGzaxMCPOoMicR3ju44NqViMH1he us0j4171skgck3ExeXS2qTJcHdMmNsPV8a4NMFQdG1ISDBtYQbQBhmQdi8RS9I/JXrNNlX7qmDaS 9FMnqDZAn4FlQ0qa7lkn2JAq000di8QMdFMnijZAF3Ws27CwPSZH0wYA3h9/11jIc7c0bYiYu68a z9VLiTN1WlsK94/f5spJ7bk6HXGuRn7N/3f3B/7CvwCe43v8gtf2swG0nLu3+Bv/AfgaP+EVfh11 rv4H8mYCwdKgaScAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjItMDctMTFUMTQ6MjM6NDMrMDA6MDAa c+OuAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIyLTA3LTExVDE0OjIzOjQzKzAwOjAway5bEgAAAABJ RU5ErkJggg=="/></svg></div>
+                </div>
+                <div class="product-gallery__thumbnail-down">
+                  <div><svg  x="0px" y="0px" width="18px" height="15px" viewBox="0 0 284 177" enable-background="new 0 0 284 177" xml:space="preserve">  <image xmlns="http://www.w3.org/2000/svg" id="image0" width="284" height="177" x="0" y="0" href="data:image/png;base64,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"/></svg></div>
+                </div>
+              </div>
+
+              <div class="product-gallery__thumbnail-list">
+                
+                {%- assign media_count = 0 -%}
+                {%- for media in product.media -%}
+                  {%- assign is_media_group = false -%}
+                  {%- assign is_media_filtered = false -%}
+                  {%- assign media_alt = media.alt -%}
+
+                  {%- if media.alt contains '#' -%}
+                    {%- assign is_media_group = true -%}
+                    {%- assign alt_parts = media.alt | split: '#' -%}
+
+                    {%- comment -%}
+                      If the custom ALT tag contains two parts (for instance "My custom alt # color_blue") then the first part is actually used
+                      as a custom ALT tag
+                    {%- endcomment -%}
+
+                    {%- if alt_parts.size == 2 and alt_parts.first != blank -%}
+                      {%- assign media_alt = alt_parts.first | strip -%}
+                    {%- else -%}
+                      {%- assign media_alt = product.title -%}
+                    {%- endif -%}
+
+                    {%- assign media_group_parts = alt_parts.last | split: '_' -%}
+
+                    {%- for option in product.options -%}
+                      {%- assign downcase_option = option | downcase -%}
+                      {%- assign downcase_group_option = media_group_parts.first | strip | downcase -%}
+
+                      {%- if downcase_option == downcase_group_option -%}
+                        {%- assign option_setting = 'option' | append: forloop.index -%}
+                        {%- assign option_value = product.selected_or_first_available_variant[option_setting] | downcase -%}
+
+                        {%- assign downcase_group_value = media_group_parts.last | strip | downcase -%}
+                        {%- assign media_variant_ids = media.variants | map: 'id' -%}
+
+                        {%- if option_value != downcase_group_value -%}
+                          {%- unless media_variant_ids contains product.selected_or_first_available_variant.id -%}
+                            {%- assign is_media_filtered = true -%}
+                          {%- endunless -%}
+                        {%- endif -%}
+
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+				
+                  {%- if media.media_type != 'video' and media.media_type != 'external_video' -%}
+                  <a href="{{ media | img_url: '1024x' }}" class="product-gallery__thumbnail {% if media.id == selected_media.id %}is-nav-selected{% endif %} {% if is_media_filtered %}is-filtered{% endif %}" data-media-id="{{ media.id }}" {% if is_media_group %}data-group-name="{{ media_group_parts.first | strip | downcase | escape }}" data-group-value="{{ media_group_parts.last | strip | downcase | escape }}"{% endif %}>
+                    {%- comment -%}Based on the type of media, we have to add an icon as per Shopify rules{%- endcomment -%}
+
+                    {%- case media.media_type -%}
+                      {%- when 'model' -%}
+                        <span class="product-gallery__thumbnail-badge">{% render 'icon', icon: 'media-model-badge' %}</span>
+
+                      {%- when 'video' or 'external_video' -%}
+                        <span class="product-gallery__thumbnail-badge">{% render 'icon', icon: 'media-video-badge' %}</span>
+                    {%- endcase -%}
+
+                    <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: media.preview_image.aspect_ratio }}%">
+                      <img class="image--fade-in lazyload" data-src="{{ media | img_url: '130x' }}" alt="{{ media_alt | escape }}">
+                    </div>
+                  </a>
+                  {% else %}
+                    {%- assign media_count = media_count | plus: 1 -%}
+                	{%- if media_count == 1 -%}
+                		{%- assign first_media = media -%}
+                	{%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                
+              </div>
+            </div>
+            <div class="locked-wrapper">
+                {%- if media_count > 0 -%}
+                <a href="{{ first_media | img_url: '1024x' }}" class="product-gallery__thumbnail-video {% if first_media.id == selected_media.id %}is-nav-selected{% endif %} {% if is_media_filtered %}is-filtered{% endif %}" data-media-id="{{ first_media.id }}" {% if is_media_group %}data-group-name="{{ media_group_parts.first | strip | downcase | escape }}" data-group-value="{{ media_group_parts.last | strip | downcase | escape }}"{% endif %} data-media-type="external_video">
+                  {%- comment -%}Based on the type of media, we have to add an icon as per Shopify rules{%- endcomment -%}
+
+                  <span class="product-gallery__thumbnail-badge">{% render 'icon', icon: 'media-video-badge' %}</span>
+
+                  <div class="aspect-ratio" style="padding-bottom: {{ 100.0 | divided_by: first_media.preview_image.aspect_ratio }}%">
+                    <img class="image--fade-in lazyload" data-src="{{ first_media | img_url: '130x' }}" alt="{{ first_media.alt | escape }}">
+                  </div>
+
+                  <span style="display: block; text-align: center; font-size: 12px; font-weight: bold; color: #555;">{{ media_count }} VIDEO{% if media_count > 1 %}S{% endif %}</span>
+                </a>
+                {%- endif -%}
+
+                {% if product.metafields.Genemco.product_pdf_link1 != blank or product.metafields.Genemco.product_pdf_link2 != blank or product.metafields.Genemco.product_pdf_link3 != blank or product.metafields.Genemco.product_pdf_link4 != blank or product.metafields.Genemco.product_pdf_link5 != blank or product.metafields.Genemco.product_pdf_link6 != blank %}
+                <a class="product-gallery__thumbnail-attachment" data-media-type="attachment">
+                  <div class="aspect-ratio" style="padding-bottom: 100%">
+                    <img class="image--fade-in lazyload" data-src="{{ "pdfIcon.png" | asset_img_url: '130x' }}" alt="Attachment">
+                  </div>
+                  {% assign attachmentCount = 0 %}
+                  {% if product.metafields.Genemco.product_pdf_link1 != blank %}{% assign attachmentCount = attachmentCount | plus: 1 %}{% endif %}
+                  {% if product.metafields.Genemco.product_pdf_link2 != blank %}{% assign attachmentCount = attachmentCount | plus: 1 %}{% endif %}
+                  {% if product.metafields.Genemco.product_pdf_link3 != blank %}{% assign attachmentCount = attachmentCount | plus: 1 %}{% endif %}
+                  {% if product.metafields.Genemco.product_pdf_link4 != blank %}{% assign attachmentCount = attachmentCount | plus: 1 %}{% endif %}
+                  {% if product.metafields.Genemco.product_pdf_link5 != blank %}{% assign attachmentCount = attachmentCount | plus: 1 %}{% endif %}
+                  {% if product.metafields.Genemco.product_pdf_link6 != blank %}{% assign attachmentCount = attachmentCount | plus: 1 %}{% endif %}
+                  <span style="position: absolute;top: 5px;right: 5px;background: #fff;width: 20px;height: 20px;display: flex;align-items: center;justify-content: center;border-radius: 50%;border: solid 1px;">{{ attachmentCount }}</span>
+                </a>
+                {% endif %}
+              </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}

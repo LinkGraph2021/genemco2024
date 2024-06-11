@@ -1,0 +1,47 @@
+{% assign current_tags = '' %}
+{% for tag in collection.tags %}
+	{% assign current_tags = current_tags | append: tag | downcase %}
+{% endfor %}
+
+<div class="genemco-collection-filter" id="desktop-genemco-collection-filter">
+  <div class="genemco-filter-row filter-accordian" data-filter="stock" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Stock status</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="manufacturer" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Manufacturer</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="model" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Product Model</span>
+  </div>
+  <div class="genemco-filter-group filter-accordian {% unless current_tags contains 'motor' %}filter-accordian-closed{% endunless %}">
+    <span class="genemco-filter-group-title filter-accordian-title">Motor Specifications</span>
+    <div class="genemco-filter-row" data-filter="motor_included_yesno" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Included (Yes/No)</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_manufacturer" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Manufacturer</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_horsepower_hp" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Horsepower (HP)</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_rpm" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor RPM</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_voltage" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Voltage</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_amps" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Amps</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_hertz_hz" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Hertz (Hz)</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_phases" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Phases</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_frame_size" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Frame Size</span>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,51 @@
+<script>
+  var customerStatus = {% if customer %} true {% else %} false {% endif %};
+  {% if customer %}
+    var customerEmail = "{{ customer.email }}";
+  {% endif %}
+</script>
+<script>
+  gtag(‘event’, ‘conversion’, {‘send_to’: ‘AW-1072077709/vBInCNqQj6UZEI23mv8D’});
+</script>
+<div class="container">
+  <div class="page__content rte" id="quick-quote-thankyou-page">
+    <div class="quick-quote-thankyou-page">
+					<div class="genemco-checkout__container" style="margin-top: 50px;">
+						<div class="genemco-checkout__col-half">
+							<h2 class="genemco-checkout__heading" style="color: #00aa00;"><strong>Thank you <label class="qi_name"></label>, your quote has been sent!</strong></h2>
+							
+							<br>
+							<p class="genemco-checkout__text">We will quickly email/call you to discuss your quote. You may also call us at <a href="tel:979-268-7447">979-268-7447</a>.</p>
+							<p class="genemco-checkout__text">Please check your email for quote confirmation and additional information.</p>
+							<div class="genemco-checkout__review-items genemco-checkout__row">
+								<h2 class="genemco-checkout__heading hide-on-mobile"><strong>Quote Number:</strong> <label class="qi_sku"></label></h2>
+								
+					<div class="genemco-checkout__cart-item">
+						<div class="cart-item__left">
+							<img class="cart-item__img" src="" />
+						</div>
+						<div class="cart-item__right">
+							<p class="cart-item__sku">RRK16</p>
+							<p class="cart-item__title"><strong>BAC TSU-940G Tube Ice Builder (Ammonia (R-717 | NH3) Refrigeration, 38 Ton Day)</strong></p>
+							<p class="cart-item__desc">BAC G Series Thermal Storage. Model: TSU-940G, Serial: U084557701. LBS of Ice: Gravity Flooded: 70890 LBS. Pump Recirculated: 75,970 LBS. Approx. Operating Weight(LBS): 147700, Air Pump(HP): 5 HP, Water Volume(Gal): 280, Coil Volume: 1655, Water Connection (In/Out): 8 in. Refrigerant charge listed is operating charge for gravity flooded system at 15 F. Overall Dimensions(in): 312 L x 142 W x 96 H. BAC Ice Chiller Storage Unit Maintain a consistently low water temperature cooled. Ideal for batch cooling for industrial and process cooling applications such as dairies, breweries, chemical manufacturers, food product cooling, bottling process, produce cooling, and more. In the Ice Build Operating mode, ice is built by circulating glycol or refrigerant through the units coils. In Ice Only Cooling operating mode, the compressor unit is off and water is circulated though the iced tubes. Phillips Refrigeration Flooded Vessel: National Board: 11934, Serial No: 0827250-01. Year Built: 2008. MAWP 250 PSI @ 450F. MDMT: -20 F @ 250 PSI. Ext. MAWP: 15 PSI @ 450 F. Dimensions(in): 151 L x 64 W x 64 H.</p>
+						</div>
+					</div>
+					
+							</div>
+						</div></div>
+				</div>
+  </div>
+
+
+</div>
+<script>
+  $( document ).ready(function() {
+    $('.qi_name').html(sessionStorage.getItem("qi_name"));
+    $('.qi_sku').html(sessionStorage.getItem("qi_quote"));
+    $('.cart-item__sku').html(sessionStorage.getItem("qi_sku"));
+    $('.cart-item__title').html(sessionStorage.getItem("qi_title"));
+    $('.cart-item__desc').html(sessionStorage.getItem("qi_desc"));
+    $('.cart-item__img').attr('src',sessionStorage.getItem("qi_img"));
+  });
+
+</script>

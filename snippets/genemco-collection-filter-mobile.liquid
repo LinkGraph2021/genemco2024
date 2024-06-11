@@ -1,0 +1,473 @@
+{% assign current_tags = '' %}
+{% for tag in collection.tags %}
+	{% assign current_tags = current_tags | append: tag | downcase %}
+{% endfor %}
+
+<div class="genemco-collection-filter" id="mobile-genemco-collection-filter">
+  <div class="genemco-filter-row filter-accordian" data-filter="stock" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Stock status</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="pump_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Pump Type</span>
+  </div>
+  <div class="genemco-filter-row boost-pfs-filter-option-range filter-accordian" data-filter="range_slider4" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Gallons Per Minute (GPM)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="03_compressor_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Compressor Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="03_stage_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Stage Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="14_stainless_tank_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Stainless Tank Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="refrigeration_tank_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Refrigeration Tank Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="tank_orientation" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tank Orientation</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="tank_diameter_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tank Diameter (Inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="tank_length_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tank Length (Inches)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="motor_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Motor Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="evaporator_component_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Evaporator Component Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian boost-pfs-filter-option-range" data-filter="range_slider1" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Tank Estimated Capacity (Gallons)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="14_jacketed_insulated" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Jacketed (Insulated)?</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="14_dimpled" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Dimpled?</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="14_agitation" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Agitation?</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="28_air_cooled_or_liquid_cooled" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Air Cooled or Liquid Cooled</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="17_tank_materials_of_construct" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tank Materials of Construction (text)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="20_conveyor_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Conveyor Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="20_conveyer_width_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Conveyer Width (inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="20_conveyor_length_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Conveyor Length (inches)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="51_kw" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">KW</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="51_high_voltage" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">High Voltage</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="51_low_voltage" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Low Voltage</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="53_freezer_part_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Freezer Part Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="46_htst_part_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">HTST Part Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="34_dryer_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Dryer Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="15_boiler_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Boiler Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="fillercapper_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Filler/Capper Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="inlinerotary" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Inline/Rotary</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="07_iqf_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">IQF Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="07_pounds_lbs_per_hour_of_free" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Pounds (LBS) per Hour of Freezing Capacity (estimate)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="type_of_ice" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Type of Ice</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="ice_production_per_day_tons" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Ice Production per Day (Tons)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="10_evaporator_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Evaporator Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="10_of_effects" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title"># of Effects</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="10_lbs_per_hr_of_evaporation_r" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">LBS per HR of Evaporation Removal (Estimate)</span>
+  </div>
+
+  <div class="genemco-filter-row filter-accordian" data-filter="manufacturer" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Manufacturer</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="model" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Product Model</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="15_boiler_hp" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Boiler HP</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="15_rated_input_btuh" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Rated Input (BTUH)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="15_rated_capacity_gallons" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Rated Capacity (Gallons)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="capacity_per_minute" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Capacity per minute</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="31_cooling_or_heating" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Cooling or Heating?</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="31_length_enclosed_tunnel_feet" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Length Enclosed Tunnel (feet)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="31_width_enclosed_tunnel_inche" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Width Enclosed Tunnel (inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="31_product_height_clearance_in" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Height Enclosed Tunnel (inches)</span>
+  </div>
+  
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="chiller_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Chiller Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="tons_of_refrigeration" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tons of Refrigeration</span>
+  </div>
+  
+  <div class="genemco-filter-row boost-pfs-filter-option-range filter-accordian" data-filter="range_slider2" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Frosted Capacity (BTUH/ °F TD)</span>
+  </div>
+  <div class="genemco-filter-row boost-pfs-filter-option-range filter-accordian" data-filter="range_slider3" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Est. Tons (TR) @15TD Frosted</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="motor_controls_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Motor Controls Type</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="47_compressor_motor_starter_ty" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Compressor Motor Starter Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="38_pipe_length_feet" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Pipe Length (feet)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="16_rated_capacity_gph" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Rated Capacity (GPH)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="16_maximum_operating_pressure" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Maximum Operating Pressure (PSI)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="16_number_of_stages" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Number of Stages</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="16_valve_seats_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Valve Seats Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian boost-pfs-filter-option-range" data-filter="range_slider12" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Heat Transfer Surface Area (SQ FT)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="55_surge_drum_included" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Surge Drum Included?</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="19_number_of_passes" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Number of Passes</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="19_number_of_tubes" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Number of Tubes</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="45_holding_capacity_gallons" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Holding Capacity (Gallons)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="tube_diameter_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tube Diameter (inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="tube_length_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Tube Length (inches)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="45_insulated" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Insulated?</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="18_number_of_plates" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Number of Plates</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="18_number_of_sections" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Number of Sections</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="25_estimated_freezing_capacity" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Estimated Freezing Capacity (Tons per 24 Hours)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="25_plate_quantity" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Plate Quantity</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="plate_width_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Plate Width (inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="25_plate_height__inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Plate Height  (inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="plate_material" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Plate Material</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="plate_length_inches" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Plate Length (inches)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="quantity_available" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Quantity Available</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="43_plategasket" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Plate/Gasket</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="32_purge_points" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Purge Points</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian boost-pfs-filter-option-range" data-filter="range_slider6" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Unit Nominal Tons (TR)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian boost-pfs-filter-option-range" data-filter="range_slider7" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Unit Ammonia Tons (TR)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian boost-pfs-filter-option-range" data-filter="range_slider10" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Est. Tons (TR) @15TD Wet</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian boost-pfs-filter-option-range" data-filter="range_slider11" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Nominal Flow Capacity (Gallons per hour GPH)</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="28_number_of_compressors" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Number of Compressors</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="28_total_compressor_horsepower" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Total Compressor Horsepower</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="06_fins_per_inch_fpi" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Fins Per Inch (FPI)</span>
+  </div>
+  <div class="genemco-filter-row filter-accordian" data-filter="06_coil_type" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Coil Type</span>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="high_side_refrigeration_equipm" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">High Side Refrigeration Equipment Included?</span>
+  </div>
+  
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">Multiple Unit Options</span>
+    <div class="genemco-filter-row" data-filter="02_multiple_units_included_in" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Multiple Units Included in Package?</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="02_units_included_in_package" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title"># Units included in Package</span>
+    </div>
+    <div class="genemco-filter-row boost-pfs-filter-option-range" data-filter="range_slider8" data-filter-type="rangeslider">
+      <span class="genemco-filter-option-title">Package Nominal Tons (TR)</span>
+    </div>
+    <div class="genemco-filter-row boost-pfs-filter-option-range" data-filter="range_slider9" data-filter-type="rangeslider">
+      <span class="genemco-filter-option-title">Package Ammonia Tons (TR)</span>
+    </div>
+  </div>
+  
+  <div class="genemco-filter-row filter-accordian" data-filter="pump_included" data-filter-type="checkbox">
+    <span class="genemco-filter-option-title filter-accordian-title">Pump Included?</span>
+  </div>
+  
+  {% if collection.handle == "screw-compressors" or collection.handle == "compressors" %}
+  <div class="genemco-filter-group filter-accordian">
+    <span class="genemco-filter-group-title filter-accordian-title">Screw Compressor Options</span>
+    <div class="genemco-filter-row" data-filter="03_compressor_manufacturer" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Compressor Manufacturer</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="03_compressor_model__" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Compressor Model # </span>
+    </div>
+  </div>
+  {% endif %}
+  
+  {% if collection.handle == "reciprocating-compressors" or collection.handle == "compressors" %}
+  <div class="genemco-filter-group filter-accordian">
+    <span class="genemco-filter-group-title filter-accordian-title">Reciprocating Compressor Options</span>
+    <div class="genemco-filter-row" data-filter="03_reciprocating_cylinders" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title"># Reciprocating Cylinders</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="03_reciprocating_type" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Reciprocating Type</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="genemco-filter-group filter-accordian">
+    <span class="genemco-filter-group-title filter-accordian-title">Compressor Package</span>
+    <div class="genemco-filter-row" data-filter="03_package_included" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Package Included?</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="03_compressor_included" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Compressor Included?</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="03_package_manufacturer" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Package Manufacturer</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="03_micro_control_panel_inlclu" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Micro Control Panel Inlcluded?</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="03_motor_starter_included" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Starter Included?</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title"># Ports (Inlets/Outlets)</span>
+    <div class="genemco-filter-row" data-filter="inlets" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title"># Inlets</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="outlets" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title"># Outlets</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="inletsoutlets" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title"># Inlets/Outlets</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">1st Port Details</span>
+    <div class="genemco-filter-row" data-filter="inletoutlet_1" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 1</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="inletoutlet_1_size_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 1 Size (Inches)</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">2nd Port Details</span>
+    <div class="genemco-filter-row" data-filter="inletoutlet_2" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 2</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="inletoutlet_2_size_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 2 Size (Inches)</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">3rd Port Details</span>
+    <div class="genemco-filter-row" data-filter="inletoutlet_3" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 3</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="inletoutlet_3_size_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 3 Size (Inches)</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">4th Port Details</span>
+    <div class="genemco-filter-row" data-filter="inletoutlet_4" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 4</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="inletoutlet_4_size_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Inlet/Outlet 4 Size (Inches)</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">Refrigerant Specifications</span>
+    <div class="genemco-filter-row" data-filter="ammonia_r717__nh3_compatable" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Ammonia (R717 | NH3) Compatible</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="halocarbon_freon__r22_compatab" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Halocarbon (Freon | R22) Compatible</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="previous_refrigerant" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Previous Refrigerant</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian {% unless current_tags contains 'motor' %}filter-accordian-closed{% endunless %}">
+    <span class="genemco-filter-group-title filter-accordian-title">Motor Specifications</span>
+    <div class="genemco-filter-row" data-filter="motor_included_yesno" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Included (Yes/No)</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_manufacturer" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Manufacturer</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_horsepower_hp" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Horsepower (HP)</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_rpm" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor RPM</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_voltage" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Voltage</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_amps" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Amps</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_hertz_hz" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Hertz (Hz)</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_phases" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Phases</span>
+    </div>
+    <div class="genemco-filter-row" data-filter="motor_frame_size" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Motor Frame Size</span>
+    </div>
+  </div>
+  <div class="genemco-filter-group filter-accordian filter-accordian-closed">
+    <span class="genemco-filter-group-title filter-accordian-title">Dimensions</span>
+    <div class="genemco-filter-row boost-pfs-filter-option-range" data-filter="length_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Length (Inches)</span>
+    </div>
+    <div class="genemco-filter-row boost-pfs-filter-option-range" data-filter="width_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Width (Inches)</span>
+    </div>
+    <div class="genemco-filter-row boost-pfs-filter-option-range" data-filter="height_inches" data-filter-type="checkbox">
+      <span class="genemco-filter-option-title">Height (Inches)</span>
+    </div>
+  </div>
+  <div class="genemco-filter-row boost-pfs-filter-option-range filter-accordian" data-filter="range_slider5" data-filter-type="rangeslider">
+    <span class="genemco-filter-option-title filter-accordian-title">Wet Capacity (BTUH/ °F TD)</span>
+  </div>
+</div>

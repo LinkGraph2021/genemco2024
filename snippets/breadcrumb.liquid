@@ -1,0 +1,57 @@
+{% if type == 'collection' %}
+{% assign collection_handle = collection.handle %}
+{% assign menu_handle = 'main-menu' %}
+<ol class="breadcrumb__list">
+  <li class="breadcrumb__item">
+    <a class="breadcrumb__link link" href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a> {%- render 'icon' with 'arrow-right' -%}
+  </li>
+  
+  {% for link in linklists[menu_handle].links %}
+  	{% if link.handle == collection_handle %}	
+  		<li class="breadcrumb__item">
+          <a class="breadcrumb__link link" href="/collections/{{ link.handle }}">{{ link.title }}</a> {%- render 'icon' with 'arrow-right' -%}
+  		</li>
+  		{% break %}
+  	{% endif %}
+  
+  	{% for sub_link in link.links %}
+  		{% if sub_link.handle == collection_handle %}
+          <li class="breadcrumb__item">
+            <a class="breadcrumb__link link" href="/collections/{{ link.handle }}">{{ link.title }}</a> {%- render 'icon' with 'arrow-right' -%}
+          </li>
+          <li class="breadcrumb__item">
+            <a class="breadcrumb__link link" href="/collections/{{ sub_link.handle }}">{{ sub_link.title }}</a>
+          </li>
+  		  {% break %}
+  		{% endif %}
+  
+  		{% for sub_sub_link in sub_link.links %}
+  			{% if sub_sub_link.handle == collection_handle %}
+  				<li class="breadcrumb__item">
+                  <a class="breadcrumb__link link" href="/collections/{{ link.handle }}">{{ link.title }}</a> {%- render 'icon' with 'arrow-right' -%}
+                </li>
+                <li class="breadcrumb__item">
+                  <a class="breadcrumb__link link" href="/collections/{{ sub_link.handle }}">{{ sub_link.title }}</a> {%- render 'icon' with 'arrow-right' -%}
+                </li>
+  				<li class="breadcrumb__item">
+                  <a class="breadcrumb__link link" href="/collections/{{ sub_sub_link.handle }}">{{ sub_sub_link.title }}</a>
+                </li>
+  			{% break %}
+  			{% endif %}
+  		{% endfor %}
+  	{% endfor %}
+  {% endfor %}
+  
+  {% comment %}
+  <li class="breadcrumb__item">
+    <span class="breadcrumb__link" aria-current="page">
+      {%- if collection.handle == 'all' -%}
+      {{- 'collection.general.all_products' | t -}}
+      {%- else -%}
+      {{- collection.title -}}
+      {%- endif -%}
+    </span>
+  </li>
+  {% endcomment %}
+</ol>
+{% endif %}

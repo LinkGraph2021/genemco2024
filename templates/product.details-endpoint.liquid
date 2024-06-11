@@ -1,0 +1,1716 @@
+{% comment %} Please don’t update this content {% endcomment %}
+
+{% layout none %}
+{
+  "product":
+    {
+      "id":{{ product.id }},
+      "metafields":[
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_manufacturer = product.metafields.Genemco["manufacturer"] %}
+              {% if v_manufacturer != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "manufacturer",
+                  "value": {{ v_manufacturer | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_product_model = product.metafields.Genemco["product_model"] %}
+              {% if v_product_model != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "product_model",
+                  "value": {{ v_product_model | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_1 = product.metafields.Genemco["inletoutlet_1"] %}
+              {% if v_inletoutlet_1 != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_1",
+                  "value": {{ v_inletoutlet_1 | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_1_size_inches = product.metafields.Genemco["inletoutlet_1_size_inches"] %}
+              {% if v_inletoutlet_1_size_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_1_size_inches",
+                  "value": {{ v_inletoutlet_1_size_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_1_type = product.metafields.Genemco["inletoutlet_1_type"] %}
+              {% if v_inletoutlet_1_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_1_type",
+                  "value": {{ v_inletoutlet_1_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_1_flange_size_inch = product.metafields.Genemco["inletoutlet_1_flange_size_inch"] %}
+              {% if v_inletoutlet_1_flange_size_inch != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_1_flange_size_inch",
+                  "value": {{ v_inletoutlet_1_flange_size_inch | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_1___flange_holes = product.metafields.Genemco["inletoutlet_1___flange_holes"] %}
+              {% if v_inletoutlet_1___flange_holes != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_1___flange_holes",
+                  "value": {{ v_inletoutlet_1___flange_holes | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_gallons_per_minute_gpm = product.metafields.Genemco["gallons_per_minute_gpm"] %}
+              {% if v_gallons_per_minute_gpm != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "gallons_per_minute_gpm",
+                  "value": {{ v_gallons_per_minute_gpm | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_pump_type = product.metafields.Genemco["pump_type"] %}
+              {% if v_pump_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "pump_type",
+                  "value": {{ v_pump_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inlets = product.metafields.Genemco["inlets"] %}
+              {% if v_inlets != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inlets",
+                  "value": {{ v_inlets | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_outlets = product.metafields.Genemco["outlets"] %}
+              {% if v_outlets != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "outlets",
+                  "value": {{ v_outlets | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletsoutlets = product.metafields.Genemco["inletsoutlets"] %}
+              {% if v_inletsoutlets != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletsoutlets",
+                  "value": {{ v_inletsoutlets | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_2 = product.metafields.Genemco["inletoutlet_2"] %}
+              {% if v_inletoutlet_2 != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_2",
+                  "value": {{ v_inletoutlet_2 | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_2_size_inches = product.metafields.Genemco["inletoutlet_2_size_inches"] %}
+              {% if v_inletoutlet_2_size_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_2_size_inches",
+                  "value": {{ v_inletoutlet_2_size_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_2_type = product.metafields.Genemco["inletoutlet_2_type"] %}
+              {% if v_inletoutlet_2_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_2_type",
+                  "value": {{ v_inletoutlet_2_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_3 = product.metafields.Genemco["inletoutlet_3"] %}
+              {% if v_inletoutlet_3 != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_3",
+                  "value": {{ v_inletoutlet_3 | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_3_size_inches = product.metafields.Genemco["inletoutlet_3_size_inches"] %}
+              {% if v_inletoutlet_3_size_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_3_size_inches",
+                  "value": {{ v_inletoutlet_3_size_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_3_type = product.metafields.Genemco["inletoutlet_3_type"] %}
+              {% if v_inletoutlet_3_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_3_type",
+                  "value": {{ v_inletoutlet_3_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_4 = product.metafields.Genemco["inletoutlet_4"] %}
+              {% if v_inletoutlet_4 != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_4",
+                  "value": {{ v_inletoutlet_4 | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_4_size_inches = product.metafields.Genemco["inletoutlet_4_size_inches"] %}
+              {% if v_inletoutlet_4_size_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_4_size_inches",
+                  "value": {{ v_inletoutlet_4_size_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inletoutlet_4_type = product.metafields.Genemco["inletoutlet_4_type"] %}
+              {% if v_inletoutlet_4_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inletoutlet_4_type",
+                  "value": {{ v_inletoutlet_4_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_unit_nominal_tons_tr = product.metafields.Genemco["unit_nominal_tons_tr"] %}
+              {% if v_unit_nominal_tons_tr != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "unit_nominal_tons_tr",
+                  "value": {{ v_unit_nominal_tons_tr | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_unit_ammonia_tons_tr = product.metafields.Genemco["02_unit_ammonia_tons_tr"] %}
+              {% if v_02_unit_ammonia_tons_tr != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_unit_ammonia_tons_tr",
+                  "value": {{ v_02_unit_ammonia_tons_tr | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_multiple_units_included_in = product.metafields.Genemco["02_multiple_units_included_in"] %}
+              {% if v_02_multiple_units_included_in != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_multiple_units_included_in",
+                  "value": {{ v_02_multiple_units_included_in | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_units_included_in_package = product.metafields.Genemco["02_units_included_in_package"] %}
+              {% if v_02_units_included_in_package != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_units_included_in_package",
+                  "value": {{ v_02_units_included_in_package | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_package_nominal_tons_tr = product.metafields.Genemco["02_package_nominal_tons_tr"] %}
+              {% if v_02_package_nominal_tons_tr != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_package_nominal_tons_tr",
+                  "value": {{ v_02_package_nominal_tons_tr | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_package_ammonia_tons_tr = product.metafields.Genemco["02_package_ammonia_tons_tr"] %}
+              {% if v_02_package_ammonia_tons_tr != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_package_ammonia_tons_tr",
+                  "value": {{ v_02_package_ammonia_tons_tr | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_pump_included = product.metafields.Genemco["pump_included"] %}
+              {% if v_pump_included != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "pump_included",
+                  "value": {{ v_pump_included | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_top_length_inches = product.metafields.Genemco["02_top_length_inches"] %}
+              {% if v_02_top_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_top_length_inches",
+                  "value": {{ v_02_top_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_top_width_inches = product.metafields.Genemco["02_top_width_inches"] %}
+              {% if v_02_top_width_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_top_width_inches",
+                  "value": {{ v_02_top_width_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_top_height_inches = product.metafields.Genemco["top_height_inches"] %}
+              {% if v_top_height_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "top_height_inches",
+                  "value": {{ v_top_height_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_bottom_length_inches = product.metafields.Genemco["02_bottom_length_inches"] %}
+              {% if v_02_bottom_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_bottom_length_inches",
+                  "value": {{ v_02_bottom_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_bottomwidth_inches = product.metafields.Genemco["02_bottomwidth_inches"] %}
+              {% if v_02_bottomwidth_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_bottomwidth_inches",
+                  "value": {{ v_02_bottomwidth_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_02_bottomheight_inches = product.metafields.Genemco["02_bottomheight_inches"] %}
+              {% if v_02_bottomheight_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "02_bottomheight_inches",
+                  "value": {{ v_02_bottomheight_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_compressor_type = product.metafields.Genemco["03_compressor_type"] %}
+              {% if v_03_compressor_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_compressor_type",
+                  "value": {{ v_03_compressor_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_stage_type = product.metafields.Genemco["03_stage_type"] %}
+              {% if v_03_stage_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_stage_type",
+                  "value": {{ v_03_stage_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_compressor_included = product.metafields.Genemco["03_compressor_included"] %}
+              {% if v_03_compressor_included != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_compressor_included",
+                  "value": {{ v_03_compressor_included | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_compressor_manufacturer = product.metafields.Genemco["03_compressor_manufacturer"] %}
+              {% if v_03_compressor_manufacturer != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_compressor_manufacturer",
+                  "value": {{ v_03_compressor_manufacturer | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_compressor_model__ = product.metafields.Genemco["03_compressor_model__"] %}
+              {% if v_03_compressor_model__ != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_compressor_model__",
+                  "value": {{ v_03_compressor_model__ | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_reciprocating_cylinders = product.metafields.Genemco["03_reciprocating_cylinders"] %}
+              {% if v_03_reciprocating_cylinders != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_reciprocating_cylinders",
+                  "value": {{ v_03_reciprocating_cylinders | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_reciprocating_type = product.metafields.Genemco["03_reciprocating_type"] %}
+              {% if v_03_reciprocating_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_reciprocating_type",
+                  "value": {{ v_03_reciprocating_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_package_included = product.metafields.Genemco["03_package_included"] %}
+              {% if v_03_package_included != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_package_included",
+                  "value": {{ v_03_package_included | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_package_manufacturer = product.metafields.Genemco["03_package_manufacturer"] %}
+              {% if v_03_package_manufacturer != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_package_manufacturer",
+                  "value": {{ v_03_package_manufacturer | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_micro_control_panel_inlclu = product.metafields.Genemco["03_micro_control_panel_inlclu"] %}
+              {% if v_03_micro_control_panel_inlclu != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_micro_control_panel_inlclu",
+                  "value": {{ v_03_micro_control_panel_inlclu | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_03_motor_starter_included = product.metafields.Genemco["03_motor_starter_included"] %}
+              {% if v_03_motor_starter_included != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "03_motor_starter_included",
+                  "value": {{ v_03_motor_starter_included | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_04_cooling_capacity_gpm = product.metafields.Genemco["04_cooling_capacity_gpm"] %}
+              {% if v_04_cooling_capacity_gpm != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "04_cooling_capacity_gpm",
+                  "value": {{ v_04_cooling_capacity_gpm | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_ice_production_per_day_tons = product.metafields.Genemco["ice_production_per_day_tons"] %}
+              {% if v_ice_production_per_day_tons != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "ice_production_per_day_tons",
+                  "value": {{ v_ice_production_per_day_tons | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_type_of_ice = product.metafields.Genemco["type_of_ice"] %}
+              {% if v_type_of_ice != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "type_of_ice",
+                  "value": {{ v_type_of_ice | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_high_side_refrigeration_equipm = product.metafields.Genemco["high_side_refrigeration_equipm"] %}
+              {% if v_high_side_refrigeration_equipm != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "high_side_refrigeration_equipm",
+                  "value": {{ v_high_side_refrigeration_equipm | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_cfm = product.metafields.Genemco["cfm"] %}
+              {% if v_cfm != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "cfm",
+                  "value": {{ v_cfm | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_06_fins_per_inch_fpi = product.metafields.Genemco["06_fins_per_inch_fpi"] %}
+              {% if v_06_fins_per_inch_fpi != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "06_fins_per_inch_fpi",
+                  "value": {{ v_06_fins_per_inch_fpi | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_06_coil_type = product.metafields.Genemco["06_coil_type"] %}
+              {% if v_06_coil_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "06_coil_type",
+                  "value": {{ v_06_coil_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_07_iqf_type = product.metafields.Genemco["07_iqf_type"] %}
+              {% if v_07_iqf_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "07_iqf_type",
+                  "value": {{ v_07_iqf_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_07_pounds_lbs_per_hour_of_free = product.metafields.Genemco["07_pounds_lbs_per_hour_of_free"] %}
+              {% if v_07_pounds_lbs_per_hour_of_free != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "07_pounds_lbs_per_hour_of_free",
+                  "value": {{ v_07_pounds_lbs_per_hour_of_free | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_refrigeration_tank_type = product.metafields.Genemco["refrigeration_tank_type"] %}
+              {% if v_refrigeration_tank_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "refrigeration_tank_type",
+                  "value": {{ v_refrigeration_tank_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tank_orientation = product.metafields.Genemco["tank_orientation"] %}
+              {% if v_tank_orientation != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tank_orientation",
+                  "value": {{ v_tank_orientation | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tank_diameter_inches = product.metafields.Genemco["tank_diameter_inches"] %}
+              {% if v_tank_diameter_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tank_diameter_inches",
+                  "value": {{ v_tank_diameter_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tank_length_inches = product.metafields.Genemco["tank_length_inches"] %}
+              {% if v_tank_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tank_length_inches",
+                  "value": {{ v_tank_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_10_evaporator_type = product.metafields.Genemco["10_evaporator_type"] %}
+              {% if v_10_evaporator_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "10_evaporator_type",
+                  "value": {{ v_10_evaporator_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_10_of_effects = product.metafields.Genemco["10_of_effects"] %}
+              {% if v_10_of_effects != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "10_of_effects",
+                  "value": {{ v_10_of_effects | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_10_lbs_per_hr_of_evaporation_r = product.metafields.Genemco["10_lbs_per_hr_of_evaporation_r"] %}
+              {% if v_10_lbs_per_hr_of_evaporation_r != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "10_lbs_per_hr_of_evaporation_r",
+                  "value": {{ v_10_lbs_per_hr_of_evaporation_r | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_fillercapper_type = product.metafields.Genemco["fillercapper_type"] %}
+              {% if v_fillercapper_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "fillercapper_type",
+                  "value": {{ v_fillercapper_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_inlinerotary = product.metafields.Genemco["inlinerotary"] %}
+              {% if v_inlinerotary != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "inlinerotary",
+                  "value": {{ v_inlinerotary | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_capacity_per_minute = product.metafields.Genemco["capacity_per_minute"] %}
+              {% if v_capacity_per_minute != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "capacity_per_minute",
+                  "value": {{ v_capacity_per_minute | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_type = product.metafields.Genemco["motor_type"] %}
+              {% if v_motor_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_type",
+                  "value": {{ v_motor_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_14_stainless_tank_type = product.metafields.Genemco["14_stainless_tank_type"] %}
+              {% if v_14_stainless_tank_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "14_stainless_tank_type",
+                  "value": {{ v_14_stainless_tank_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tank_estimated_capacity_gal = product.metafields.Genemco["tank_estimated_capacity_gal"] %}
+              {% if v_tank_estimated_capacity_gal != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tank_estimated_capacity_gal",
+                  "value": {{ v_tank_estimated_capacity_gal | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_14_jacketed_insulated = product.metafields.Genemco["14_jacketed_insulated"] %}
+              {% if v_14_jacketed_insulated != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "14_jacketed_insulated",
+                  "value": {{ v_14_jacketed_insulated | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_14_dimpled = product.metafields.Genemco["14_dimpled"] %}
+              {% if v_14_dimpled != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "14_dimpled",
+                  "value": {{ v_14_dimpled | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_14_agitation = product.metafields.Genemco["14_agitation"] %}
+              {% if v_14_agitation != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "14_agitation",
+                  "value": {{ v_14_agitation | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_15_boiler_type = product.metafields.Genemco["15_boiler_type"] %}
+              {% if v_15_boiler_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "15_boiler_type",
+                  "value": {{ v_15_boiler_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_15_boiler_hp = product.metafields.Genemco["15_boiler_hp"] %}
+              {% if v_15_boiler_hp != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "15_boiler_hp",
+                  "value": {{ v_15_boiler_hp | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_15_rated_input_btuh = product.metafields.Genemco["15_rated_input_btuh"] %}
+              {% if v_15_rated_input_btuh != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "15_rated_input_btuh",
+                  "value": {{ v_15_rated_input_btuh | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_15_rated_capacity_gallons = product.metafields.Genemco["15_rated_capacity_gallons"] %}
+              {% if v_15_rated_capacity_gallons != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "15_rated_capacity_gallons",
+                  "value": {{ v_15_rated_capacity_gallons | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_16_rated_capacity_gph = product.metafields.Genemco["16_rated_capacity_gph"] %}
+              {% if v_16_rated_capacity_gph != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "16_rated_capacity_gph",
+                  "value": {{ v_16_rated_capacity_gph | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_16_maximum_operating_pressure = product.metafields.Genemco["16_maximum_operating_pressure"] %}
+              {% if v_16_maximum_operating_pressure != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "16_maximum_operating_pressure",
+                  "value": {{ v_16_maximum_operating_pressure | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_16_number_of_stages = product.metafields.Genemco["16_number_of_stages"] %}
+              {% if v_16_number_of_stages != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "16_number_of_stages",
+                  "value": {{ v_16_number_of_stages | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_16_valve_seats_type = product.metafields.Genemco["16_valve_seats_type"] %}
+              {% if v_16_valve_seats_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "16_valve_seats_type",
+                  "value": {{ v_16_valve_seats_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_17_tank_materials_of_construct = product.metafields.Genemco["17_tank_materials_of_construct"] %}
+              {% if v_17_tank_materials_of_construct != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "17_tank_materials_of_construct",
+                  "value": {{ v_17_tank_materials_of_construct | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_heat_transfer_surface_area = product.metafields.Genemco["heat_transfer_surface_area"] %}
+              {% if v_heat_transfer_surface_area != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "heat_transfer_surface_area",
+                  "value": {{ v_heat_transfer_surface_area | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_18_number_of_plates = product.metafields.Genemco["18_number_of_plates"] %}
+              {% if v_18_number_of_plates != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "18_number_of_plates",
+                  "value": {{ v_18_number_of_plates | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_18_number_of_sections = product.metafields.Genemco["18_number_of_sections"] %}
+              {% if v_18_number_of_sections != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "18_number_of_sections",
+                  "value": {{ v_18_number_of_sections | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_plate_material = product.metafields.Genemco["plate_material"] %}
+              {% if v_plate_material != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "plate_material",
+                  "value": {{ v_plate_material | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_19_number_of_passes = product.metafields.Genemco["19_number_of_passes"] %}
+              {% if v_19_number_of_passes != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "19_number_of_passes",
+                  "value": {{ v_19_number_of_passes | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_19_number_of_tubes = product.metafields.Genemco["19_number_of_tubes"] %}
+              {% if v_19_number_of_tubes != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "19_number_of_tubes",
+                  "value": {{ v_19_number_of_tubes | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tube_diameter_inches = product.metafields.Genemco["tube_diameter_inches"] %}
+              {% if v_tube_diameter_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tube_diameter_inches",
+                  "value": {{ v_tube_diameter_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tube_length_inches = product.metafields.Genemco["tube_length_inches"] %}
+              {% if v_tube_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tube_length_inches",
+                  "value": {{ v_tube_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_20_conveyor_type = product.metafields.Genemco["20_conveyor_type"] %}
+              {% if v_20_conveyor_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "20_conveyor_type",
+                  "value": {{ v_20_conveyor_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_20_conveyer_width_inches = product.metafields.Genemco["20_conveyer_width_inches"] %}
+              {% if v_20_conveyer_width_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "20_conveyer_width_inches",
+                  "value": {{ v_20_conveyer_width_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_20_conveyor_length_inches = product.metafields.Genemco["20_conveyor_length_inches"] %}
+              {% if v_20_conveyor_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "20_conveyor_length_inches",
+                  "value": {{ v_20_conveyor_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_23_number_of_votator_tubes = product.metafields.Genemco["23_number_of_votator_tubes"] %}
+              {% if v_23_number_of_votator_tubes != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "23_number_of_votator_tubes",
+                  "value": {{ v_23_number_of_votator_tubes | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_24_nominal_flow_capacity_gallo = product.metafields.Genemco["24_nominal_flow_capacity_gallo"] %}
+              {% if v_24_nominal_flow_capacity_gallo != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "24_nominal_flow_capacity_gallo",
+                  "value": {{ v_24_nominal_flow_capacity_gallo | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_25_estimated_freezing_capacity = product.metafields.Genemco["25_estimated_freezing_capacity"] %}
+              {% if v_25_estimated_freezing_capacity != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "25_estimated_freezing_capacity",
+                  "value": {{ v_25_estimated_freezing_capacity | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_25_plate_quantity = product.metafields.Genemco["25_plate_quantity"] %}
+              {% if v_25_plate_quantity != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "25_plate_quantity",
+                  "value": {{ v_25_plate_quantity | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_plate_width_inches = product.metafields.Genemco["plate_width_inches"] %}
+              {% if v_plate_width_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "plate_width_inches",
+                  "value": {{ v_plate_width_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_25_plate_height__inches = product.metafields.Genemco["25_plate_height__inches"] %}
+              {% if v_25_plate_height__inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "25_plate_height__inches",
+                  "value": {{ v_25_plate_height__inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_chiller_type = product.metafields.Genemco["chiller_type"] %}
+              {% if v_chiller_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "chiller_type",
+                  "value": {{ v_chiller_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_tons_of_refrigeration = product.metafields.Genemco["tons_of_refrigeration"] %}
+              {% if v_tons_of_refrigeration != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "tons_of_refrigeration",
+                  "value": {{ v_tons_of_refrigeration | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_28_air_cooled_or_liquid_cooled = product.metafields.Genemco["28_air_cooled_or_liquid_cooled"] %}
+              {% if v_28_air_cooled_or_liquid_cooled != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "28_air_cooled_or_liquid_cooled",
+                  "value": {{ v_28_air_cooled_or_liquid_cooled | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_28_number_of_compressors = product.metafields.Genemco["28_number_of_compressors"] %}
+              {% if v_28_number_of_compressors != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "28_number_of_compressors",
+                  "value": {{ v_28_number_of_compressors | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_28_total_compressor_horsepower = product.metafields.Genemco["28_total_compressor_horsepower"] %}
+              {% if v_28_total_compressor_horsepower != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "28_total_compressor_horsepower",
+                  "value": {{ v_28_total_compressor_horsepower | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_31_cooling_or_heating = product.metafields.Genemco["31_cooling_or_heating"] %}
+              {% if v_31_cooling_or_heating != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "31_cooling_or_heating",
+                  "value": {{ v_31_cooling_or_heating | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_31_length_enclosed_tunnel_feet = product.metafields.Genemco["31_length_enclosed_tunnel_feet"] %}
+              {% if v_31_length_enclosed_tunnel_feet != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "31_length_enclosed_tunnel_feet",
+                  "value": {{ v_31_length_enclosed_tunnel_feet | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_31_width_enclosed_tunnel_inche = product.metafields.Genemco["31_width_enclosed_tunnel_inche"] %}
+              {% if v_31_width_enclosed_tunnel_inche != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "31_width_enclosed_tunnel_inche",
+                  "value": {{ v_31_width_enclosed_tunnel_inche | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_31_product_height_clearance_in = product.metafields.Genemco["31_product_height_clearance_in"] %}
+              {% if v_31_product_height_clearance_in != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "31_product_height_clearance_in",
+                  "value": {{ v_31_product_height_clearance_in | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_32_purge_points = product.metafields.Genemco["32_purge_points"] %}
+              {% if v_32_purge_points != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "32_purge_points",
+                  "value": {{ v_32_purge_points | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_34_dryer_type = product.metafields.Genemco["34_dryer_type"] %}
+              {% if v_34_dryer_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "34_dryer_type",
+                  "value": {{ v_34_dryer_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_plate_length_inches = product.metafields.Genemco["plate_length_inches"] %}
+              {% if v_plate_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "plate_length_inches",
+                  "value": {{ v_plate_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_quantity_available = product.metafields.Genemco["quantity_available"] %}
+              {% if v_quantity_available != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "quantity_available",
+                  "value": {{ v_quantity_available | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_evaporator_component_type = product.metafields.Genemco["evaporator_component_type"] %}
+              {% if v_evaporator_component_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "evaporator_component_type",
+                  "value": {{ v_evaporator_component_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_38_pipe_length_feet = product.metafields.Genemco["38_pipe_length_feet"] %}
+              {% if v_38_pipe_length_feet != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "38_pipe_length_feet",
+                  "value": {{ v_38_pipe_length_feet | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_43_plategasket = product.metafields.Genemco["43_plategasket"] %}
+              {% if v_43_plategasket != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "43_plategasket",
+                  "value": {{ v_43_plategasket | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_45_holding_capacity_gallons = product.metafields.Genemco["45_holding_capacity_gallons"] %}
+              {% if v_45_holding_capacity_gallons != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "45_holding_capacity_gallons",
+                  "value": {{ v_45_holding_capacity_gallons | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_45_insulated = product.metafields.Genemco["45_insulated"] %}
+              {% if v_45_insulated != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "45_insulated",
+                  "value": {{ v_45_insulated | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_46_htst_part_type = product.metafields.Genemco["46_htst_part_type"] %}
+              {% if v_46_htst_part_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "46_htst_part_type",
+                  "value": {{ v_46_htst_part_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_controls_type = product.metafields.Genemco["motor_controls_type"] %}
+              {% if v_motor_controls_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_controls_type",
+                  "value": {{ v_motor_controls_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_47_compressor_motor_starter_ty = product.metafields.Genemco["47_compressor_motor_starter_ty"] %}
+              {% if v_47_compressor_motor_starter_ty != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "47_compressor_motor_starter_ty",
+                  "value": {{ v_47_compressor_motor_starter_ty | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_kva = product.metafields.Genemco["kva"] %}
+              {% if v_kva != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "kva",
+                  "value": {{ v_kva | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_51_kw = product.metafields.Genemco["51_kw"] %}
+              {% if v_51_kw != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "51_kw",
+                  "value": {{ v_51_kw | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_kva = product.metafields.Genemco["kva"] %}
+              {% if v_kva != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "kva",
+                  "value": {{ v_kva | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_51_high_voltage = product.metafields.Genemco["51_high_voltage"] %}
+              {% if v_51_high_voltage != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "51_high_voltage",
+                  "value": {{ v_51_high_voltage | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_51_low_voltage = product.metafields.Genemco["51_low_voltage"] %}
+              {% if v_51_low_voltage != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "51_low_voltage",
+                  "value": {{ v_51_low_voltage | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_53_freezer_part_type = product.metafields.Genemco["53_freezer_part_type"] %}
+              {% if v_53_freezer_part_type != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "53_freezer_part_type",
+                  "value": {{ v_53_freezer_part_type | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_55_surge_drum_included = product.metafields.Genemco["55_surge_drum_included"] %}
+              {% if v_55_surge_drum_included != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "55_surge_drum_included",
+                  "value": {{ v_55_surge_drum_included | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_model = product.metafields.Genemco["model"] %}
+              {% if v_model != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "model",
+                  "value": {{ v_model | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_year_of_manufacture = product.metafields.Genemco["year_of_manufacture"] %}
+              {% if v_year_of_manufacture != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "year_of_manufacture",
+                  "value": {{ v_year_of_manufacture | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_ammonia_r717__nh3_compatable = product.metafields.Genemco["ammonia_r717__nh3_compatable"] %}
+              {% if v_ammonia_r717__nh3_compatable != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "ammonia_r717__nh3_compatable",
+                  "value": {{ v_ammonia_r717__nh3_compatable | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_halocarbon_freon__r22_compatab = product.metafields.Genemco["halocarbon_freon__r22_compatab"] %}
+              {% if v_halocarbon_freon__r22_compatab != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "halocarbon_freon__r22_compatab",
+                  "value": {{ v_halocarbon_freon__r22_compatab | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_previous_refrigerant = product.metafields.Genemco["previous_refrigerant"] %}
+              {% if v_previous_refrigerant != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "previous_refrigerant",
+                  "value": {{ v_previous_refrigerant | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_included_yesno = product.metafields.Genemco["motor_included_yesno"] %}
+              {% if v_motor_included_yesno != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_included_yesno",
+                  "value": {{ v_motor_included_yesno | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_manufacturer = product.metafields.Genemco["motor_manufacturer"] %}
+              {% if v_motor_manufacturer != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_manufacturer",
+                  "value": {{ v_motor_manufacturer | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_horsepower_hp = product.metafields.Genemco["motor_horsepower_hp"] %}
+              {% if v_motor_horsepower_hp != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_horsepower_hp",
+                  "value": {{ v_motor_horsepower_hp | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_rpm = product.metafields.Genemco["motor_rpm"] %}
+              {% if v_motor_rpm != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_rpm",
+                  "value": {{ v_motor_rpm | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_voltage = product.metafields.Genemco["motor_voltage"] %}
+              {% if v_motor_voltage != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_voltage",
+                  "value": {{ v_motor_voltage | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_amps = product.metafields.Genemco["motor_amps"] %}
+              {% if v_motor_amps != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_amps",
+                  "value": {{ v_motor_amps | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_hertz_hz = product.metafields.Genemco["motor_hertz_hz"] %}
+              {% if v_motor_hertz_hz != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_hertz_hz",
+                  "value": {{ v_motor_hertz_hz | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_phases = product.metafields.Genemco["motor_phases"] %}
+              {% if v_motor_phases != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_phases",
+                  "value": {{ v_motor_phases | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_motor_frame_size = product.metafields.Genemco["motor_frame_size"] %}
+              {% if v_motor_frame_size != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "motor_frame_size",
+                  "value": {{ v_motor_frame_size | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_length_inches = product.metafields.Genemco["length_inches"] %}
+              {% if v_length_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "length_inches",
+                  "value": {{ v_length_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_width_inches = product.metafields.Genemco["width_inches"] %}
+              {% if v_width_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "width_inches",
+                  "value": {{ v_width_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_height_inches = product.metafields.Genemco["height_inches"] %}
+              {% if v_height_inches != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "height_inches",
+                  "value": {{ v_height_inches | json }}
+                },
+              {% endif %}
+        
+              {% comment %}
+                Single Metafield
+              {% endcomment %}
+              {% assign v_serial_number = product.metafields.Genemco["serial_number"] %}
+              {% if v_serial_number != blank %}
+                {
+                  "namespace": "Genemco",
+                  "key": "serial_number",
+                  "value": {{ v_serial_number | json }}
+                },
+              {% endif %}
+        
+      ]
+    }
+}

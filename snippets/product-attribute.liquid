@@ -1,0 +1,854 @@
+{% assign lowercased_tags = product.tags | downcase %}
+{% comment %}
+{% assign lowercased_tags = '' %}
+{% for tag in product.tags %}
+  {% assign lowercased_tags = lowercased_tags | append: '|' | append: tag | append: '|' | append: ',' %}
+{% endfor %}
+{% assign lowercased_tags = lowercased_tags | downcase %}
+{% endcomment %}
+<h2 data-tags='{{ lowercased_tags }}'>Product Details</h2>
+<ul>
+  {% unless product.metafields.Genemco.stock_no == blank %}<li>Stock No: <span>{{ product.metafields.Genemco.stock_no }}</span></li> {% endunless %}
+  {% unless product.metafields.Genemco.manufacturer == blank %}<li>Manufacturer: <span>{{ product.metafields.Genemco.manufacturer }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.model == blank %}<li>Model: <span>{{ product.metafields.Genemco.model }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.serial_number == blank %}<li>Serial Number: <span>{{ product.metafields.Genemco.serial_number }}</span></li>{% endunless %}
+</ul>
+{% assign show_additional_fields = true %}
+{% if lowercased_tags contains '"pumps"' and lowercased_tags contains '"pumps homogenizers & tanks"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Pump Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco.pump_type == blank %}<li>Pump Type: <span>{{ product.metafields.Genemco.pump_type }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.gallons_per_minute_gpm == blank %}<li>Max Gallons Per Minute GPM: <span>{{ product.metafields.Genemco.gallons_per_minute_gpm }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_displacement_per_revolution"] == blank %}<li>Displacement per Revolution (Gallons): <span>{{ product.metafields.Genemco["01_displacement_per_revolution"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.drive_ratio == blank %}<li>Drive Ratio: <span>{{ product.metafields.Genemco.drive_ratio }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.est_actual_gallons_per_minute_ == blank %}<li>Est. Actual Gallons Per Minute (GPM): <span>{{ product.metafields.Genemco.est_actual_gallons_per_minute_ }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_max_speed_rpm"] == blank %}<li>Max Speed RPM: <span>{{ product.metafields.Genemco["01_max_speed_rpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_minimum_temperature_f"] == blank %}<li>Minimum Temperature (F): <span>{{ product.metafields.Genemco["01_minimum_temperature_f"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_maximum_temperature_f"] == blank %}<li>Maximum Temperature (F): <span>{{ product.metafields.Genemco["01_maximum_temperature_f"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_maximum_pressure_mawp_psi"] == blank %}<li>Maximum Pressure MAWP (PSI): <span>{{ product.metafields.Genemco["01_maximum_pressure_mawp_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_rotors"] == blank %}<li># Rotors: <span>{{ product.metafields.Genemco["01_rotors"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_rotor_size_inches"] == blank %}<li>Rotor Size (Inches): <span>{{ product.metafields.Genemco["01_rotor_size_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_impeller_diameter_inches"] == blank %}<li>Impeller Diameter (inches): <span>{{ product.metafields.Genemco["01_impeller_diameter_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inlets == blank %}<li># Inlets: <span>{{ product.metafields.Genemco.inlets }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.outlets == blank %}<li># Outlets: <span>{{ product.metafields.Genemco.outlets }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletsoutlets == blank %}<li># Inlets/Outlets: <span>{{ product.metafields.Genemco.inletsoutlets }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_1 == blank %}<li>Inlet/Outlet 1: <span>{{ product.metafields.Genemco.inletoutlet_1 }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_1_size_inches == blank %}<li>Inlet/Outlet 1 Size (Inches): <span>{{ product.metafields.Genemco.inletoutlet_1_size_inches }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_1_type == blank %}<li>Inlet/Outlet 1 Type: <span>{{ product.metafields.Genemco.inletoutlet_1_type }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_1_flange_size_i"] == blank %}<li>Inlet/Outlet 1 Flange Size (inches): <span>{{ product.metafields.Genemco["01_inletoutlet_1_flange_size_i"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_1___flange_hole"] == blank %}<li>Inlet/Outlet 1  # Flange Holes: <span>{{ product.metafields.Genemco["01_inletoutlet_1___flange_hole"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_2 == blank %}<li>Inlet/Outlet 2: <span>{{ product.metafields.Genemco.inletoutlet_2 }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_2_size_inches == blank %}<li>Inlet/Outlet 2 Size (inches): <span>{{ product.metafields.Genemco.inletoutlet_2_size_inches }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_2_type == blank %}<li>Inlet/Outlet 2 Type: <span>{{ product.metafields.Genemco.inletoutlet_2_type }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_2_flange_size_i"] == blank %}<li>Inlet/Outlet 2 Flange Size (inches): <span>{{ product.metafields.Genemco["01_inletoutlet_2_flange_size_i"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_2__flange_holes"] == blank %}<li>Inlet/Outlet 2 # Flange Holes: <span>{{ product.metafields.Genemco["01_inletoutlet_2__flange_holes"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_3 == blank %}<li>Inlet/Outlet 3: <span>{{ product.metafields.Genemco.inletoutlet_3 }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_3_size_inches == blank %}<li>Inlet/Outlet 3 Size (inches): <span>{{ product.metafields.Genemco.inletoutlet_3_size_inches }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_3_type == blank %}<li>Inlet/Outlet 3 Type: <span>{{ product.metafields.Genemco.inletoutlet_3_type }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_3_flange_size_i"] == blank %}<li>Inlet/Outlet 3 Flange Size (inches): <span>{{ product.metafields.Genemco["01_inletoutlet_3_flange_size_i"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_3__flange_holes"] == blank %}<li>Inlet/Outlet 3 # Flange Holes: <span>{{ product.metafields.Genemco["01_inletoutlet_3__flange_holes"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_4 == blank %}<li>Inlet/Outlet 4: <span>{{ product.metafields.Genemco.inletoutlet_4 }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_4_size_inches == blank %}<li>Inlet/Outlet 4 Size (inches): <span>{{ product.metafields.Genemco.inletoutlet_4_size_inches }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.inletoutlet_4_type == blank %}<li>Inlet/Outlet 4 Type: <span>{{ product.metafields.Genemco.inletoutlet_4_type }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_4_flange_size_i"] == blank %}<li>Inlet/Outlet 4 Flange Size (inches): <span>{{ product.metafields.Genemco["01_inletoutlet_4_flange_size_i"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["01_inletoutlet_4__flange_holes"] == blank %}<li>Inlet/Outlet 4 # Flange Holes: <span>{{ product.metafields.Genemco["01_inletoutlet_4__flange_holes"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"htst control panels"' %}
+  <h2>HTST Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["46_htst_part_type"] == blank %}<li>HTST Part Type: <span>{{ product.metafields.Genemco["46_htst_part_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"miscellaneous heat exchange parts"' %}
+  <h2>HTST Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["46_htst_part_type"] == blank %}<li>HTST Part Type: <span>{{ product.metafields.Genemco["46_htst_part_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"evaporator coils"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Evaporator Coil Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco.frosted_or_wet_coil == blank %}<li>Frosted or Wet Coil: <span>{{ product.metafields.Genemco.frosted_or_wet_coil }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.capacity__wet_btuh__f_td == blank %}<li>Wet Capacity (BTUH/ °F TD): <span>{{ product.metafields.Genemco.capacity__wet_btuh__f_td }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Est. Tons (TR) @15TD Wet: <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.capacity__frosted_btuh__f_td == blank %}<li>Frosted Capacity (BTUH/ °F TD): <span>{{ product.metafields.Genemco.capacity__frosted_btuh__f_td }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.est_tons_tr_15td_frosted == blank %}<li>Est. Tons (TR) @15TD Frosted: <span>{{ product.metafields.Genemco.est_tons_tr_15td_frosted }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.cfm == blank %}<li>Air Flow (CFM): <span>{{ product.metafields.Genemco.cfm }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.face_velocity_fpm == blank %}<li>Face Velocity (FPM): <span>{{ product.metafields.Genemco.face_velocity_fpm }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_coil_volume_ft3"] == blank %}<li>Coil Volume (ft3): <span>{{ product.metafields.Genemco["06_coil_volume_ft3"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_coil_type"] == blank %}<li>Coil Type: <span>{{ product.metafields.Genemco["06_coil_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_feed_type"] == blank %}<li>Feed Type: <span>{{ product.metafields.Genemco["06_feed_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_defrost_type"] == blank %}<li>Coil Defrost: <span>{{ product.metafields.Genemco["06_defrost_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.pan_defrost == blank %}<li>Pan Defrost: <span>{{ product.metafields.Genemco.pan_defrost }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco.sound_level_dba__10 == blank %}<li>Sound Level (dbA @ 10): <span>{{ product.metafields.Genemco.sound_level_dba__10 }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_fins_per_inch_fpi"] == blank %}<li>Fins Per Inch: <span>{{ product.metafields.Genemco["06_fins_per_inch_fpi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_fans"] == blank %}<li># Fans: <span>{{ product.metafields.Genemco["06_fans"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_left_or_right_handed"] == blank %}<li>Left or Right Handed: <span>{{ product.metafields.Genemco["06_left_or_right_handed"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_spec_sheet_available"] == blank %}<li>Spec Sheet Available: <span>{{ product.metafields.Genemco["06_spec_sheet_available"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"evaporative condensers"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Condenser Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["02_multiple_units_included_in"] == blank %}<li>Multiple Units Included in Package? <span>{{ product.metafields.Genemco["02_multiple_units_included_in"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_units_included_in_package"] == blank %}<li># Units included in Package: <span>{{ product.metafields.Genemco["02_units_included_in_package"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_package_nominal_tons_tr"] == blank %}<li>Package Nominal Tons (TR): <span>{{ product.metafields.Genemco["02_package_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_package_ammonia_tons_tr"] == blank %}<li>Package Ammonia Tons (TR): <span>{{ product.metafields.Genemco["02_package_ammonia_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_package_coil_volume_ft3"] == blank %}<li>Package Coil Volume (ft3): <span>{{ product.metafields.Genemco["02_package_coil_volume_ft3"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_package_cfm_cfm"] == blank %}<li>Package CFM (CFM): <span>{{ product.metafields.Genemco["02_package_cfm_cfm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_unit_ammonia_tons_tr"] == blank %}<li>Unit Ammonia Tons (TR): <span>{{ product.metafields.Genemco["02_unit_ammonia_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["06_coil_volume_ft3"] == blank %}<li>Unit Coil Volume (ft3): <span>{{ product.metafields.Genemco["06_coil_volume_ft3"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["cfm"] == blank %}<li>Unit CFM (CFM): <span>{{ product.metafields.Genemco["cfm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_design_pressure_psi"] == blank %}<li>Design Pressure (PSI): <span>{{ product.metafields.Genemco["02_design_pressure_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Top_Rating"] == blank %}<li>Top Coil Condition Rating: <span>{{ product.metafields.Genemco["Top_Rating"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Bottom_Rating"] == blank %}<li>Bottom Coil Condition Rating: <span>{{ product.metafields.Genemco["Bottom_Rating"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Circuit_1_Pressure"] == blank %}<li>Circuit 1 Pressure Rating: <span>{{ product.metafields.Genemco["Circuit_1_Pressure"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Circuit_1_Date"] == blank %}<li>Circuit 1 Pressure Check Date: <span>{{ product.metafields.Genemco["Circuit_1_Date"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Circuit_2_Pressure"] == blank %}<li>Circuit 2 Pressure Rating: <span>{{ product.metafields.Genemco["Circuit_2_Pressure"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Circuit_2_Date"] == blank %}<li>Circuit 2 Pressure Check Date: <span>{{ product.metafields.Genemco["Circuit_2_Date"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Condenser Dimensions</h2>
+  <ul>
+    {% unless product.metafields.Genemco["02_top_length_inches"] == blank %}<li>Top Length (Inches): <span>{{ product.metafields.Genemco["02_top_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_top_width_inches"] == blank %}<li>Top Width (Inches): <span>{{ product.metafields.Genemco["02_top_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["top_height_inches"] == blank %}<li>Top Height (Inches): <span>{{ product.metafields.Genemco["top_height_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_top_weight_lbs"] == blank %}<li>Top Weight (LBS): <span>{{ product.metafields.Genemco["02_top_weight_lbs"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_bottom_length_inches"] == blank %}<li>Bottom Length (Inches): <span>{{ product.metafields.Genemco["02_bottom_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_bottomwidth_inches"] == blank %}<li>Bottom Width (Inches): <span>{{ product.metafields.Genemco["02_bottomwidth_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_bottomheight_inches"] == blank %}<li>Bottom Height (Inches): <span>{{ product.metafields.Genemco["02_bottomheight_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_bottom_weight_lbs"] == blank %}<li>Bottom Weight (LBS): <span>{{ product.metafields.Genemco["02_bottom_weight_lbs"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Pump Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["pump_included"] == blank %}<li>Pump Included? <span>{{ product.metafields.Genemco["pump_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_pump_recommended_hp"] == blank %}<li>Pump Recommended HP: <span>{{ product.metafields.Genemco["02_pump_recommended_hp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["02_pump_recommended_gallons_pe"] == blank %}<li>Pump Recommended Gallons per Minute (GPM): <span>{{ product.metafields.Genemco["02_pump_recommended_gallons_pe"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"screw compressors"' %}
+  {% assign show_additional_fields = false %}
+  <ul>
+    {% unless product.metafields.Genemco["03_compressor_type"] == blank %}<li>Compressor Type: <span>{{ product.metafields.Genemco["03_compressor_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_included"] == blank %}<li>Package Included? <span>{{ product.metafields.Genemco["03_package_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_stage_type"] == blank %}<li>Stage Type: <span>{{ product.metafields.Genemco["03_stage_type"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Package Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_package_manufacturer"] == blank %}<li>Package Manufacturer: <span>{{ product.metafields.Genemco["03_package_manufacturer"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_model_"] == blank %}<li>Package Model: <span>{{ product.metafields.Genemco["03_package_model_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_serial_"] == blank %}<li>Package SN: <span>{{ product.metafields.Genemco["03_package_serial_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_order_"] == blank %}<li>Package Order: <span>{{ product.metafields.Genemco["03_package_order_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_max_speed_rpm"] == blank %}<li>Package Max Speed (RPM): <span>{{ product.metafields.Genemco["03_package_max_speed_rpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_max_design_pressure"] == blank %}<li>Package Max Design Pressure (PSIG): <span>{{ product.metafields.Genemco["03_package_max_design_pressure"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Screw Compressor Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_compressor_included"] == blank %}<li>Compressor Included? <span>{{ product.metafields.Genemco["03_compressor_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_manufacturer"] == blank %}<li>Compressor Manufacturer: <span>{{ product.metafields.Genemco["03_compressor_manufacturer"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressors_in_package"] == blank %}<li># Compressors in Package: <span>{{ product.metafields.Genemco["03_compressors_in_package"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_model__"] == blank %}<li>Compressor Model: <span>{{ product.metafields.Genemco["03_compressor_model__"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_serial_"] == blank %}<li>Compressor SN: <span>{{ product.metafields.Genemco["03_compressor_serial_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_max_speed_rpm"] == blank %}<li>Compressor Max Speed (RPM): <span>{{ product.metafields.Genemco["03_compressor_max_speed_rpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_design_pressure"] == blank %}<li>Compressor Design Pressure (PSIG): <span>{{ product.metafields.Genemco["03_compressor_design_pressure"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_year_manufacture"] == blank %}<li>Compressor Year Manufactured: <span>{{ product.metafields.Genemco["03_compressor_year_manufacture"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_rebuild_year"] == blank %}<li>Compressor Rebuild Year: <span>{{ product.metafields.Genemco["03_compressor_rebuild_year"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_run_time_hours"] == blank %}<li>Compressor Run Time Hours: <span>{{ product.metafields.Genemco["03_compressor_run_time_hours"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_vi"] == blank %}<li>Fixed/Variable VI: <span>{{ product.metafields.Genemco["03_compressor_vi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_volume_ratio"] == blank %}<li>Compressor Volume Ratio: <span>{{ product.metafields.Genemco["03_compressor_volume_ratio"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_separator_included"] == blank %}<li>Oil Separator Included? <span>{{ product.metafields.Genemco["03_oil_separator_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_separator_national_boa"] == blank %}<li>Oil Separator National Board #: <span>{{ product.metafields.Genemco["03_oil_separator_national_boa"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_cooling_type"] == blank %}<li>Oil Cooling Type: <span>{{ product.metafields.Genemco["03_oil_cooling_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_cooler_national_boa"] == blank %}<li>Oil Cooler National Board #: <span>{{ product.metafields.Genemco["03_oil_cooler_national_boa"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Micro Panel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Motor Starter Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_motor_starter_included"] == blank %}<li>Motor Starter Included? <span>{{ product.metafields.Genemco["03_motor_starter_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_motor_starter_manufactu"] == blank %}<li>Motor Starter Manufacturer: <span>{{ product.metafields.Genemco["03_motor_starter_manufactu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_motor_starter_type"] == blank %}<li>Motor Starter Type: <span>{{ product.metafields.Genemco["03_motor_starter_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"reciprocating compressors"' %}
+  {% assign show_additional_fields = false %}
+  <ul>
+    {% unless product.metafields.Genemco["03_compressor_type"] == blank %}<li>Compressor Type: <span>{{ product.metafields.Genemco["03_compressor_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_included"] == blank %}<li>Package Included? <span>{{ product.metafields.Genemco["03_package_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_stage_type"] == blank %}<li>Stage Type: <span>{{ product.metafields.Genemco["03_stage_type"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Reciprocating Compressor Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_compressor_included"] == blank %}<li>Compressor Included? <span>{{ product.metafields.Genemco["03_compressor_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_manufacturer"] == blank %}<li>Compressor Manufacturer: <span>{{ product.metafields.Genemco["03_compressor_manufacturer"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_reciprocating_cylinders"] == blank %}<li># Of Reciprocating Cylinders: <span>{{ product.metafields.Genemco["03_reciprocating_cylinders"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_reciprocating_type"] == blank %}<li>Reciprocating Type: <span>{{ product.metafields.Genemco["03_reciprocating_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressors_in_package"] == blank %}<li># Compressors in Package: <span>{{ product.metafields.Genemco["03_compressors_in_package"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_model__"] == blank %}<li>Compressor Model: <span>{{ product.metafields.Genemco["03_compressor_model__"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_serial_"] == blank %}<li>Compressor SN: <span>{{ product.metafields.Genemco["03_compressor_serial_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_max_speed_rpm"] == blank %}<li>Compressor Max Speed (RPM): <span>{{ product.metafields.Genemco["03_compressor_max_speed_rpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_design_pressure"] == blank %}<li>Compressor Design Pressure (PSIG): <span>{{ product.metafields.Genemco["03_compressor_design_pressure"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_year_manufacture"] == blank %}<li>Compressor Year Manufactured: <span>{{ product.metafields.Genemco["03_compressor_year_manufacture"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_rebuild_year"] == blank %}<li>Compressor Rebuild Year: <span>{{ product.metafields.Genemco["03_compressor_rebuild_year"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_run_time_hours"] == blank %}<li>Compressor Run Time Hours: <span>{{ product.metafields.Genemco["03_compressor_run_time_hours"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_vi"] == blank %}<li>Fixed/Variable VI: <span>{{ product.metafields.Genemco["03_compressor_vi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_volume_ratio"] == blank %}<li>Compressor Volume Ratio: <span>{{ product.metafields.Genemco["03_compressor_volume_ratio"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_separator_national_boa"] == blank %}<li>Oil Separator Included? <span>{{ product.metafields.Genemco["03_oil_separator_national_boa"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_separator_included"] == blank %}<li>Oil Separator National Board #: <span>{{ product.metafields.Genemco["03_oil_separator_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_cooling_type"] == blank %}<li>Oil Cooling Type: <span>{{ product.metafields.Genemco["03_oil_cooling_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_oil_cooler_national_boa"] == blank %}<li>Oil Cooler National Board #: <span>{{ product.metafields.Genemco["03_oil_cooler_national_boa"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Motor Starter Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_motor_starter_included"] == blank %}<li>Motor Starter Included? <span>{{ product.metafields.Genemco["03_motor_starter_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_motor_starter_manufactu"] == blank %}<li>Motor Starter Manufacturer: <span>{{ product.metafields.Genemco["03_motor_starter_manufactu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_motor_starter_type"] == blank %}<li>Motor Starter Type: <span>{{ product.metafields.Genemco["03_motor_starter_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"compressors"' %}
+  {% assign show_additional_fields = false %}
+  <ul>
+    {% unless product.metafields.Genemco["03_compressor_type"] == blank %}<li>Compressor Type: <span>{{ product.metafields.Genemco["03_compressor_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_included"] == blank %}<li>Package Included? <span>{{ product.metafields.Genemco["03_package_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_stage_type"] == blank %}<li>Stage Type: <span>{{ product.metafields.Genemco["03_stage_type"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Package Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_package_manufacturer"] == blank %}<li>Package Manufacturer: <span>{{ product.metafields.Genemco["03_package_manufacturer"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_model_"] == blank %}<li>Package Model: <span>{{ product.metafields.Genemco["03_package_model_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_serial_"] == blank %}<li>Package SN: <span>{{ product.metafields.Genemco["03_package_serial_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_order_"] == blank %}<li>Package Order: <span>{{ product.metafields.Genemco["03_package_order_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_max_speed_rpm"] == blank %}<li>Package Max Speed (RPM): <span>{{ product.metafields.Genemco["03_package_max_speed_rpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_package_max_design_pressure"] == blank %}<li>Package Max Design Pressure (PSIG): <span>{{ product.metafields.Genemco["03_package_max_design_pressure"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Compressor Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_compressor_included"] == blank %}<li>Compressor Included? <span>{{ product.metafields.Genemco["03_compressor_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_manufacturer"] == blank %}<li>Compressor Manufacturer: <span>{{ product.metafields.Genemco["03_compressor_manufacturer"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressors_in_package"] == blank %}<li># Compressors in Package: <span>{{ product.metafields.Genemco["03_compressors_in_package"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_model__"] == blank %}<li>Compressor Model: <span>{{ product.metafields.Genemco["03_compressor_model__"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_serial_"] == blank %}<li>Compressor SN: <span>{{ product.metafields.Genemco["03_compressor_serial_"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_max_speed_rpm"] == blank %}<li>Compressor Max Speed (RPM): <span>{{ product.metafields.Genemco["03_compressor_max_speed_rpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_design_pressure"] == blank %}<li>Compressor Design Pressure (PSIG): <span>{{ product.metafields.Genemco["03_compressor_design_pressure"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_year_manufacture"] == blank %}<li>Compressor Year Manufactured: <span>{{ product.metafields.Genemco["03_compressor_year_manufacture"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_vi"] == blank %}<li>Fixed/Variable VI: <span>{{ product.metafields.Genemco["03_compressor_vi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_compressor_volume_ratio"] == blank %}<li>Compressor Volume Ratio: <span>{{ product.metafields.Genemco["03_compressor_volume_ratio"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Micro Panel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Motor Starter Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_motor_starter_included"] == blank %}<li>Motor Starter Included? <span>{{ product.metafields.Genemco["03_motor_starter_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_motor_starter_manufactu"] == blank %}<li>Motor Starter Manufacturer: <span>{{ product.metafields.Genemco["03_motor_starter_manufactu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_motor_starter_type"] == blank %}<li>Motor Starter Type: <span>{{ product.metafields.Genemco["03_motor_starter_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"receivers"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Tank Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Micro Panel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"accumulators"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Tank Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Micro Panel Details</h2>
+  <ul>
+    <li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>
+    <li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>
+    <li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>
+  </ul>
+{% elsif lowercased_tags contains '"intercoolers & subcoolers"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"'  %}
+    {% assign show_additional_fields = false %}
+    <h2>Tank Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+    </ul>
+    <h2>Micro Panel Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+    </ul>
+{% elsif lowercased_tags contains '"oil tanks"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"' %}
+      {% assign show_additional_fields = false %}
+    <h2>Tank Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+    </ul>
+    <h2>Micro Panel Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+    </ul>
+{% elsif lowercased_tags contains '"surge drums"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"'  %}
+    {% assign show_additional_fields = false %}
+    <h2>Tank Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+    </ul>
+    <h2>Micro Panel Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+    </ul>
+{% elsif lowercased_tags contains '"diffusion tanks"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"' %}
+    {% assign show_additional_fields = false %}
+    <h2>Tank Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+    </ul>
+    <h2>Micro Panel Details</h2>
+    <ul>
+      {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+      {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+    </ul>
+{% elsif lowercased_tags contains '"cooling towers"' and lowercased_tags contains '"refrigeration"' %}
+  {% assign show_additional_fields = false %}
+  <h2 data-tags="{{ lowercased_tags }}">Cooling Tower Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["04_cooling_capacity_gpm"] == blank %}<li>Cooling Capacity (GPM): <span>{{ product.metafields.Genemco["04_cooling_capacity_gpm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["pump_included"] == blank %}<li>Pump Included: <span>{{ product.metafields.Genemco["pump_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["Circuit_Type"] == blank %}<li>Circuit Type: <span>{{ product.metafields.Genemco["Circuit_Type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"plate chillers & freezers"' and lowercased_tags contains '"ice freezers & chillers"' and lowercased_tags contains '"refrigeration"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Plate Chiller Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["25_estimated_freezing_capacity"] == blank %}<li>Estimated Freezing Capacity (Tons per 24 Hours): <span>{{ product.metafields.Genemco["25_estimated_freezing_capacity"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["25_plate_quantity"] == blank %}<li>Plate Quantity: <span>{{ product.metafields.Genemco["25_plate_quantity"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_width_inches"] == blank %}<li>Plate Width (inches): <span>{{ product.metafields.Genemco["plate_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["25_plate_height__inches"] == blank %}<li>Plate Height  (inches): <span>{{ product.metafields.Genemco["25_plate_height__inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_material"] == blank %}<li>Plate Material: <span>{{ product.metafields.Genemco["plate_material"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>High Side Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"recirculators"' and lowercased_tags contains '"recirculators receivers vessels"' and lowercased_tags contains '"refrigeration"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Tank Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["refrigeration_tank_type"] == blank %}<li>Refrigeration Tank Type: <span>{{ product.metafields.Genemco["refrigeration_tank_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_diameter_inches"] == blank %}<li>Tank Diameter (Inches): <span>{{ product.metafields.Genemco["tank_diameter_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_length_inches"] == blank %}<li>Tank Length (Inches): <span>{{ product.metafields.Genemco["tank_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Pump Details</h2>
+  <ul>
+    <li>Pump Included? <span>{{ product.metafields.Genemco["pump_included"] }}</span></li>
+    {% unless product.metafields.Genemco["24_number_of_pumps_in_package"] == blank %}<li>Number of Pumps in Package: <span>{{ product.metafields.Genemco["24_number_of_pumps_in_package"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_pump_manufacturers"] == blank %}<li>Pump Manufacturer(s): <span>{{ product.metafields.Genemco["08_pump_manufacturers"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["24_pump_horsepower_hp"] == blank %}<li>Pump Horsepower (HP): <span>{{ product.metafields.Genemco["24_pump_horsepower_hp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["24_pump_descriptions"] == blank %}<li>Pump Description(s): <span>{{ product.metafields.Genemco["24_pump_descriptions"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Micro Panel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"refrigeration"' and lowercased_tags contains '"ice freezers & chillers"' and lowercased_tags contains '"ice makers & equipment"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Ice Maker Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["type_of_ice"] == blank %}<li>Type of Ice: <span>{{ product.metafields.Genemco["type_of_ice"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["ice_production_per_day_tons"] == blank %}<li>Ice Production per Day (Tons): <span>{{ product.metafields.Genemco["ice_production_per_day_tons"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["hopperauger_included"] == blank %}<li>Hopper/Auger Included? <span>{{ product.metafields.Genemco["hopperauger_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["hopperauger_description"] == blank %}<li>Hopper/Auger Description: <span>{{ product.metafields.Genemco["hopperauger_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>High Side Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["ice_maker_accessory"] == blank %}<li>Ice Maker Accessory? <span>{{ product.metafields.Genemco["ice_maker_accessory"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["ice_accessory_type"] == blank %}<li>Ice Accessory Type: <span>{{ product.metafields.Genemco["ice_accessory_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"homogenizers"' and lowercased_tags contains '"pumps homogenizers & tanks"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Homogenizer Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["16_rated_capacity_gph"] == blank %}<li>Rated Capacity (GPH): <span>{{ product.metafields.Genemco["16_rated_capacity_gph"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["16_maximum_operating_pressure"] == blank %}<li>Maximum Operating Pressure (PSI): <span>{{ product.metafields.Genemco["16_maximum_operating_pressure"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["16_number_of_stages"] == blank %}<li>Number of Stages: <span>{{ product.metafields.Genemco["16_number_of_stages"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["16_valve_seats_type"] == blank %}<li>Valve Seats Type: <span>{{ product.metafields.Genemco["16_valve_seats_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"chillers"' or lowercased_tags contains '"chillers & coolers"'%}
+  {% assign show_additional_fields = false %}
+  <h2>Chiller Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["28_air_cooled_or_liquid_cooled"] == blank %}<li>Air Cooled or Liquid Cooled: <span>{{ product.metafields.Genemco["28_air_cooled_or_liquid_cooled"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["cfm"] == blank %}<li>CFM: <span>{{ product.metafields.Genemco["cfm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["28_number_of_compressors"] == blank %}<li>Number of Compressors: <span>{{ product.metafields.Genemco["28_number_of_compressors"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["29_compressor_descriptions"] == blank %}<li>Compressor Descriptions: <span>{{ product.metafields.Genemco["29_compressor_descriptions"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["28_total_compressor_horsepower"] == blank %}<li>Total Compressor Horsepower: <span>{{ product.metafields.Genemco["28_total_compressor_horsepower"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"non-stainless tanks"' and lowercased_tags contains '"pumps homogenizers & tanks"' %}
+  <h2>Tank Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity: <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["17_tank_materials_of_construct"] == blank %}<li>Tank Materials of Construction: <span>{{ product.metafields.Genemco["17_tank_materials_of_construct"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"stainless tanks"' and lowercased_tags contains '"pumps homogenizers & tanks"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Tank Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["14_stainless_tank_type"] == blank %}<li>Stainless Tank Type: <span>{{ product.metafields.Genemco["14_stainless_tank_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tank_orientation"] == blank %}<li>Tank Orientation: <span>{{ product.metafields.Genemco["tank_orientation"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_jacketed_insulated"] == blank %}<li>Jacketed (Insulated)? <span>{{ product.metafields.Genemco["14_jacketed_insulated"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_dimpled"] == blank %}<li>Dimpled? <span>{{ product.metafields.Genemco["14_dimpled"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_agitation"] == blank %}<li>Agitation? <span>{{ product.metafields.Genemco["14_agitation"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>Tank National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_mawp_psi_at_temp"] == blank %}<li>Tank MAWP (PSI at temp): <span>{{ product.metafields.Genemco["08_tank_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_mawt_temp_at_psi"] == blank %}<li>Tank MAWT (temp at PSI): <span>{{ product.metafields.Genemco["14_tank_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"shell & tube heat exchangers"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Shell & Tube Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["heat_transfer_surface_area"] == blank %}<li>Heat Transfer Surface Area (SQ FT): <span>{{ product.metafields.Genemco["heat_transfer_surface_area"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_number_of_passes"] == blank %}<li>Number of Passes: <span>{{ product.metafields.Genemco["19_number_of_passes"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tube_material"] == blank %}<li>Tube Material: <span>{{ product.metafields.Genemco["tube_material"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_number_of_tubes"] == blank %}<li>Number of Tubes: <span>{{ product.metafields.Genemco["19_number_of_tubes"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tube_diameter_inches"] == blank %}<li>Tube Diameter (inches): <span>{{ product.metafields.Genemco["tube_diameter_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tube_length_inches"] == blank %}<li>Tube Length (inches): <span>{{ product.metafields.Genemco["tube_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mawp_psi_at_temp"] == blank %}<li>MAWP (PSI at temp): <span>{{ product.metafields.Genemco["19_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mawt_temp_at_psi"] == blank %}<li>MAWT (temp at PSI): <span>{{ product.metafields.Genemco["19_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mdmt_temp_at_psi"] == blank %}<li>MDMT (temp at PSI): <span>{{ product.metafields.Genemco["19_mdmt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mdmp_psi_at_minium_temp"] == blank %}<li>MDMP (PSI at minimum temp): <span>{{ product.metafields.Genemco["19_mdmp_psi_at_minium_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"air cooled condensers"' and lowercased_tags contains '"condensers & cooling towers"' and lowercased_tags contains '"refrigeration"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Condenser Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_accessory_main_item_or_a_pa"] == blank %}<li>Accessory? <span>{{ product.metafields.Genemco["27_accessory_main_item_or_a_pa"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"water cooled condensers"' and lowercased_tags contains '"condensers & cooling towers"' and lowercased_tags contains '"refrigeration"' %}
+  <h2>Condenser Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_accessory_main_item_or_a_pa"] == blank %}<li>Accessory? <span>{{ product.metafields.Genemco["27_accessory_main_item_or_a_pa"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"condenser & cooling tower parts"' and lowercased_tags contains '"condensers & cooling towers"' and lowercased_tags contains '"refrigeration"' %}
+  <h2>Condenser Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_accessory_main_item_or_a_pa"] == blank %}<li>Accessory? <span>{{ product.metafields.Genemco["27_accessory_main_item_or_a_pa"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"conveyor systems"' and lowercased_tags contains '"fillers conveyors & packaging"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Conveyor Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["20_conveyor_type"] == blank %}<li>Conveyor Type: <span>{{ product.metafields.Genemco["20_conveyor_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["20_conveyer_width_inches"] == blank %}<li>Conveyor Width (inches): <span>{{ product.metafields.Genemco["20_conveyer_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["20_conveyor_length_inches"] == blank %}<li>Conveyor Length (inches): <span>{{ product.metafields.Genemco["20_conveyor_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["20_max_height_clearance_above"] == blank %}<li>Max Height Clearance above Belt (Inches): <span>{{ product.metafields.Genemco["20_max_height_clearance_above"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"transformers & generators"' and lowercased_tags contains '"motors & electrical"' %}
+  {% assign show_additional_fields = false %}
+  <h2>Transformer Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["51_kw"] == blank %}<li>KW: <span>{{ product.metafields.Genemco["51_kw"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["kva"] == blank %}<li>KVA: <span>{{ product.metafields.Genemco["kva"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["51_high_voltage"] == blank %}<li>High Voltage: <span>{{ product.metafields.Genemco["51_high_voltage"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["51_low_voltage"] == blank %}<li>Low Voltage: <span>{{ product.metafields.Genemco["51_low_voltage"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"auto-purgers"' %}
+  {% assign show_additional_fields = false %}
+  <ul>
+    {% unless product.metafields.Genemco["32_purge_points"] == blank %}<li>Purge Points: <span>{{ product.metafields.Genemco["32_purge_points"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"ammonia auto-purgers"' and lowercased_tags contains '"other refrigeration"' and lowercased_tags contains '"refrigeration"' %}
+  <ul>
+    {% unless product.metafields.Genemco["32_purge_points"] == blank %}<li>Purge Points: <span>{{ product.metafields.Genemco["32_purge_points"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"boilers"' and lowercased_tags contains '"evaporators & boilers"' %}
+  <h2>Boiler Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["15_boiler_type"] == blank %}<li>Boiler Type: <span>{{ product.metafields.Genemco["15_boiler_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["15_boiler_hp"] == blank %}<li>Boiler HP: <span>{{ product.metafields.Genemco["15_boiler_hp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["15_rated_input_btuh"] == blank %}<li>Rated Input (BTUH): <span>{{ product.metafields.Genemco["15_rated_input_btuh"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["15_rated_capacity_gallons"] == blank %}<li>Rated Capacity (Gallons): <span>{{ product.metafields.Genemco["15_rated_capacity_gallons"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"dryers"' and lowercased_tags contains '"evaporators"' and lowercased_tags contains '"evaporators & boilers"' %}
+  <h2>Dryer Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["34_dryer_type"] == blank %}<li>Dryer Type: <span>{{ product.metafields.Genemco["34_dryer_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"ice freezers & chillers"' and lowercased_tags contains '"shell"' and lowercased_tags contains '"glycol"'%}
+  <h2>Glycol Chiller Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["chiller_type"] == blank %}<li>Chiller Type: <span>{{ product.metafields.Genemco["chiller_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tons_of_refrigeration"] == blank %}<li>Tons of Refrigeration: <span>{{ product.metafields.Genemco["tons_of_refrigeration"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["heat_transfer_surface_area"] == blank %}<li>Heat Transfer Surface Area (SQ FT): <span>{{ product.metafields.Genemco["heat_transfer_surface_area"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["55_surge_drum_included"] == blank %}<li>Surge Drum Included?: <span>{{ product.metafields.Genemco["55_surge_drum_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["55_heat_exchanger_description"] == blank %}<li>Heat Exchanger Description: <span>{{ product.metafields.Genemco["55_heat_exchanger_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>High Side Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"glycol systems"' and lowercased_tags contains '"ice freezers & chillers"' and lowercased_tags contains '"refrigeration"' %}
+  <h2>Glycol Chiller Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["chiller_type"] == blank %}<li>Chiller Type: <span>{{ product.metafields.Genemco["chiller_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tons_of_refrigeration"] == blank %}<li>Tons of Refrigeration: <span>{{ product.metafields.Genemco["tons_of_refrigeration"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["heat_transfer_surface_area"] == blank %}<li>Heat Transfer Surface Area (SQ FT): <span>{{ product.metafields.Genemco["heat_transfer_surface_area"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["55_surge_drum_included"] == blank %}<li>Surge Drum Included?: <span>{{ product.metafields.Genemco["55_surge_drum_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["55_heat_exchanger_description"] == blank %}<li>Heat Exchanger Description: <span>{{ product.metafields.Genemco["55_heat_exchanger_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>High Side Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"htst applications"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <h2>HTST Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["24_nominal_flow_capacity_gallo"] == blank %}<li>Nominal Flow Capacity: <span>{{ product.metafields.Genemco["24_nominal_flow_capacity_gallo"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["heat_transfer_surface_area"] == blank %}<li>Heat Transfer Surface Area (SQ FT): <span>{{ product.metafields.Genemco["heat_transfer_surface_area"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Pump Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["pump_included"] == blank %}<li>Pump Included? <span>{{ product.metafields.Genemco["pump_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["24_number_of_pumps_in_package"] == blank %}<li>Number of Pumps in Package: <span>{{ product.metafields.Genemco["24_number_of_pumps_in_package"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_pump_manufacturers"] == blank %}<li>Pump Manufacturer(s): <span>{{ product.metafields.Genemco["08_pump_manufacturers"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["24_pump_horsepower_hp"] == blank %}<li>Pump Horsepower (HP): <span>{{ product.metafields.Genemco["24_pump_horsepower_hp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["24_pump_descriptions"] == blank %}<li>Pump Description(s): <span>{{ product.metafields.Genemco["24_pump_descriptions"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"plated heat exchangers"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <h2>Heat Exchanger Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["heat_transfer_surface_area"] == blank %}<li>Heat Transfer Surface Area (SQ FT): <span>{{ product.metafields.Genemco["heat_transfer_surface_area"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["18_nominal_flow_capacity_gallo"] == blank %}<li>Nominal Flow Capacity: <span>{{ product.metafields.Genemco["18_nominal_flow_capacity_gallo"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["18_nominal_heat_transfer_capac"] == blank %}<li>Nominal Heat Transfer Capacity (BTU/HR): <span>{{ product.metafields.Genemco["18_nominal_heat_transfer_capac"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_material"] == blank %}<li>Plate Material: <span>{{ product.metafields.Genemco["plate_material"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["18_number_of_plates"] == blank %}<li>Number of Plates: <span>{{ product.metafields.Genemco["18_number_of_plates"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["18_number_of_dividers"] == blank %}<li>Number of Dividers: <span>{{ product.metafields.Genemco["18_number_of_dividers"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["18_number_of_sections"] == blank %}<li>Number of Sections: <span>{{ product.metafields.Genemco["18_number_of_sections"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mawp_psi_at_temp"] == blank %}<li>MAWP (PSI at temp): <span>{{ product.metafields.Genemco["19_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mawt_temp_at_psi"] == blank %}<li>MAWT (temp at PSI): <span>{{ product.metafields.Genemco["19_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"screw compressor motor starters"' %}
+  <h2>Motor Starter Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["motor_controls_type"] == blank %}<li>Motor Control Type: <span>{{ product.metafields.Genemco["motor_controls_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["47_compressor_motor_starter_ty"] == blank %}<li>Compressor Motor Starter Type: <span>{{ product.metafields.Genemco["47_compressor_motor_starter_ty"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["kva"] == blank %}<li>KVA: <span>{{ product.metafields.Genemco["kva"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"votators & scraped surface heat exchangers"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <h2>Votator & Heat Exchanger Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["23_number_of_votator_tubes"] == blank %}<li>Number of Votator Tubes: <span>{{ product.metafields.Genemco["23_number_of_votator_tubes"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["heat_transfer_surface_area"] == blank %}<li>Heat Transfer Surface Area (SQ FT): <span>{{ product.metafields.Genemco["heat_transfer_surface_area"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tube_diameter_inches"] == blank %}<li>Tube Diameter (inches): <span>{{ product.metafields.Genemco["tube_diameter_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tube_length_inches"] == blank %}<li>Tube Length (inches): <span>{{ product.metafields.Genemco["tube_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["tube_material"] == blank %}<li>Tube Material: <span>{{ product.metafields.Genemco["tube_material"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["23_shaft_blade_and_scraper_des"] == blank %}<li>Shaft, Blade and Scraper Description: <span>{{ product.metafields.Genemco["23_shaft_blade_and_scraper_des"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_national_board_number"] == blank %}<li>National Board Number: <span>{{ product.metafields.Genemco["19_national_board_number"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mawp_psi_at_temp"] == blank %}<li>MAWP (PSI at temp): <span>{{ product.metafields.Genemco["19_mawp_psi_at_temp"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mawt_temp_at_psi"] == blank %}<li>MAWT (temp at PSI): <span>{{ product.metafields.Genemco["19_mawt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mdmt_temp_at_psi"] == blank %}<li>MDMT (temp at PSI): <span>{{ product.metafields.Genemco["19_mdmt_temp_at_psi"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_mdmp_psi_at_minium_temp"] == blank %}<li>MDMP (PSI at minimum temp): <span>{{ product.metafields.Genemco["19_mdmp_psi_at_minium_temp"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"comfort heating/cooling"' and lowercased_tags contains '"other refrigeration"' and lowercased_tags contains '"refrigeration"' %}
+  <ul>
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["cfm"] == blank %}<li>CFM: <span>{{ product.metafields.Genemco["cfm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["29_compressor_descriptions"] == blank %}<li>Compressor Descriptions: <span>{{ product.metafields.Genemco["29_compressor_descriptions"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"air handlers"' and lowercased_tags contains '"other refrigeration"' and lowercased_tags contains '"refrigeration"' %}
+  <ul>
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Unit Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["cfm"] == blank %}<li>CFM: <span>{{ product.metafields.Genemco["cfm"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["29_compressor_descriptions"] == blank %}<li>Compressor Descriptions: <span>{{ product.metafields.Genemco["29_compressor_descriptions"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"bottle & cap feeders"' and lowercased_tags contains '"fillers & cappers"' and lowercased_tags contains '"fillers conveyors & packaging"' %}
+  <h2>Feeder Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["fillercapper_type"] == blank %}<li>Filler/Capper Type: <span>{{ product.metafields.Genemco["fillercapper_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["inlinerotary"] == blank %}<li>Inline/Rotary: <span>{{ product.metafields.Genemco["inlinerotary"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["54_capacity_per_minute"] == blank %}<li>Capacity per minute: <span>{{ product.metafields.Genemco["54_capacity_per_minute"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"concentrator plates"' and lowercased_tags contains '"evaporators"' and lowercased_tags contains '"evaporators & boilers"' %}
+  <h2>Plate Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["plate_width_inches"] == blank %}<li>Plate Width (inches): <span>{{ product.metafields.Genemco["plate_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_length_inches"] == blank %}<li>Plate Length (inches): <span>{{ product.metafields.Genemco["plate_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["quantity_available"] == blank %}<li>Quantity Available: <span>{{ product.metafields.Genemco["quantity_available"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"evaporator components"' and lowercased_tags contains '"evaporators"' and lowercased_tags contains '"evaporators & boilers"' %}
+  <h2>Plate Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["plate_width_inches"] == blank %}<li>Plate Width (inches): <span>{{ product.metafields.Genemco["plate_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_length_inches"] == blank %}<li>Plate Length (inches): <span>{{ product.metafields.Genemco["plate_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["quantity_available"] == blank %}<li>Quantity Available: <span>{{ product.metafields.Genemco["quantity_available"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"evaporators"' and lowercased_tags contains '"evaporators & boilers"' %}
+  <h2>Evaporator Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["10_evaporator_type"] == blank %}<li>Evaporator Type: <span>{{ product.metafields.Genemco["10_evaporator_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["10_of_effects"] == blank %}<li># of Effects: <span>{{ product.metafields.Genemco["10_of_effects"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["10_lbs_per_hr_of_evaporation_r"] == blank %}<li>LBS per HR of Evaporation Removal: <span>{{ product.metafields.Genemco["10_lbs_per_hr_of_evaporation_r"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["10_metal_types"] == blank %}<li>Metal Types: <span>{{ product.metafields.Genemco["10_metal_types"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["10_skid_mounted"] == blank %}<li>Skid Mounted: <span>{{ product.metafields.Genemco["10_skid_mounted"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["10_evaporator_components_inclu"] == blank %}<li>Evaporator Components Included: <span>{{ product.metafields.Genemco["10_evaporator_components_inclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["10_evaporator_components_not_i"] == blank %}<li>Evaporator Components Not Included: <span>{{ product.metafields.Genemco["10_evaporator_components_not_i"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Micro Panel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Micro Control Panel Included? <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_manufac"] == blank %}<li>Micro Control Panel Manufacturer: <span>{{ product.metafields.Genemco["03_micro_control_panel_manufac"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Micro Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"flavorizer flash chambers"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <h2>Flavorizer Flash Chamber Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["evaporator_component_type"] == blank %}<li>Evaporator Component Type: <span>{{ product.metafields.Genemco["evaporator_component_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["08_tank_estimated_capacity_gal"] == blank %}<li>Tank Estimated Capacity (Gallons): <span>{{ product.metafields.Genemco["08_tank_estimated_capacity_gal"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"fillers & cappers"' and lowercased_tags contains '"fillers conveyors & packaging"' %}
+  <h2>Filler & Capper Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["fillercapper_type"] == blank %}<li>Filler/Capper Type: <span>{{ product.metafields.Genemco["fillercapper_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["inlinerotary"] == blank %}<li>Inline/Rotary: <span>{{ product.metafields.Genemco["inlinerotary"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["capacity_per_minute"] == blank %}<li>Capacity per minute: <span>{{ product.metafields.Genemco["capacity_per_minute"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["11_of_heads"] == blank %}<li># of Heads: <span>{{ product.metafields.Genemco["11_of_heads"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["11_cap_hopper_included"] == blank %}<li>Cap Hopper Included: <span>{{ product.metafields.Genemco["11_cap_hopper_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["11_cap_chute_included"] == blank %}<li>Cap Chute Included: <span>{{ product.metafields.Genemco["11_cap_chute_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["11_includes_capper"] == blank %}<li>Includes Capper? <span>{{ product.metafields.Genemco["11_includes_capper"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"freezer belts & parts"' and lowercased_tags contains '"ice freezers & chillers"' and lowercased_tags contains '"refrigeration"' %}
+  <h2>Freezer Belts & Parts</h2>
+  <ul>
+    {% unless product.metafields.Genemco["53_freezer_part_type"] == blank %}<li>Freezer Part Type: <span>{{ product.metafields.Genemco["53_freezer_part_type"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"heat exchanger frames"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <ul>
+    {% unless product.metafields.Genemco["38_pipe_length_feet"] == blank %}<li>Pipe Length (feet): <span>{{ product.metafields.Genemco["38_pipe_length_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"heat exchanger plates"' and lowercased_tags contains '"htst & heat exchange parts"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <h2>Plate Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["43_plategasket"] == blank %}<li>Plate/Gasket: <span>{{ product.metafields.Genemco["43_plategasket"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_width_inches"] == blank %}<li>Plate Width (inches): <span>{{ product.metafields.Genemco["plate_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["plate_length_inches"] == blank %}<li>Plate Length (inches): <span>{{ product.metafields.Genemco["plate_length_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["quantity_available"] == blank %}<li>Quantity Available: <span>{{ product.metafields.Genemco["quantity_available"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"iqf freezer tunnels"' or lowercased_tags contains '"iqf spiral freezers"' or lowercased_tags contains '"iqf nitrogen equipment"' %}
+  <h2>IQF Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["07_iqf_type"] == blank %}<li>IQF Type: <span>{{ product.metafields.Genemco["07_iqf_type"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_pounds_lbs_per_hour_of_free"] == blank %}<li>Pounds (LBS) per Hour of Freezing Capacity: <span>{{ product.metafields.Genemco["07_pounds_lbs_per_hour_of_free"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_number_of_towers"] == blank %}<li>Number of Towers: <span>{{ product.metafields.Genemco["07_number_of_towers"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_quantity_of_product_streams"] == blank %}<li>Quantity of Product Streams: <span>{{ product.metafields.Genemco["07_quantity_of_product_streams"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_number_of_tiers"] == blank %}<li>Number of Tiers: <span>{{ product.metafields.Genemco["07_number_of_tiers"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_tier_spacing_inches"] == blank %}<li>Tier Spacing (Inches): <span>{{ product.metafields.Genemco["07_tier_spacing_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_product_height_clearance_in"] == blank %}<li>Product Height Clearance (Inches): <span>{{ product.metafields.Genemco["07_product_height_clearance_in"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["31_infeed_description"] == blank %}<li>Infeed Description: <span>{{ product.metafields.Genemco["31_infeed_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["31_outfeed_description"] == blank %}<li>Outfeed Description: <span>{{ product.metafields.Genemco["31_outfeed_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_frame_description"] == blank %}<li>Frame Description: <span>{{ product.metafields.Genemco["07_frame_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_drum_description"] == blank %}<li>Drum Description: <span>{{ product.metafields.Genemco["07_drum_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_length_enclosed_tunnel_feet"] == blank %}<li>Length Enclosed Tunnel (feet): <span>{{ product.metafields.Genemco["07_length_enclosed_tunnel_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_width_enclosed_tunnel"] == blank %}<li>Width Enclosed Tunnel: <span>{{ product.metafields.Genemco["07_width_enclosed_tunnel"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_evaporator_coil_full_descri"] == blank %}<li>Evaporator Coil Full Description: <span>{{ product.metafields.Genemco["07_evaporator_coil_full_descri"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["unit_nominal_tons_tr"] == blank %}<li>Nominal Tons (TR): <span>{{ product.metafields.Genemco["unit_nominal_tons_tr"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_additional_refrigeration_eq"] == blank %}<li>Additional Refrigeration Equipment Required: <span>{{ product.metafields.Genemco["07_additional_refrigeration_eq"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_insulated_panels_included"] == blank %}<li>Insulated Panels Included? <span>{{ product.metafields.Genemco["07_insulated_panels_included"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Belt Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["07_belt_description"] == blank %}<li>Belt Description: <span>{{ product.metafields.Genemco["07_belt_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_total_belt_length_feet"] == blank %}<li>Total Belt Length (Feet): <span>{{ product.metafields.Genemco["07_total_belt_length_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_total_active_belt_length_fe"] == blank %}<li>Total Active Belt Length (Feet): <span>{{ product.metafields.Genemco["07_total_active_belt_length_fe"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_total_belt_width_inches"] == blank %}<li>Total Belt Width (Inches): <span>{{ product.metafields.Genemco["07_total_belt_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_active_belth_width_inches"] == blank %}<li>Active Belth Width (Inches): <span>{{ product.metafields.Genemco["07_active_belth_width_inches"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_number_of_belts"] == blank %}<li>Number of Belts: <span>{{ product.metafields.Genemco["07_number_of_belts"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_1st_belt_active_length_feet"] == blank %}<li>1st Belt Active Length (Feet): <span>{{ product.metafields.Genemco["07_1st_belt_active_length_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_1st_belt_material"] == blank %}<li>1st Belt Material: <span>{{ product.metafields.Genemco["07_1st_belt_material"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_2nd_belt_active_length_feet"] == blank %}<li>2nd Belt Active Length (Feet): <span>{{ product.metafields.Genemco["07_2nd_belt_active_length_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_2nd_belt_material"] == blank %}<li>2nd Belt Material: <span>{{ product.metafields.Genemco["07_2nd_belt_material"] }}</span></li>{% endunless %}
+  </ul>
+  <h2>Control Panel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["03_micro_control_panel_inlclu"] == blank %}<li>Control Panel Included: <span>{{ product.metafields.Genemco["03_micro_control_panel_inlclu"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["03_micro_control_panel_descrip"] == blank %}<li>Control Panel Description: <span>{{ product.metafields.Genemco["03_micro_control_panel_descrip"] }}</span></li>{% endunless %}
+  </ul>  
+{%  elsif lowercased_tags contains '"pasteurizing warming & cooling tunnels"' and lowercased_tags contains '"other refrigeration"' and lowercased_tags contains '"refrigeration"' %}
+  <h2>Tunnel Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["31_cooling_or_heating"] == blank %}<li>Cooling or Heating? <span>{{ product.metafields.Genemco["31_cooling_or_heating"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_length_enclosed_tunnel_feet"] == blank %}<li>Length Enclosed Tunnel (feet): <span>{{ product.metafields.Genemco["07_length_enclosed_tunnel_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["31_width_enclosed_tunnel_inche"] == blank %}<li>Width Enclosed Tunnel (inches): <span>{{ product.metafields.Genemco["31_width_enclosed_tunnel_inche"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["31_product_height_clearance_in"] == blank %}<li>Product Height Clearance (Inches): <span>{{ product.metafields.Genemco["31_product_height_clearance_in"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["31_infeed_description"] == blank %}<li>Infeed Description: <span>{{ product.metafields.Genemco["31_infeed_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["31_outfeed_description"] == blank %}<li>Outfeed Description: <span>{{ product.metafields.Genemco["31_outfeed_description"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"plate-fin heat exchangers"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <ul>
+    {% unless product.metafields.Genemco["14_tank_inlets__outlets_descri"] == blank %}<li>Tank Inlets & Outlets Description: <span>{{ product.metafields.Genemco["14_tank_inlets__outlets_descri"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"screw compressor transformers"' or lowercased_tags contains '"screw compressor switchgear"' and lowercased_tags contains '"compressor motors & electrical"' and lowercased_tags contains '"motors & electrical"' %}
+  <ul>
+    {% unless product.metafields.Genemco["kva"] == blank %}<li>KVA: <span>{{ product.metafields.Genemco["kva"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"tube in tube heat exchangers"' and lowercased_tags contains '"heat exchangers"' and lowercased_tags contains '"htst & heat exchangers"' %}
+  <h2>Heat Exchanger Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["38_pipe_length_feet"] == blank %}<li>Pipe Length (feet): <span>{{ product.metafields.Genemco["38_pipe_length_feet"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["19_inlets__outlets_description"] == blank %}<li>Inlets & Outlets Description: <span>{{ product.metafields.Genemco["19_inlets__outlets_description"] }}</span></li>{% endunless %}
+  </ul>
+{% elsif lowercased_tags contains '"walk in coolers"' and lowercased_tags contains '"ice freezers & chillers"' and lowercased_tags contains '"refrigeration"' %}
+  <h2>Cooler Details</h2>
+  <ul>
+    {% unless product.metafields.Genemco["07_refrigeration_equipment_inc"] == blank %}<li>High Side Refrigeration Equipment Included? <span>{{ product.metafields.Genemco["07_refrigeration_equipment_inc"] }}</span></li>{% endunless %}
+    {% unless product.metafields.Genemco["27_included_refrigeration_equi"] == blank %}<li>Included Refrigeration Equipment Description: <span>{{ product.metafields.Genemco["27_included_refrigeration_equi"] }}</span></li>{% endunless %}
+  </ul>
+{% endif %}
+
+<h2>Previous Refrigerant</h2>
+<ul>
+  {% unless product.metafields.Genemco["previous_refrigerant"] == blank %}<li>Previous Refrigerant: <span>{{ product.metafields.Genemco["previous_refrigerant"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["ammonia_r717__nh3_compatable"] == blank %}<li>Ammonia (R-717) Compatiable: <span>{{ product.metafields.Genemco["ammonia_r717__nh3_compatable"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["halocarbon_freon__r22_compatab"] == blank %}<li>Halocarbon (Freon) Compatible: <span>{{ product.metafields.Genemco["halocarbon_freon__r22_compatab"] }}</span></li>{% endunless %}
+</ul>
+<h2>Motor Details</h2>
+<ul>
+  {% unless product.metafields.Genemco.motor_included_yesno == blank %}<li>Motor Included? <span>{{ product.metafields.Genemco.motor_included_yesno }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motors == blank %}<li># Motors: <span>{{ product.metafields.Genemco.motors }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.if_multiple_motors_motor_descr == blank %}<li>If Multiple Motors, Motor Descriptions vs specs: <span>{{ product.metafields.Genemco.if_multiple_motors_motor_descr }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_manufacturer == blank %}<li>Motor Manufacturer: <span>{{ product.metafields.Genemco.motor_manufacturer }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_horsepower_hp == blank %}<li>Motor Horsepower(HP): <span>{{ product.metafields.Genemco.motor_horsepower_hp }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_rpm == blank %}<li>Motor RPM: <span>{{ product.metafields.Genemco.motor_rpm }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_voltage == blank %}<li>Motor Voltage: <span>{{ product.metafields.Genemco.motor_voltage }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_amps == blank %}<li>Motor Amps: <span>{{ product.metafields.Genemco.motor_amps }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_hertz_hz == blank %}<li>Motor Hertz (Hz): <span>{{ product.metafields.Genemco.motor_hertz_hz }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_phases == blank %}<li>Motor Phases: <span>{{ product.metafields.Genemco.motor_phases }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.motor_frame_size == blank %}<li>Motor Frame Size: <span>{{ product.metafields.Genemco.motor_frame_size }}</span></li>{% endunless %}
+</ul>
+<h2>Dimensions:</h2>
+<ul>
+  {% unless product.metafields.Genemco.length_inches == blank %}<li>Length (Inches): <span>{{ product.metafields.Genemco.length_inches }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.width_inches == blank %}<li>Width (Inches): <span>{{ product.metafields.Genemco.width_inches }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.height_inches == blank %}<li>Height (Inches): <span>{{ product.metafields.Genemco.height_inches }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.weight_lbs == blank %}<li>Weight (LBS): <span>{{ product.metafields.Genemco.weight_lbs }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.pieces_for_shipping == blank %}<li># of Pieces for Shipping: <span>{{ product.metafields.Genemco.pieces_for_shipping }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco.acn == blank %}<li>ACN: <span>{{ product.metafields.Genemco.acn }}</span></li>{% endunless %}
+</ul>
+<h2>Additional Product Details</h2>
+<ul>
+  {% unless product.metafields.Genemco["year_of_manufacture"] == blank %}<li>Year of Manufacture: <span>{{ product.metafields.Genemco["year_of_manufacture"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["year_of_installation"] == blank %}<li>Year of Installation: <span>{{ product.metafields.Genemco["year_of_installation"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["year_removed_from_production"] == blank %}<li>Year Removed from Production: <span>{{ product.metafields.Genemco["year_removed_from_production"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["06_spec_sheet_available"] == blank %}<li>Spec Sheet Available: <span>{{ product.metafields.Genemco["06_spec_sheet_available"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["previously_used_with"] == blank %}<li>Previously Used With: <span>{{ product.metafields.Genemco["previously_used_with"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["product_purchased_from"] == blank %}<li>Product Purchased From: <span>{{ product.metafields.Genemco["product_purchased_from"] }}</span></li>{% endunless %}
+  {% unless product.metafields.Genemco["known_issues_or_problems"] == blank %}<li>Known Issues or Problems: <span>{{ product.metafields.Genemco["known_issues_or_problems"] }}</span></li>{% endunless %}
+</ul>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    const allAttributeHeadings = document.querySelectorAll('.product-attribute h2');
+    allAttributeHeadings.forEach((attributeHeading, index) => {
+      const nextElementSibling = attributeHeading.nextElementSibling;
+      if (nextElementSibling.querySelectorAll('li').length == 0) {
+        attributeHeading.style.display = "none";
+        nextElementSibling.style.display = "none";
+      }
+    });
+  });
+</script>
+{% comment %}
+{% if show_additional_fields == true %}
+<h2>All fields</h2>
+{% for genemco in product.metafields.Genemco %}
+<ul class="all-fields">
+<li>{{ genemco | first }}: <span>{{ genemco | last }}</span></li>
+</ul>
+{% endfor %}
+{% endif %}
+{% endcomment %}

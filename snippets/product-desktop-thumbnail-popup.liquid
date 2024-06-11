@@ -1,0 +1,200 @@
+<div id="product-desktop-thumbnail-popup">
+  <div class="product-thumbnail-popup-background">
+  </div>
+  <div class="product-thumbnail-popup-container">
+    <div class="product-thumbnail-popup-back">
+      <span class="back-icon"></span><span class="back-label">Back</span>
+    </div>
+    <div class="product-thumbnail-popup-close">
+      <span class="close-icon"></span>
+    </div>
+    <ul class="product-thumbnail-tabs">
+      <li class="tab-item is-active"><a href="#popup-videos">Videos</a></li>
+      <li class="tab-item"><a href="#popup-images">Images</a></li>
+      <li class="tab-item"><a href="#popup-pdfs">PDFs</a></li>
+    </ul>
+    <div class="product-thumbnail-popup-content" id="popup-videos">
+      <div class="product-thumbanil-popup-left">
+        <div class="product-tumbnail-popup-iframe">
+          <iframe src="" width="" height="" allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+        </div>
+      </div>
+      <div class="product-thumbnail-popup-right">
+        <div>
+          {% assign media_index = 0 %}
+          {%- for media in product.media -%}
+          {%- case media.media_type -%}
+          {%- when 'external_video' -%}
+          {% assign media_index = media_index | plus: 1 %}
+          <div class="popup-media-thumbs">
+            <div class="popup-media-thumb {% if media_index == 1 %} is-active {% endif %}">
+              <img src="{{ media | img_url: '150x150' }}" data-media-url="{{ media | external_video_url }}" data-media-aspect="{{ media.aspect_ratio }}" data-media-index="{{ media_index }}">
+            </div>
+            <div class="popup-media-thumb-content">
+              {{ media.alt }}
+            </div>
+          </div>
+          {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="product-thumbnail-popup-content hidden" id="popup-images">
+      <div id="product-desktop-image-gallery">
+        <div class="product-thumbanil-popup-left">
+          <div class="product-thumbnail-popup-image">
+            {% comment %}<img src="" data-index="">{% endcomment %}
+            <div class="product-thumbnail-popup-image__slider">
+              {% assign media_index = 0 %}
+              {%- for media in product.media -%}
+              {%- case media.media_type -%}
+              {%- when 'image' -%}
+              {% assign image_index = image_index | plus: 1 %}
+                <div class="product-thumbnail-popup-image__slider-item {% if image_index == 1 %} is-active {% endif %}" data-media-id="{{ media.id }}">
+                  {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+                  {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                  <div><img src="{{ media | img_url: 'master' }}" srcset="{{ media | img_url: '400x' }} 400w, {{ media | img_url: '500x' }} 500w, {{ media | img_url: '600x' }} 600w, {{ media | img_url: '700x' }} 700w, {{ media | img_url: '800x' }} 800w, {{ media | img_url: '900x' }} 900w, {{ media | img_url: '1000x' }} 1000w, {{ media | img_url: '1100x' }} 1100w, {{ media | img_url: '1200x' }} 1200w" data-index="{{ forloop.index }}"></div>
+                  
+                </div>
+              {% endcase %}
+              {%- endfor -%}
+            </div>
+          </div>
+          <div class="product-thumbnail-popup-image-arrows">
+            <span class="arrow-prev"></span>
+            <span class="arrow-next"></span>
+          </div>
+        </div>
+        <div class="product-thumbnail-popup-right">
+          <div>
+            {% assign image_index = 0 %}
+            {%- for media in product.media -%}
+            {%- case media.media_type -%}
+            {%- when 'image' -%}
+            {% assign image_index = image_index | plus: 1 %}
+            <div class="popup-image-thumbs {% if image_index == 1 %} is-active {% endif %}" data-media-id="{{ media.id }}">
+              <div class="popup-image-thumb" style="max-width: {{ media.width }}px">
+                {%- assign image_url = media | img_url: '50x50' -%}
+                {%- assign image_url_origin = media | img_url: '1200x'  %}
+
+                <img class="product-gallery__image lazyload image--fade-in" src="{{ image_url }}" data-image-url="{{ image_url_origin }}" data-image-index="{{ image_index }}">
+              </div>
+            </div>
+            {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div id="product-mobile-image-gallery">
+        <div id="product-mobile-image-gallery-main">
+          <div>
+            <div class="product-mobile-slider-wrapper">
+              {%- for media in product.media -%}
+              {%- case media.media_type -%}
+              {%- when 'image' -%}
+              <div class="product-mobile-image-gallery-item" data-media-id="{{ media.id }}">
+                <div class="product-gallery__size-limiter" style="max-width: {{ media.width }}px">
+                  {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+                  {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                  <div class="aspect-ratio image-{{ media.id }}" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+                    <img class="product-gallery__image lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ media | img_url: '3200x' }}" alt="{{ media_alt | escape }}">
+
+                    <noscript>
+                      <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+                    </noscript>
+                  </div>
+                </div>
+              </div>
+              {% endcase %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div id="product-mobile-image-gallery-thumbnail">
+          <div class="product-mobile-slider-wrapper">
+            {%- for media in product.media -%}
+            {%- case media.media_type -%}
+            {%- when 'image' -%}
+            <div class="product-mobile-image-gallery-thumbnail">
+              <div class="product-gallery__size-limiter" style="max-width: {{ media.width }}px; width: 45px;">
+                {%- capture supported_sizes -%}{%- render 'image-size', sizes: '400,500,600,700,800,900,1000,1100,1200', image: media -%}{%- endcapture -%}
+                {%- assign image_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+                <div class="aspect-ratio image-{{ media.id }}" style="padding-bottom: {{ 100.0 | divided_by: media.aspect_ratio }}%">
+                  <img class="product-gallery__image lazyload image--fade-in" data-src="{{ image_url }}" data-widths="[{{ supported_sizes }}]" data-sizes="auto" data-zoom="{{ media | img_url: '3200x' }}" alt="{{ media_alt | escape }}">
+
+                  <noscript>
+                    <img src="{{ media | img_url: '800x' }}" alt="{{ media_alt | escape }}">
+                  </noscript>
+                </div>
+              </div>
+            </div>
+            {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product-thumbnail-popup-content hidden" id="popup-pdfs">
+      <div class="product-thumbanil-popup-left noscroll">
+		<div class="product-tumbnail-popup-pdf">
+          <iframe src="{{ product.metafields.Genemco.product_pdf_link1 | file_url }}" width="" height="" data-pdf-name="{{ product.metafields.Genemco.product_pdf_link1 }}"></iframe>
+        </div>
+      </div>
+      <div class="product-thumbnail-popup-right">
+        {% unless product.metafields.Genemco.product_pdf_link1 == blank %}
+        <div class="popup-pdf-thumbs is-active">
+          <div class="popup-pdf-thumb">
+			<img src="{{ 'pdfIcon.png' | asset_url }}" data-pdf-url="{{ product.metafields.Genemco.product_pdf_link1 | replace: ' ', '_' | file_url }}" data-pdf-name="{{ product.metafields.Genemco.product_pdf_link1 }}">
+          </div>
+          <div class="popup-pdf-thumb-content">
+            {{ product.metafields.Genemco.product_pdf_name1 }}
+          </div>
+        </div>
+        {% endunless %}
+        {% unless product.metafields.Genemco.product_pdf_link2 == blank %}
+        <div class="popup-pdf-thumbs">
+          <div class="popup-pdf-thumb">
+			<img src="{{ 'pdfIcon.png' | asset_url }}" data-pdf-url="{{ product.metafields.Genemco.product_pdf_link2 | replace: ' ', '_' | file_url }}" data-pdf-name="{{ product.metafields.Genemco.product_pdf_link2 }}">
+          </div>
+          <div class="popup-pdf-thumb-content">
+            {{ product.metafields.Genemco.product_pdf_name2 }}
+          </div>
+        </div>
+        {% endunless %}
+        {% unless product.metafields.Genemco.product_pdf_link3 == blank %}
+        <div class="popup-pdf-thumbs">
+          <div class="popup-pdf-thumb">
+			<img src="{{ 'pdfIcon.png' | asset_url }}" data-pdf-url="{{ product.metafields.Genemco.product_pdf_link3 | replace: ' ', '_' | file_url }}" data-pdf-name="{{ product.metafields.Genemco.product_pdf_link3 }}">
+          </div>
+          <div class="popup-pdf-thumb-content">
+            {{ product.metafields.Genemco.product_pdf_name3 }}
+          </div>
+        </div>
+        {% endunless %}
+        {% unless product.metafields.Genemco.product_pdf_link4 == blank %}
+        <div class="popup-pdf-thumbs">
+          <div class="popup-pdf-thumb">
+			<img src="{{ 'pdfIcon.png' | asset_url }}" data-pdf-url="{{ product.metafields.Genemco.product_pdf_link4 | replace: ' ', '_' | file_url }}" data-pdf-name="{{ product.metafields.Genemco.product_pdf_link4 }}">
+          </div>
+          <div class="popup-pdf-thumb-content">
+            {{ product.metafields.Genemco.product_pdf_name4 }}
+          </div>
+        </div>
+        {% endunless %}
+        {% unless product.metafields.Genemco.product_pdf_link5 == blank %}
+        <div class="popup-pdf-thumbs">
+          <div class="popup-pdf-thumb">
+			<img src="{{ 'pdfIcon.png' | asset_url }}" data-pdf-url="{{ product.metafields.Genemco.product_pdf_link5 | replace: ' ', '_' | file_url }}" data-pdf-name="{{ product.metafields.Genemco.product_pdf_link5 }}">
+          </div>
+          <div class="popup-pdf-thumb-content">
+            {{ product.metafields.Genemco.product_pdf_name5 }}
+          </div>
+        </div>
+        {% endunless %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{% schema %}
+  {
+    "name": "Video Slider",
+    "settings": [
+	],
+	"blocks": [
+		{
+			"type": "video_slide",
+			"name": "Video Slide",
+			"settings": [
+              {
+                "id": "video_url",
+                "type": "video_url",
+                "label": "Video URL",
+                "accept": ["youtube", "vimeo"],
+                "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+                "info": "Video Slide",
+                "placeholder": "Video Slide"
+              }
+			]
+		}
+	],
+	"presets": [
+      {
+        "category": "Video",
+        "name": "Video Slider"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

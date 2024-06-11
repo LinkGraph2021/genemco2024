@@ -1,0 +1,173 @@
+<script>
+  var customerStatus = {% if customer %} true {% else %} false {% endif %};
+  {% if customer %}
+    var customerEmail = "{{ customer.email }}";
+  {% endif %}
+</script>
+<div class="genemco-checkout__wrapper step2" id="genemco-customer-checkout">
+  <div {% comment %}id="step2" style="display: none;"{% endcomment %}>
+    <div class="genemco-checkout__top-bar">
+      <div class="genemco-checkout__container">
+        <a href="https://{{ shop.domain }}">
+          <img src="{{ 'genemco-logo.png' | asset_img_url: '200x' }}" class="genemco-checkout__logo hide-on-mobile">
+          <img src="{{ 'genemco-logo-mobile.png' | asset_img_url: '100x' }}" class="genemco-checkout__logo hide-on-desktop">
+        </a>
+        {% comment %}
+        <h2 class="hide-on-mobile">Checkout (<span>{{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</span>)</h2>
+        {% endcomment %}
+        <h2><strong>My Quote <br class="hide-on-desktop"/>(Step 2 of 2)</strong></h2>
+        <img src="{{ 'security-lock.png' | asset_img_url: '50x' }}">
+      </div>
+    </div>
+    <div class="genemco-checkout__container">
+      {% comment %}<a id="back-top-steop1">Back to step1</a>{% endcomment %}
+      <div class="genemco-checkout__left">
+        <div class="genemco-checkout__contact genemco-checkout__row">
+          <h2 class="genemco-checkout__heading"><strong>1. Contact Details</strong><a href="/pages/quote-request?show=1" class="{% if customer %}change-login-customer-info{% endif %}">Change</a></h2>
+          <div class="genemco-checkout__content">
+            <p class="genemco-checkout__text"><span id="first_name"></span> <span id="last_name"></span></p>
+            <p class="genemco-checkout__text"><span id="company_name"></span></p>
+            <p class="genemco-checkout__text"><span id="email"></span></p>
+            <p class="genemco-checkout__text"><span id="phone"></span></p>
+            <p class="genemco-checkout__text"><span id="city"></span>, <span id="state"></span> <span id="country"></span></p>
+            <p class="genemco-checkout__text">Preferred language: <span id="preferred_language"></span></p>
+          </div>
+        </div>
+        <div class="genemco-checkout__project-details genemco-checkout__row">
+          <h2 class="genemco-checkout__heading"><strong>2.</strong> <strong style="color: #00aa00">Your Project Information</strong> <strong style="color: #00aa00" class="hide-on-mobile">(if available)</strong></h2>
+          <form class="genemco-checkout__content" id="genemco-customer-checkout__project-details">
+            <select id="role-in-this-project" {% comment %}class="genemco-field"{% endcomment %} data-cookie="roleInThisProject">
+              <option value="">What's your role in this project?</option>
+              <option value="I'm the end user/buyer">I'm the end user/buyer</option>
+              <option value="I'm helping the buyer">I'm helping the buyer</option>
+              <option value="I'm a reseller">I'm a reseller</option>
+            </select>
+            <p></p>
+            <select id="project-time-line" {% comment %}class="genemco-field"{% endcomment %} data-cookie="projectTimeLine">
+              <option value="">What is your project timeline?</option>
+              <option value="Now">Now</option>
+              <option value="Weeks">Weeks</option>
+              <option value="Months">Months</option>
+              <option value="Future">Future</option>
+              <option value="Just Budgeting">Just Budgeting</option>
+              <option value="I Don't Know">I Don't Know</option>
+            </select> 
+            <p></p>
+            <textarea id="about-project-and-request" maxlength="1000" placeholder="Tell us about your project and your request?" class="genemco-textarea" data-cookie="aboutProjectandRequest"></textarea>
+            <input type="hidden" id="customer_offer_values" class="customer_offer_values" value=""/>
+          </form>
+        </div>
+        <div class="genemco-checkout__review-items genemco-checkout__row">
+          <h2 class="genemco-checkout__heading"><strong>3. Review Items</strong><a id="genemco-checkout__review-items__change" href="/cart">Change</a></h2>
+          <div class="genemco-checkout__content">
+          {% for line_item in cart.items %}
+          <div class="genemco-checkout__cart-item">
+            <div class="cart-item__left">
+              {{ line_item.image | img_url: '200x' | img_tag }}
+            </div>
+            <div class="cart-item__right">
+              <p class="cart-item__sku">{{ line_item.product.metafields.Genemco.stock_no }}</p>
+              <p class="cart-item__title"><strong>{{ line_item.product.title }}</strong></p>
+              <div class="cart-item__desc">{{ line_item.product.metafields.Genemco.description }}</div>
+            </div>
+            <div class="cart-item__categories" data-productid="{{ line_item.id }}"><label><i>Make an Offer (Optional)</i></label><br><input type="number" placeholder="$" onkeypress="validates(event);" name="{{ line_item.id }}" class="txt_offer"/></div>
+            <div class="cart-item__categories" style="display: none;" data-productid="{{ line_item.id }}">{% for collection in line_item.product.collections limit: 3 %}{{ collection.title | strip | strip_html | strip_newlines }}{% unless forloop.last %} | {% endunless %}{% endfor %}</div>
+          </div>
+          {% endfor %}
+          </div>
+        </div>
+        <div class="genemco-checkout__row">
+          <p class="error-message"></p>
+          <button class="btn customer-checkout-submit" data-url-next="/pages/quote-thankyou"><strong>Get My Quote</strong></button>
+          <p style="font-size: 16px;"><br><strong><i>Almost done!</i></strong> Click "Get My quote!" We will contact you ASAP</p>
+        </div>
+      </div>
+      <div class="genemco-checkout__right hide-on-mobile">
+        <p class="error-message"></p>
+        <button class="btn customer-checkout-submit" data-url-next="/pages/quote-thankyou"><strong>Get My Quote</strong></button>
+        <p style="font-size: 16px;"><strong><i>Almost done!</i></strong> Click "Get My quote!" <br>We will contact you ASAP</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var customer_email = '';
+</script>
+{% if customer %}<script>customer_email = '{{ customer.email }}';</script>{% endif %}
+<script>
+  var email = '';
+  if(customer_email!=''){
+    email = customer_email;
+  }else{
+    email = getCookie('email');
+  }
+  
+    $(document).ready(function() {
+    var values = [];
+    var new_val = 0;
+    $('.txt_offer').each(function(){
+      if(this.value==''){
+        new_val = 0;
+      }else{
+        new_val = this.value;
+      }
+      values.push({ name: this.name, value: new_val }); 
+    });
+    $('.customer_offer_values').val(values);
+  });
+  
+  $(".txt_offer").change(function(){
+    var values = [];
+    var new_val = 0;
+    $('.txt_offer').each(function(){
+      if(this.value==''){
+        new_val = 0;
+      }else{
+        new_val = this.value;
+      }
+      values.push({ name: this.name, value: new_val }); 
+    });
+    $.ajax({
+     type:'POST',
+     url: webhook_domain +"/webhooks/temp-customer-offer",
+     data: {'email': email,'offers':values},
+     success:function(data){
+         console.log(data);
+       }
+    });   
+   $('.customer_offer_values').val(values);
+  });
+  
+  function validates(evt) {
+        var theEvent = evt || window.event;
+      
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+        // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if( !regex.test(key) ) {
+          theEvent.returnValue = false;
+          if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+  function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    } 
+</script>

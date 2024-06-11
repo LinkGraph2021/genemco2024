@@ -1,0 +1,318 @@
+<section class="team-section-{{section.id}}">
+  <div class="team-section__heading">
+    {% unless section.settings.title == blank %}
+    <h2>{{ section.settings.title }}</h2>
+    {% endunless %}
+    {% unless section.settings.content == blank %}
+    <div>{{ section.settings.content }}</div>
+    {% endunless %}
+    <div></div>
+  </div>
+  <div class="team-section__members">
+    {% for block in section.blocks %}
+    {% if block.type == "team_member" %}
+    <div class="team-section__member" id="team-section__member-{{forloop.index}}">
+      <div class="team-section__member-image"><img src={{ block.settings.member_image | img_url: "300x" }}></div>
+      {% if block.settings.member_hover_image != blank %}
+      <div class="team-section__member-hover-image"><img src={{ block.settings.member_hover_image | img_url: "300x" }}></div>
+      {% endif %}
+      <div class="team-section__member-content">
+        <h2 class="team-section__member-name">{{ block.settings.member_name }}</h2>
+        <p class="team-section__member-bio">{{ block.settings.member_bio }}</p>
+        <div class="team-section__member-socials" style="display: none">
+          {% unless block.settings.member_social_linkedin == blank %}
+          <a href="{{ block.settings.member_social_linkedin }}">
+            <svg width="30" zoomAndPan="magnify" viewBox="0 0 37.5 37.499999" height="30"><defs><clipPath id="linkedinid1"><path d="M 0 0 L 37.007812 0 L 37.007812 37.007812 L 0 37.007812 Z M 0 0 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#linkedinid1)"><g transform="matrix(0.661017, 0, 0, 0.657895, 0.0000005, 0)"><image x="0" y="0" width="59" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADsAAAA5CAIAAAAHj8TvAAAABmJLR0QA/wD/AP+gvaeTAAADzElEQVRoge2a30/yPBTH13VsHQFlIP64EIyJxgtNDFfGf5d/xsTES4nGHwiC4GhgMKRsa/teLNm7jNeHwvtUQ7LvFWkO3aftaXvO2UC9Xh+Px4wxZUOkKorCOf9tjBWk/jbAykqJ5Ssllq+UWL42j1hb9Q/h7QgAAABI4FmuFYghhJZllctlTdNGo9FgMJjNZvLIvpMosWmap6enJycn2WwWAOB5Xrfbvb+/t21bKt+ihIg1Tdvb27u4uNje3o6cwTTNIAgmkwkhRCZhUkI7DyFUqVTiuIqimKa5v79vWdYPB1JCxLquJ3BDGYaRy+UkUP1JQsSUUs/zFtsZY0EQ/G2kJRIiJoR0Oh1KabyRcz6ZTDDGP3zMCRHP5/NWq/X4+Egp5Zxzzhljtm03Go3JZCIbMSHR08113Zubm/f394ODAwjhcDhst9uj0ejn8xdRYsbY19fX6+trp9MBAARB4Hlewk9EFI1wbV9a4c4LQX3fj54HAIjP8eLVHbpQ+BtCaBhGJpMJbXzfJ4SsMWYhYgBALpc7PDxM0DiO0+/3KaUAAAjh0dGRruuRQbgsrVZL1/VisVgulwuFAkIoJCaEOI6DMcYYE0LEvUuU2LKs6+vrBPHLywvGOCQ2DKNWq21tbUUGQRD0er3Pz89KpXJ+fl4qleLjCQ0cx3l4eHh6enJdVxBa1CvCNU0Qa5oWdwNd1+M2EEKE0NnZ2eXlZTabVdXkuaRpWqlUqtVqpmne3d0J3varRZsi2yWygRCWSqWdnR1d1xdxI0uE0PHx8XA4bDQaIgwSI3pVVRFCCKH/xI0EAMjn89VqNbGG33b7l/C+pRGCUNV8Pl8sFkVceeUcZA1hjN/e3jDGiqLs7u5Wq9VEXAUAQAgVCoVut7u0N7nEjLHxeHx7e9vr9cKN1e12h8Ph1dWVYRhxaE3T8vm8SJ9yvYIx9vz83G63XdcNgiDMAJrN5mAwSDgAhNA0TREvkktMKW02m4mIlFLa7/cTlgCATCYj0qdE4jB6nk6nielkjLmuu3a3cufY9/0gCBZPgP+TB/xChYVzHoZT62nzakIpsXylxPKVEsvX5hGvFrvFb6/vYlnxHHO9WocQMed8Pp/bth2PrcIqVliyD6tEo9HI87zIhjE2nU4X33gzxjzPs207npv4vi9YXgL1et1xnKXDRQhZlpVonM1m0Vt4CGGxWNS0f6eAc04pxRgnoMPEu1AoxMfPGAvrAUuJRb2CEPLx8fEHA0qpYL2ec04I6fV6go9OaPN2XkosXymxfKXE8pUSy5e6WZ+OKYryD7yb/M8X+qoDAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="57" preserveAspectRatio="xMidYMid meet" xlink:show="embed"/></g></g></svg>
+          </a>
+          {% endunless %}
+          {% unless block.settings.member_social_facebook == blank %}
+          <a href="{{ block.settings.member_social_facebook }}">
+            <svg width="30" zoomAndPan="magnify" viewBox="0 0 37.5 37.499999" height="30" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="facebookid1"><path d="M 0 0 L 37.007812 0 L 37.007812 37.007812 L 0 37.007812 Z M 0 0 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#facebookid1)"><g transform="matrix(0.657895, 0, 0, 0.659483, 0.0000005, 0)"><image x="0" y="0" width="57" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAAA6CAIAAACF7mZ8AAAABmJLR0QA/wD/AP+gvaeTAAADA0lEQVRoge2azU7qQBSAz3SmU0RDUGlcQUjwBdyY+Ko+jCs3JoaFrlwoCSYIWkRxQqAzc+YuJml61Wtb7ETM7bcg0DTtl9M5P9NATk9PV6uVMQY2HkYIAQD7ueF4Py1QgMrVDZWrGypXN/wmV5b/VKf9Ik/jzOtKKa3X69/z+Sda6+VyiYhfn5bLtdFonJyc7O/vlyH2CVLKwWDQ7/e/1s12ZYy1Wq1OpxMEQXl6f4GIlNKbmxshxBeLITu3PM+r1Wqc81L13t8iCIJarZZxmjuDomTmboE6sDaIKKWUUiqlrBMhhHPOOfe8AsFy7iqlFEKMRqPxeCyEsEuTMdZutw8PD7e2tvJfyq0rIt7d3fX7/el0aoxJnrIxhlLabrc3xRURB4PBxcWFEALKaCWuXI0xUsrr6+vFYpGumrYkGWPW2OG5ctVaPz8/Pz092XwCAErpzs5OGIaUUgA4ODgoWgdduSLiy8uLlDI5sru7e3R01Gq1bO4HQVC0uThcA4vFIn1kb2+v2+0msVxj+brNrfRPSqnv+9/JsA3qW5mUHNckwRHxXaYbY9KRtt2r0MXLdI3jeDgcRlEEAIg4mUzSulEUXV5e2u/GmE6nE4ZhoVJQpquUcjgc3t7eEkKMMVrrtOtsNnt7e7OxRMRGo1F0IC7T1db/5XL56cPVWmut7Xc7uxQaXOBHcosQQind3t62TSE/ZcbV8zzOeTKOKKWSpgUAjDHGmE0p3/fr9XrRuJbpaic962pzazQaJUu22Wx2u10AIIQwxoIg+Mk6wDnv9Xq9Xg8A4ji+urp6eHhIXMMwPD4+Tvx+vm9lGvwvfatydUPl6obK1Q2V61pkvn/NdlVKzWazdxu9clFKzefz+Xz+9UuD7B6LiNPp9OzsrNls5ry33a5EUZS+92QyOT8//9hj7VT++PiY3qCv6QoAcRzf39+Px+OcrolB2vX19VUI8ek8gIhKqcw3MXlnF0RcrVb5XT+S3hesxwblViaVqxsqVzdUrm6oXN3AGGO+7/+K/5L9AR7BfZNH8lSMAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="58" preserveAspectRatio="xMidYMid meet" xlink:show="embed"/></g></g></svg>
+          </a>
+          {% endunless %}
+          {% unless block.settings.member_social_instagram == blank %}
+          <a href="{{ block.settings.member_social_instagram }}">
+            <svg width="30" zoomAndPan="magnify" viewBox="0 0 37.5 37.499999" height="30" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="instagramid1"><path d="M 0 0 L 37.007812 0 L 37.007812 37.007812 L 0 37.007812 Z M 0 0 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#instagramid1)"><g transform="matrix(0.672414, 0, 0, 0.669643, -0.669642, 0)"><image x="0" y="0" width="58" xlink:href="data:image/png;base64,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" xlink:type="simple" xlink:actuate="onLoad" height="56" preserveAspectRatio="xMidYMid meet" xlink:show="embed"/></g></g></svg>
+          </a>
+          {% endunless %}
+          {% unless block.settings.member_social_twitter == blank %}
+          <a href="{{ block.settings.member_social_twitter }}">
+            <svg width="30" zoomAndPan="magnify" viewBox="0 0 37.5 37.499999" height="30" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><clipPath id="twitterid1"><path d="M 0 0 L 37.007812 0 L 37.007812 37.007812 L 0 37.007812 Z M 0 0 " clip-rule="nonzero"/></clipPath></defs><g clip-path="url(#twitterid1)"><path fill="rgb(100%, 100%, 100%)" d="M 0 0 L 37.5 0 L 37.5 45 L 0 45 Z M 0 0 " fill-opacity="1" fill-rule="nonzero"/><path fill="rgb(100%, 100%, 100%)" d="M 0 0 L 37.5 0 L 37.5 37.5 L 0 37.5 Z M 0 0 " fill-opacity="1" fill-rule="nonzero"/><path fill="rgb(100%, 100%, 100%)" d="M 0 0 L 37.5 0 L 37.5 37.5 L 0 37.5 Z M 0 0 " fill-opacity="1" fill-rule="nonzero"/><path fill="rgb(100%, 100%, 100%)" d="M 0 0 L 37.5 0 L 37.5 37.5 L 0 37.5 Z M 0 0 " fill-opacity="1" fill-rule="nonzero"/><g transform="matrix(0.646552, 0, 0, 0.646552, 0.0000005, 0)"><image x="0" y="0" width="58" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADoAAAA6CAIAAABu2d1/AAAABmJLR0QA/wD/AP+gvaeTAAAEw0lEQVRoge2ZXU/yShDHd7dLawuVl6JWowmPkhCjRvHGeEX8Bn5Bv4zGCy808SUqkohE5U2oRUqx7bZ7LnoeYh49skV7zjHhfz27+2M6MzuzwL29PcMwwA8RRgghhP5rDFb9GFBfY9wwNcYNU2PcMDXGDVNj3DD1w3Dxv3MMx3EcxwEAPM8jhIy8T+i4oihKkpRMJiVJAgBYlqVpmmmapmlSSgEACKFIJAIhfH19/U5chJAkSaZpep7HaC+K4vLycjabnZycjEQiAABCSK/Xu729vby87Pf7CKFoNDo1NdXr9SqVCoTwe3ARQvF4vFAo7O/v67o+lBhCKIrizs7OwsICQmjAgTGOx+P5fH52drZarSYSienp6Xa7fXBwgBDy/f0ZBiMuxjiTyaiqWigU0un0UDdMTExsbm4uLCxwHPfWGP7WzMzM+vp6JpPp9XpXV1e2bYuiOBSDFZfjuEQigRCamZkpFAq/fv3yP+4/GadSqWw266fXxwcjhDH2My+Xy21vb7NgBChk/tkYY0VRtra2NjY24vH4h5Y8z6uqyuItjuMUReE4rlgsfmeqUUr7/f7fazBOpVIrKyuKopTL5Wq1ahjGIOwopZFIJJVKDQ0YAIDruk9PT+fn581mkyWDWXEJIfV6fXV11Z9DIYSxWCyTyaTT6VqtVq/XNU0zDMOyLNu2EUKCILBs2+/3i8Xiw8MDYzFmxXVdt1artdvtqampQUT6aR6Px5eWljRNa7fbrVar2+0KgoAx086vr6+GYTiOw/IpAuACACil19fX0Wg0Go0OZn3/GD9YVVX1fxghxE//oRtalhXokmNNNZ7n19bWIISNRsNxnE8sOY4TBIHneZZtCSGu6zK6FrB71y/7+XweQvhJeQoqP9zZ7Vm968cuhBBjzO6MoTIMw7ZtdntWXEJItVrVNM113ZHAPpBt25qmhYJLKTVN8+TkpNvtfhexrutvCzaLAlQGz/Pu7u4EQcjlcslkUhCEL74FPjw8mKYZaEmw8wght7e3xWJR07SvdNkAANM0K5UKy8X7VoHdE4vF5ubmJiYmgi58K8/zKpWKrutB4yowrq7rEEJZlj/pyD6X53n9fv/09DSoa8EIuLZtn5yc1Go1SmmgLBnIcZyzszOWHv+9AuNCCDVNOzo6KpVKlmUFhbZt+/Hx8eLiYrTywu3u7gaqfOD3Xd9sNuv1ummaGONoNMqy0HGcZrN5eHg48r8hI07CjuMYhgEhTCQSjO2BZVnVavX4+Pj5+Xm0QwEjLoTQn/v8hiESicRisWQyqarq3NycLMtDdzAM4/7+/vLystFojBbxAXD9QU2SJEmSBEGQZVlRlGQyKYri0HbHcZxOp1Mul29ubnRd/worKy4AAEK4uLioqqokSTzPv53F34tS6s+MlmUNZpugGTI6LiGk2Wy2Wq10Or20tDQ/Py/LMsb4w0vY8zzXdXu9XqPRKJVK9Xr9G7uiAN6llD49PTUaDZ7nJycn0+m0oiiyLA9SzbZtwzCen59brVan07Es6xtbzWC4AyGECCGdTufl5aVcLgMA3ocjpTTQjMCuEQvZ4Pv+wRoG4lt99QUybL4/9MOeo8e4YWqMG6bGuGFqjBumxrhhCrO8G/9/9BeWmlxW84mGtgAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="58" preserveAspectRatio="xMidYMid meet" xlink:show="embed"/></g></g></svg>
+          </a>
+          {% endunless %}
+        </div>
+        <div class="team-section__member-desc" style="display: none;">{{ block.settings.member_desc }}</div>
+      </div>
+    </div>
+    {% elsif block.type == "heading" %}
+    <div class="team-section__heading">
+      {% unless block.settings.heading == blank %}
+      <h2>{{ block.settings.heading }}</h2>
+      {% endunless %}
+      {% unless block.settings.sub_heading == blank %}
+      <p>{{ block.settings.sub_heading }}</p>
+      {% endunless %}
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</section>
+<script>
+  window.addEventListener('load', function() {
+  	let teamMemberImgs = document.querySelectorAll('.team-section__member-image, .team-section__member-hover-image');
+    teamMemberImgs.forEach(teamMemberImg => {
+      teamMemberImg.addEventListener('click', function(e) {
+        let memberDesc = teamMemberImg.closest('.team-section__member').querySelector('.team-section__member-desc').innerHTML;
+        let memberName = teamMemberImg.closest('.team-section__member').querySelector('.team-section__member-name').innerHTML;
+        let memeberBio = teamMemberImg.closest('.team-section__member').querySelector('.team-section__member-bio').innerHTML;
+        let memberSocials = teamMemberImg.closest('.team-section__member').querySelector('.team-section__member-socials').innerHTML;
+        const fancybox = new Fancybox([
+          {
+            src: `<div class="team-section__member-popup">
+					<div class="team-section__member-popup-left"><div>${teamMemberImg.innerHTML}</div><div style="margin-top: 2em;"><h2 style="line-height: 1;margin-bottom: 0.25em;">${memberName}</h2><p>${memeberBio}</p></div><div>${memberSocials}</div></div>
+					<div class="team-section__member-popup-right">${memberDesc}</div>
+  				  </div>`,
+            type: "html",
+          },
+        ]);
+      });
+    });
+  });
+</script>
+<style>
+  #shopify-section-{{section.id}} {
+  	margin-top: 50px;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__heading {
+    text-align: center;
+    margin-bottom: 1em;
+    margin-top: 3em;
+    width: 100%;
+  }
+  #shopify-section-{{section.id}} .team-section__heading h2 {
+  	font-size: 3rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+  #shopify-section-{{section.id}} .team-section__members {
+  	display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__members .team-section__member {
+  	width: calc(100% / 3);
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 30px;
+    position: relative;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__members .team-section__member:hover .team-section__member-hover-image,
+  #shopify-section-{{section.id}} .team-section__members .team-section__member:focus .team-section__member-hover-image {
+  	z-index: 1;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__members .team-section__member-content {
+  	margin-top: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__members .team-section__member-content .team-section__member-name {
+  	font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__members .team-section__member-content .team-section__member-bio {
+  	line-height: 1.5;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__member-hover-image {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 300px;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in-out .2s;
+    cursor: pointer;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__member-hover-image img {
+  	margin-top: 0;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__member-image img {
+    margin: 0 auto 0 auto;
+    transition: transform ease .6s;
+  }
+  
+  #shopify-section-{{section.id}} .team-section__member-image {
+/* 	background: linear-gradient(45deg, #ff5500, transparent); */
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+/*   #shopify-section-{{section.id}} .team-section__member-image:hover img {
+  	transform: scale(1.2);
+  } */
+  
+  .fancybox__content {
+  	border-radius: 5px;
+  }
+  
+  .fancybox__content :focus:not(.carousel__button.is-close) {
+    outline: none !important;
+    box-shadow: none;
+  }
+  
+  .team-section__member-popup {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 800px;
+    border-radius: 5px;
+  }
+  
+  .team-section__member-popup .team-section__member-popup-left {
+	width: 300px;
+  }
+  
+  .team-section__member-popup .team-section__member-popup-left h2 {
+  	font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .team-section__member-popup .team-section__member-popup-right {
+    width: calc(100% - 320px);
+    padding-top: 60px;
+  }
+  
+  .team-section__member-popup .team-section__member-popup-right strong {
+    display: block;
+    margin-bottom: -14px;
+  }
+  
+  @media screen and (max-width: 680px) {
+    #shopify-section-{{section.id}} .team-section__members .team-section__member {
+      width: 100%;
+    }
+    
+    .team-section__member-popup {
+      flex-wrap: wrap;
+    }
+    
+    .team-section__member-popup .team-section__member-popup-right {
+      padding-top: 10px;
+    }
+    
+    .team-section__member-popup .team-section__member-popup-left,
+    .team-section__member-popup .team-section__member-popup-right {
+      width: 100%;
+    }
+  }
+</style>
+{% schema %}
+  {
+    "name": "Team",
+    "settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Heading"
+		},
+		{
+			"type": "textarea",
+			"id": "content",
+			"label": "Content"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Heading",
+			"type": "heading",
+			"settings": [
+				{
+					"type": "text",
+					"id": "heading",
+					"label": "Heading"
+				},
+				{
+					"type": "text",
+					"id": "sub_heading",
+					"label": "Subheading"
+				}
+			]
+		},
+		{
+			"name": "Team member",
+			"type": "team_member",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "member_image",
+					"label": "Team member image"
+				},
+				{
+					"type": "image_picker",
+					"id": "member_hover_image",
+					"label": "Team member hover image"
+				},
+				{
+					"type": "text",
+					"id": "member_name",
+					"label": "Name"
+				},
+				{
+					"type": "text",
+					"id": "member_bio",
+					"label": "Bio"
+				},
+				{
+					"type": "richtext",
+					"id": "member_desc",
+					"label": "Description"
+				},
+				{
+					"type": "url",
+					"id": "member_social_linkedin",
+					"label": "Linkedin"
+				},
+				{
+					"type": "url",
+					"id": "member_social_facebook",
+					"label": "Facebook"
+				},
+				{
+					"type": "url",
+					"id": "member_social_instagram",
+					"label": "Instagram"
+				},
+				{
+					"type": "url",
+					"id": "member_social_twitter",
+					"label": "Twitter"
+				}
+			]
+		}
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
